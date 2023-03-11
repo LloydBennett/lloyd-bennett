@@ -1,1 +1,12 @@
-.block{background-color:red}
+/*!******************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./styles/index.scss ***!
+  \******************************************************************************************************************************************************/
+.block {
+  background-color: red;
+}
+
+.figure {
+  background-color: blue;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5jc3MiLCJtYXBwaW5ncyI6Ijs7O0FBRUE7RUFDRSxxQkFITTtBQUVSOztBQUlBO0VBQ0U7QUFERixDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbGxveWQtYmVubmV0dC8uL3N0eWxlcy9pbmRleC5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIiRjb2xvcjogcmVkO1xuXG4uYmxvY2sge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3I7XG59XG5cbi5maWd1cmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibHVlO1xufVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/

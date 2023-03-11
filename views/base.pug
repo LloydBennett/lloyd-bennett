@@ -1,0 +1,33 @@
+block variables
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, intital-scale=1.0")
+
+    base(href="/")
+    link(rel="icon" type="image/ico" href="../images/favicon.png")
+    title Lloyd Bennett &ndash; Brand &amp; Web Designer
+
+    meta(name="description" content="A Brand & Web Designer based in London")
+
+    meta(property="og:url" content="https://www.lloydjamiebennett.co.uk")
+    meta(property="og:title" content="Lloyd Bennett's Portfolio")
+    meta(property="og:description" content="A Brand & Web Designer based in London")
+    meta(property="og:type" content="website")
+    meta(property="og:image" content="https://www.lloydjamiebennett.co.uk/images/facebook-meta-card.jpg")
+
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site" content="@LloydBennett_")
+    meta(name="twitter:title" content="Lloyd Bennett's Portfolio")
+    meta(name="twitter:description" content="A Brand & Web Designer based in London.")
+    meta(name="twitter:image" content="https://www.lloydjamiebennett.co.uk/images/twitter-meta-card.jpg")
+
+    link(href="https://use.typekit.net/nsp0voe.css" rel="stylesheet")
+    link(href="index.css" rel="stylesheet")
+
+    body
+      include ./partials/navigation
+
+      .content(data-template=template)
+        block content
