@@ -41,24 +41,38 @@ app.use((req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+const handleRequest = async api => {
+  const meta = await client.getSingle('meta')
+  const navigation = await client.getSingle('navigation')
+
+  return {
+    meta,
+    navigation
+  }
+}
+
 
 // Query for the root path.
 app.get('/', async (req, res) => {
 
-  const document = await client.getSingle('home')
-  res.render('pages/home', { document })
+  const home = await client.getSingle('home')
+  const defaults = await handleRequest(req)
+
+  res.render('pages/home', { ...defaults, home })
 })
 
 app.get('/about', async (req, res) => {
-  const document = await client.getSingle('about')
-  console.log(document);
-  res.render('pages/about', { document })
+  const about = await client.getSingle('about')
+  const defaults = await handleRequest(req)
+
+  res.render('pages/about', { ...defaults, about })
 })
 
 app.get('/projects/:uid', async (req, res) => {
   const uid = req.params.uid
-  const document = await client.getByUID('projects', uid)
-  res.render('pages/project', { document })
+  const project = await client.getByUID('projects', uid)
+  const defaults = await handleRequest(req)
+  res.render('pages/project', { ...defaults, project })
 })
 
 app.listen(port, () => {
