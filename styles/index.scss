@@ -20,6 +20,10 @@
 @import './tools/mixins/body-text.scss';
 @import './tools/mixins/section-large.scss';
 @import './tools/mixins/section-small.scss';
+@import './tools/mixins/captialised-text.scss';
+@import './tools/mixins/button.scss';
+
+@import './tools/animations/link-hover.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- B A S E -----------------------------------------
@@ -41,5 +45,7 @@
 // ------------------------------------ // ------------------------------------------
 
 @import './components/section.scss';
+@import './components/button.scss';
+@import './components/link.scss';
 
 

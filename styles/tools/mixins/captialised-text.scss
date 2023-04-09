@@ -1,0 +1,15 @@
+@mixin capitalised-text($typeface-alt: false, $bold: false, $letter-spacing: false) {
+  text-transform: uppercase;
+
+  @if ($typeface-alt == true) {
+    font-family: $type--family-alt;
+  }
+
+  @if ($bold == true) {
+    font-weight: $type--font-weight-semi;
+  }
+
+  @if ($letter-spacing == true) {
+    letter-spacing: 1px;  
+  }
+}
