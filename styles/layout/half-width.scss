@@ -1,0 +1,23 @@
+.half-width {
+	grid-column: 1 / 7;
+}
+
+.half-width--start {
+	@include media-query($breakpoint--medium) {
+		grid-column: 1 / 4;
+	}
+
+	@include media-query($breakpoint--x-large) {
+		grid-column: 1 / 6;
+	}
+}
+
+.half-width--end {
+	@include media-query($breakpoint--medium) {
+		grid-column: 4 / 7;
+	}
+
+	@include media-query($breakpoint--x-large) {
+		grid-column: 6 / 11;
+	}
+}
