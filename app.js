@@ -72,7 +72,6 @@ app.get('/projects/:uid', async (req, res) => {
   const uid = req.params.uid
   const document = await client.getByUID('projects', uid)
   const defaults = await handleRequest(req)
-  console.log(defaults.navigation);
   res.render('pages/project', { ...defaults, document })
 })
 
