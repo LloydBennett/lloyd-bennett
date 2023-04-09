@@ -55,24 +55,25 @@ const handleRequest = async api => {
 // Query for the root path.
 app.get('/', async (req, res) => {
 
-  const home = await client.getSingle('home')
+  const document = await client.getSingle('home')
   const defaults = await handleRequest(req)
 
-  res.render('pages/home', { ...defaults, home })
+  res.render('pages/home', { ...defaults, document })
 })
 
 app.get('/about', async (req, res) => {
-  const about = await client.getSingle('about')
+  const document = await client.getSingle('about')
   const defaults = await handleRequest(req)
 
-  res.render('pages/about', { ...defaults, about })
+  res.render('pages/about', { ...defaults, document })
 })
 
 app.get('/projects/:uid', async (req, res) => {
   const uid = req.params.uid
-  const project = await client.getByUID('projects', uid)
+  const document = await client.getByUID('projects', uid)
   const defaults = await handleRequest(req)
-  res.render('pages/project', { ...defaults, project })
+  console.log(defaults.navigation);
+  res.render('pages/project', { ...defaults, document })
 })
 
 app.listen(port, () => {

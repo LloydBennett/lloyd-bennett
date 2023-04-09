@@ -7,20 +7,24 @@ html(lang="en")
 
     base(href="/")
     link(rel="icon" type="image/ico" href="../images/favicon.png")
-    title Lloyd Bennett &ndash; Brand &amp; Web Designer
+    
+    if template !== "home"
+      title=document.data.title + " | " + meta.data.title
+    else
+      title=meta.data.title
 
-    meta(name="description" content="A Brand & Web Designer based in London")
+    meta(name="description" content=meta.data.description)
 
     meta(property="og:url" content="https://www.lloydjamiebennett.co.uk")
-    meta(property="og:title" content="Lloyd Bennett's Portfolio")
-    meta(property="og:description" content="A Brand & Web Designer based in London")
+    meta(property="og:title" content=meta.data.title)
+    meta(property="og:description" content=meta.data.description)
     meta(property="og:type" content="website")
     meta(property="og:image" content="https://www.lloydjamiebennett.co.uk/images/facebook-meta-card.jpg")
 
     meta(name="twitter:card" content="summary_large_image")
     meta(name="twitter:site" content="@LloydBennett_")
-    meta(name="twitter:title" content="Lloyd Bennett's Portfolio")
-    meta(name="twitter:description" content="A Brand & Web Designer based in London.")
+    meta(name="twitter:title" content=meta.data.title)
+    meta(name="twitter:description" content=meta.data.description)
     meta(name="twitter:image" content="https://www.lloydjamiebennett.co.uk/images/twitter-meta-card.jpg")
 
     link(href="https://use.typekit.net/nsp0voe.css" rel="stylesheet")
