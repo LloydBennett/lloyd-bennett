@@ -1,0 +1,39 @@
+/* Colours */
+$colour--passion: #f56308;
+$colour--grey: #F2F2F2;
+$colour--grit: #202020;
+$colour--white: white;
+$colour--black: black;
+$colour--text-on-grit: #CAC9C9;
+$colour--body-type: #464646;
+$colour--heading-type: #2D2D2D;
+$colour--light-type: #525252;
+
+/* Type */
+$type--line-height: 1.5;
+$type--family-display: "freight-display-pro", serif;
+$type--family-body: "freight-text-pro", serif;
+$type--family-alt: "freight-sans-pro", sans-serif;
+
+$type--font-weight-reg: 400;
+$type--font-weight-semi: 600;
+$type--font-weight-bold: 700;
+
+/* Spacing */
+$spacing-rule: 0.8rem;
+$spacing-rule-half: $spacing-rule / 2;
+
+/* Breakpoints */
+$breakpoint--small: 550px;
+$breakpoint--medium: 768px;
+$breakpoint--large: 960px;
+$breakpoint--x-large: 1200px;
+$breakpoint--tweakpoint: 1470px;
+$breakpoint--xx-large: 1600px;
+$breakpoint--xxx-large: 2000px;
+
+/* Animation Easing */
+$cubic-bezier--zoom: cubic-bezier(0.420,0.000,0.002,1.000);
+
+/* Border */
+$border-top: 2px solid $colour--grit;

@@ -9,6 +9,8 @@ const port = 3000
 const Prismic = require('@prismicio/client');
 const PrismicH = require('@prismicio/helpers');
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 const routes = [
   {
     type: 'home',
