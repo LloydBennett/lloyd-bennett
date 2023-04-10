@@ -11,7 +11,6 @@ html {
 
 body {
 	font-family: $type--family-body;
-	color: $colour--body-type;
 	font-size: 100%;
 }
 
@@ -19,7 +18,6 @@ body {
 .type--l,
 .type--m,
 .type--s {
-	color: $colour--heading-type;
 	font-family: $type--family-display;
 	font-weight: 700;
 }
@@ -93,11 +91,29 @@ body {
 }
   
 .type--body {
-	@include body-text;
+	@include text-size;
 	line-height: $type--line-height;
 	margin: 0;
 
 	& + & {
 		margin-top: spacing(3);
 	}
+}
+
+.type--alt-l {
+	@include capitalised-text(true);
+	@include text-size;
+}
+
+.type--alt-s {
+	@include capitalised-text(true);
+	@include text-size(1.2, null, 1.4);
+}
+
+.type--body-color {
+	color: $colour--body-type;
+}
+
+.type--white {
+	color: $colour--white;
 }
