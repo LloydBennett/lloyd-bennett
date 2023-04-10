@@ -16,6 +16,6 @@
 .nav-menu
   ul.nav-menu__list
     each item in navigation.data
-      li.nav-menu__list-item
+      li.nav-menu__list-item.text-center
         a.nav-menu__link(href=item.url)
-          span=item.slug
+          span.type--white=item.slug
