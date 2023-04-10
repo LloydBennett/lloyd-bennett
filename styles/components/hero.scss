@@ -1,0 +1,27 @@
+.hero__project {
+  @include grid(null, true);
+}
+
+.hero__project-no span,
+.hero__project-title {
+  @include media-query($breakpoint--small - 1, max-width) {
+    font-size: 5rem;
+  }
+}
+
+.hero__project-title {
+  @include offset-content;
+  grid-column: 2 / 5;
+  
+  @include media-query($breakpoint--small - 1, max-width) {
+    text-align: right;
+  }
+}
+
+.hero__project-no {
+  grid-column: 1 / 2;
+
+  @include media-query($breakpoint--small) {
+    grid-column: 1 / 3;
+  }
+}

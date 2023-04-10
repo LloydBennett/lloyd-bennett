@@ -6,8 +6,10 @@ block variables
 block content
   section.section--l
     .section--s
-      .container.grid
-        h1.type--xl.no-margin--bottom=document.data.title
+      .hero__project.container
+        .hero__project-no
+          span.type--xl.no-margin--bottom 01
+        h1.type--xl.hero__project-title.no-margin--bottom=document.data.title
     picture.block
       source(media="(max-width: 700px)" srcset=document.data.hero_image.small.url)
       source(media="(max-width: 1270px)" srcset=document.data.hero_image.url)
