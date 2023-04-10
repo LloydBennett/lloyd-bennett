@@ -1,4 +1,21 @@
-ul.nav-menu__list
-  each item in navigation.data
-    li.nav-menu__list-item
-      a.nav-menu__link(href=item.url)=item.slug
+.nav-bar
+  .container.grid
+    a(href='/').nav-bar__logo
+      L.J.B
+    .nav-bar__meta-one
+      span.type--alt-s.no-wrap--and-break Lloyd-Jamie&nbsp;
+      span.type--alt-s.no-wrap--and-break Bennett
+    .nav-bar__meta-two
+      span.type--alt-s.no-wrap--and-break Brand &amp; 
+      span.type--alt-s.no-wrap--and-break Web Designer
+    .nav-bar__trigger
+      .hamburger
+        span.hamburger__line
+        span.hamburger__line
+
+.nav-menu
+  ul.nav-menu__list
+    each item in navigation.data
+      li.nav-menu__list-item
+        a.nav-menu__link(href=item.url)
+          span=item.slug

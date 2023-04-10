@@ -17,7 +17,7 @@
 @import './tools/mixins/container.scss';
 @import './tools/mixins/grid.scss';
 @import './tools/mixins/offset-content.scss';
-@import './tools/mixins/body-text.scss';
+@import './tools/mixins/text-size.scss';
 @import './tools/mixins/section-large.scss';
 @import './tools/mixins/section-small.scss';
 @import './tools/mixins/captialised-text.scss';
@@ -37,6 +37,8 @@
 
 @import './helpers/display.scss';
 @import './helpers/no-margin.scss';
+@import './helpers/no-wrap.scss';
+@import './helpers/text-alignment.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- L A Y O U T -------------------------------------
@@ -55,4 +57,7 @@
 @import './components/button.scss';
 @import './components/link.scss';
 @import './components/hero.scss';
+@import './components/nav-menu.scss';
+@import './components/nav-bar.scss';
+@import './components/hamburger.scss';
 
