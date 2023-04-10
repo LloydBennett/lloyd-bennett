@@ -1,10 +1,11 @@
 .hero__project {
   @include grid(null, true);
+  @include section--l(top);
 }
 
 .hero__project-no span,
 .hero__project-title {
-  @include media-query($breakpoint--small - 1, max-width) {
+  @include media-query($breakpoint--medium - 1, max-width) {
     font-size: 5rem;
   }
 }
