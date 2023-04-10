@@ -8,8 +8,15 @@ block content
     .section--s
       .hero__project.container
         .hero__project-no
-          span.type--xl.no-margin--bottom 01
-        h1.type--xl.hero__project-title.no-margin--bottom=document.data.title
+          span.type--xl 01
+
+        - var projectTitle = document.data.title
+        - var projectTitleArr = projectTitle.split(" ")
+
+        h1.type--xl.hero__project-title
+          each title in projectTitleArr
+            span.no-wrap--and-break=title
+
     picture.block
       source(media="(max-width: 700px)" srcset=document.data.hero_image.small.url)
       source(media="(max-width: 1270px)" srcset=document.data.hero_image.url)
