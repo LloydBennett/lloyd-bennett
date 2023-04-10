@@ -8,11 +8,8 @@
 }
 
 .nav-menu__list {
-  margin: 0;
-  padding-top: spacing(15);
+  margin: spacing(15) auto 0;
   display: table;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .nav-menu__list-item {
@@ -21,7 +18,7 @@
 
 .nav-menu__link {
   @extend .type--l;
-  display: inline-block;
+  display: block;
 
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;
