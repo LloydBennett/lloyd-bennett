@@ -1,28 +1,28 @@
-<div class="projectss">
-  <div class="section section--l">
-    <div class="section--s">
-      <div class="hero__project container">
-        <div class="hero__project-no">
-          <span class="type--xl">
-            01
-          </span>
-          <% 
-            var projectTitle = document.data.title 
-            var projectTitleArr = projectTitle.split(" ")
-          %>
-          <h1 class="type--xl hero__project-title">
-            yoooooo
-            
-          </h1>
-        </div>
+<div class="section section--l">
+  <div class="section--s">
+    <div class="hero__project container">
+      <div class="hero__project-no">
+        <span class="type--xl">
+          01
+        </span>
       </div>
+      <% 
+        var projectTitle = document.data.title 
+        var projectTitleArr = projectTitle.split(" ")
+      %>
+      <h1 class="type--xl hero__project-title">
+        <% projectTitleArr.forEach((title) => { %>
+          <span class="no-wrap--and-break"><%- title %></span>
+        <% }) %>
+      </h1>
     </div>
-    <picture class="block">
-      <source media="(min-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
-      <source media="(min-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
-      <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
-      <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
-    </picture>
   </div>
-
+  <picture class="block">
+    <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
+    <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
+    <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
+    <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
+  </picture>
 </div>
+
+<%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
