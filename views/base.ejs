@@ -1,0 +1,25 @@
+<% var page = pageType %>
+
+<%- include('./partials/head', { page: page } ) -%>
+
+<body>
+  <main data-page="<%- page %>">
+    
+
+    <% switch(page) {
+      case 'project' : %>
+        <%- include('./pages/project') %>
+        <%  break; %>
+      <% case 'about' : %>
+        <%- include('./pages/about') -%>
+        <% break; %>
+      <% default : %>
+      <%- include('./pages/home') -%>
+    <% } %>
+
+  </main>
+
+  
+</body>
+
+
