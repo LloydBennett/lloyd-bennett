@@ -1,14 +1,19 @@
 <% getSlices = ((SliceZone) => {
   return SliceZone.reduce((prevSlices, slice) => {
-    if (slice.slice_type === 'two_column_image') {
-      return prevSlices + include('./slices/TwoColumnImage.ejs', { slice: slice })
-    }  
-    else if (slice.slice_type === 'full_width_image') {
-      return prevSlices + include('./slices/FullWidthImage.ejs', { slice: slice })
+    switch(slice.slice_type) {
+      case 'two_column_image':
+        return prevSlices + include('./slices/TwoColumnImage.ejs', { slice: slice })
+        break;
+      case 'full_width_image':
+        return prevSlices + include('./slices/FullWidthImage.ejs', { slice: slice })
+        break;
+      case 'single_paragraph':
+        return prevSlices + include('./slices/SingleParagraph.ejs', { slice: slice })
+        break;
+      default :
+        return '<h1>No Slices found</h1>'
     }
-    else {
-      return '<h1>No Slices found</h1>'
-    } 
+    
   }, '') 
 }) %> 
 
