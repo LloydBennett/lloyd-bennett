@@ -106,6 +106,11 @@ body {
 	}
 }
 
+.type--alt-xl {
+	@include capitalised-text(true);
+	@include text-size(1.6, 2.4, 3.2);
+}
+
 .type--alt-l {
 	@include capitalised-text(true);
 	@include text-size;

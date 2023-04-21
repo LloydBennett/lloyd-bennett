@@ -1,0 +1,42 @@
+.belt {
+  padding: spacing(6) 0;
+  overflow: hidden;
+
+  @include media-query($breakpoint--medium) {
+    margin-left: spacing(4);
+    padding: spacing(13) 0;
+  }
+}
+
+.belt__wrapper {
+  display: flex;
+  align-items: center;
+  transform: $rotation-angle;
+}
+
+.belt__label {
+  & + & {
+    margin-left: spacing(2);
+
+    @include media-query($breakpoint--medium) {
+      margin-left: spacing(4);
+    }
+
+    @include media-query($breakpoint--xx-large) {
+      margin-left: spacing(7)
+    }
+  }
+}
+
+.belt--label-star {
+  height: 17px;
+
+  @include media-query($breakpoint--medium) {
+    height: auto;  
+  }
+
+  svg {
+    height: 100%;
+    display: block;
+  }
+}
