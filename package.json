@@ -23,7 +23,6 @@
     "mini-css-extract-plugin": "^2.7.2",
     "nodemon": "^2.0.22",
     "postcss-loader": "^7.0.2",
-    "pug": "^3.0.2",
     "sass": "^1.58.3",
     "sass-loader": "^13.2.0",
     "webpack": "^5.75.0",
