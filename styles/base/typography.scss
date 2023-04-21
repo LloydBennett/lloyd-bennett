@@ -101,6 +101,10 @@ body {
 	@include text-size(1.2, null, 1.4);
 }
 
+.type--letter-sp {
+	letter-spacing: 1px;
+}
+
 .type--l-margin {
 	margin: 0 0 spacing(5);
 
@@ -129,6 +133,11 @@ body {
 	}
 }
 
+.type--semi-bold {
+	font-weight: $type--font-weight-semi;
+}
+
+.type--letter-sp
 .type--body-color {
 	color: $colour--body-type;
 }
