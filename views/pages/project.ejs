@@ -1,4 +1,4 @@
-<div class="section section--l">
+<section class="section section--l">
   <div class="section--s">
     <div class="hero__project container">
       <div class="hero__project-no">
@@ -23,10 +23,10 @@
     <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
     <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
   </picture>
-</div>
+</section>
 
 
-<div class="section--l">
+<section class="section--l">
   <div class="container grid">
     <% 
     let services = document.data.services
@@ -85,6 +85,36 @@
       <% }) %>
     </div>
   </div>
-</div>
+</section>
 
 <%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
+
+<section class="section--l">
+  <% 
+    let outcome = document.data.outcome
+    
+    %>
+  <div class="container grid">
+    <div class="offset-content">
+      <div class="meta meta--margin-bottom">
+        <div class="hr"></div>
+        <span class="block type--alt-s type--semi-bold type--letter-sp">
+          The Outcome
+        </span>
+      </div>
+      <% outcome.forEach((obj, i) => { %>
+        <% if(obj.outcome_title !== null) { %>
+          <h3 class="type--m type--m-margin">
+            <%- obj.outcome_title %>
+          </h3>
+        <% } %>
+        <% if(obj.outcome_body !== null) { %>
+          <p class="type--body type--body-colour">
+            <%- obj.outcome_body %>
+          </p>
+        <% } %>
+      <% }) %>
+    </div>
+
+  </div>
+</section>
