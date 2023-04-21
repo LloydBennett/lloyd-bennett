@@ -1,0 +1,15 @@
+.meta {
+  max-width: 14rem;
+
+  @include media-query($breakpoint--small) {
+		max-width: 19rem;
+	}
+}
+
+.meta--margin-bottom {
+  margin-bottom: spacing(7);
+
+  @include media-query($breakpoint--medium) {
+		margin-bottom: spacing(9);
+	}
+}

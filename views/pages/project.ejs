@@ -59,13 +59,17 @@
           <% }) %>
         </ul>
       </div>
-      
-
     </div>
     <div class="offset-content">
+      <div class="meta meta--margin-bottom">
+        <div class="hr"></div>
+        <span class="block type--alt-s type--semi-bold type--letter-sp">
+          The Challenge
+        </span>
+      </div>
       <% intro.forEach((obj, i) => { %>
         <% if(obj.intro_title !== null) { %>
-          <h3 class="type--m">
+          <h3 class="type--m type--m-margin">
             <%- obj.intro_title %>
           </h3>
         <% } %>
