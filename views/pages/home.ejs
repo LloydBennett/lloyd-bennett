@@ -28,10 +28,25 @@
 
 <section class="section--l">
   <div class="container grid">
-    <div class="column--centered">
+    <div class="column--centered section--s">
       <h4 class="text-center type--call-out type--grit-colour">
         <%- document.data.call_out_text %>
       </h4>
+    </div>
+    <div class="services">
+      <% 
+        let list = document.data.services_list
+        
+      %>
+      <ul class="services__list">
+        <% for(skill in list) { %>
+          <li>
+            <p class="services__list-item type--grit-colour">
+             <%- list[skill].service %>
+            </p>
+          </li>
+        <% } %>
+      </ul>
     </div>
   </div>
 </section>
