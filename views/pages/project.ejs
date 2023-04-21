@@ -25,4 +25,58 @@
   </picture>
 </div>
 
+
+<div class="section--l">
+  <div class="container grid">
+    <% 
+    let services = document.data.services
+    let industries = document.data.industries
+    let intro = document.data.introduction
+    
+    %>
+    <div class="aside">
+      <div>
+        <h4 class="type--body">
+          Services
+        </h4>
+        <ul>
+        <% services.forEach((service, i) => { %>
+          <li>
+            <p class="type--body"><%- service.skill %></p>
+          </li>
+        <% }) %>
+        </ul>
+      </div>
+      <div>
+        <h4 class="type--body">
+          Industry
+        </h4>
+        <ul>
+          <% industries.forEach((elem) => { %>
+            <li>
+              <p class="type--body"><%- elem.industry %></p>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+      
+
+    </div>
+    <div class="offset-content">
+      <% intro.forEach((obj, i) => { %>
+        <% if(obj.intro_title !== null) { %>
+          <h3 class="type--m">
+            <%- obj.intro_title %>
+          </h3>
+        <% } %>
+        <% if(obj.intro_body !== null) { %>
+          <p class="type--body">
+            <%- obj.intro_body %>
+          </p>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
 <%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
