@@ -61,7 +61,6 @@ app.get('/', async (req, res) => {
   const defaults = await handleRequest(req)
 
   res.render('base', { ...defaults, document, pageType })
-  console.log(document.data)
 })
 
 app.get('/about', async (req, res) => {
@@ -77,7 +76,6 @@ app.get('/projects/:uid', async (req, res) => {
   const pageType = 'project'
   const document = await client.getByUID('projects', uid)
   const defaults = await handleRequest(req)
-  console.log(pageType)
   res.render('base', { ...defaults, document, pageType })
 })
 
