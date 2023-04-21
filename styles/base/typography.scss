@@ -11,7 +11,6 @@ html {
 
 body {
 	font-family: $type--family-body;
-	color: $colour--body-type;
 	font-size: 100%;
 }
 
@@ -19,7 +18,6 @@ body {
 .type--l,
 .type--m,
 .type--s {
-	color: $colour--heading-type;
 	font-family: $type--family-display;
 	font-weight: 700;
 }
@@ -27,7 +25,6 @@ body {
 .type--xl {
 	font-size: 6rem;
 	line-height: 1.1;
-	margin: 0 0 spacing(5);
 
 	@include media-query($type--tweakpoint) {
 		font-size: 7.6rem;
@@ -36,12 +33,10 @@ body {
 	@include media-query($breakpoint--small) {
 		font-size: 9.6rem;
 		line-height: 1;
-		margin: 0 0 spacing(7);
 	}
 
 	@include media-query($breakpoint--medium) {
 		font-size: 11.8rem;
-		margin: 0 0 spacing(9);
 	}
 
 	@include media-query($breakpoint--tweakpoint) {
@@ -56,7 +51,6 @@ body {
 .type--l {
 	font-size: 4.8rem;
 	line-height: 1.1;
-	margin: 0 0 spacing(4);
 
 	@include media-query($breakpoint--small) {
 		font-size: 6rem;
@@ -64,17 +58,14 @@ body {
 
 	@include media-query($breakpoint--medium) {
 		font-size: 7.6rem;
-		margin: 0 0 spacing(5);
 	}
 }
   
 .type--m {
 	font-size: 3.9rem;
 	line-height: 1.3;
-	margin: 0 0 spacing(2);
 
 	@include media-query($breakpoint--medium) {
-		margin: 0 0 spacing(3);
 		font-size: 6rem;
 		line-height: 1.1;
 	}
@@ -83,21 +74,73 @@ body {
 .type--s {
 	font-size: 2.5rem;
 	line-height: 1.3;
-	margin: 0 0 spacing(2);
 
 	@include media-query($breakpoint--medium) {
-		margin: 0 0 spacing(3);
 		font-size: 3.9rem;
 		line-height: 1.2;
 	}
 }
   
 .type--body {
-	@include body-text;
+	@include text-size;
 	line-height: $type--line-height;
 	margin: 0;
 
 	& + & {
 		margin-top: spacing(3);
 	}
+}
+
+.type--alt-l {
+	@include capitalised-text(true);
+	@include text-size;
+}
+
+.type--alt-s {
+	@include capitalised-text(true);
+	@include text-size(1.2, null, 1.4);
+}
+
+.type--letter-sp {
+	letter-spacing: 1px;
+}
+
+.type--l-margin {
+	margin: 0 0 spacing(5);
+
+	@include media-query($breakpoint--small) {
+		margin: 0 0 spacing(7);
+	}
+
+	@include media-query($breakpoint--medium) {
+		margin: 0 0 spacing(9);
+	}
+}
+
+.type--m-margin {
+	margin: 0 0 spacing(4);
+
+	@include media-query($breakpoint--medium) {
+		margin: 0 0 spacing(5);
+	}
+}
+
+.type--s-margin {
+	margin: 0 0 spacing(2);
+
+	@include media-query($breakpoint--medium) {
+		margin: 0 0 spacing(3);
+	}
+}
+
+.type--semi-bold {
+	font-weight: $type--font-weight-semi;
+}
+
+.type--body-colour {
+	color: $colour--body-type;
+}
+
+.type--white {
+	color: $colour--white;
 }

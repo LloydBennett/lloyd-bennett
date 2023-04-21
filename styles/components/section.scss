@@ -5,3 +5,7 @@
 .section--s {
   @include section--s;
 }
+
+.section-xs {
+  @include section--xs;
+}

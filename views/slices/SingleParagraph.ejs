@@ -1,0 +1,23 @@
+<% 
+  var para = slice.items
+%>
+<section class="section--l">
+  <div class="container grid">
+    <div class="offset-content">
+      
+      <% if(slice.primary.paragraph_title !== null) { %>
+        <h3 class="type--m type--m-margin">
+          <%- slice.primary.paragraph_title %>
+        </h3>
+      <% } %>
+
+      <% para.forEach((block) => { %>
+        <% if(block.paragraph_text !== null) { %>
+          <p class="type--body type--body-colour">
+            <%- block.paragraph_text %>
+          </p>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+</section>

@@ -5,9 +5,9 @@
   vertical-align: bottom;
 
   &::after {
+    content: "";
     background-color: #4e4e53;
     bottom: 3px;
-    content: "";
     display: block;
     height: 0.1rem;
     left: 0;

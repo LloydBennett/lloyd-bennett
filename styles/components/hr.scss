@@ -1,0 +1,11 @@
+.hr {
+  background-color: $colour--black;
+  border: none;
+  height: $spacing-rule-half / 2;
+  margin: 0 0 spacing(2);
+
+  @include media-query($breakpoint--small) {
+    height: $spacing-rule-half;
+    margin: 0 0 spacing(3);
+  }
+}

@@ -1,0 +1,120 @@
+<section class="section section--l">
+  <div class="section--s">
+    <div class="hero__project container">
+      <div class="hero__project-no">
+        <span class="type--xl">
+          01
+        </span>
+      </div>
+      <% 
+        var projectTitle = document.data.title 
+        var projectTitleArr = projectTitle.split(" ")
+      %>
+      <h1 class="type--xl hero__project-title">
+        <% projectTitleArr.forEach((title) => { %>
+          <span class="no-wrap--and-break"><%- title %></span>
+        <% }) %>
+      </h1>
+    </div>
+  </div>
+  <picture class="block">
+    <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
+    <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
+    <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
+    <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
+  </picture>
+</section>
+
+
+<section class="section--l">
+  <div class="container grid">
+    <% 
+    let services = document.data.services
+    let industries = document.data.industries
+    let intro = document.data.introduction
+    
+    %>
+    <div class="aside section--l">
+      <div class="aside__content">
+        <h4 class="type--body type--s-margin">
+          Services
+        </h4>
+        <ul class="list">
+        <% services.forEach((service, i) => { %>
+          <li class="list__item">
+            <p class="type--body type--body-colour">
+              <%- service.skill %>
+            </p>
+          </li>
+        <% }) %>
+        </ul>
+      </div>
+      <div class="aside__content">
+        <h4 class="type--body type--s-margin">
+          Industry
+        </h4>
+        <ul class="list">
+          <% industries.forEach((elem) => { %>
+            <li class="list__item">
+              <p class="type--body type--body-colour">
+                <%- elem.industry %>
+              </p>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <div class="offset-content">
+      <div class="meta meta--margin-bottom">
+        <div class="hr"></div>
+        <span class="block type--alt-s type--semi-bold type--letter-sp">
+          The Challenge
+        </span>
+      </div>
+      <% intro.forEach((obj, i) => { %>
+        <% if(obj.intro_title !== null) { %>
+          <h3 class="type--m type--m-margin">
+            <%- obj.intro_title %>
+          </h3>
+        <% } %>
+        <% if(obj.intro_body !== null) { %>
+          <p class="type--body type--body-colour">
+            <%- obj.intro_body %>
+          </p>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
+
+<section class="section--l">
+  <% 
+    let outcome = document.data.outcome
+    
+    %>
+  <div class="container grid">
+    <div class="offset-content">
+      <div class="meta meta--margin-bottom">
+        <div class="hr"></div>
+        <span class="block type--alt-s type--semi-bold type--letter-sp">
+          The Outcome
+        </span>
+      </div>
+      <% outcome.forEach((obj, i) => { %>
+        <% if(obj.outcome_title !== null) { %>
+          <h3 class="type--m type--m-margin">
+            <%- obj.outcome_title %>
+          </h3>
+        <% } %>
+        <% if(obj.outcome_body !== null) { %>
+          <p class="type--body type--body-colour">
+            <%- obj.outcome_body %>
+          </p>
+        <% } %>
+      <% }) %>
+    </div>
+
+  </div>
+</section>

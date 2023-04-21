@@ -1,5 +1,5 @@
 .button {
-  @include body-text;
+  @include text-size;
   @include capitalised-text(true, true, true);
   @include button;
 
