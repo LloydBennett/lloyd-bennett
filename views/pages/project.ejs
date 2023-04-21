@@ -34,27 +34,31 @@
     let intro = document.data.introduction
     
     %>
-    <div class="aside">
-      <div>
-        <h4 class="type--body">
+    <div class="aside section--l">
+      <div class="aside__content">
+        <h4 class="type--body type--s-margin">
           Services
         </h4>
-        <ul>
+        <ul class="list">
         <% services.forEach((service, i) => { %>
-          <li>
-            <p class="type--body"><%- service.skill %></p>
+          <li class="list__item">
+            <p class="type--body type--body-colour">
+              <%- service.skill %>
+            </p>
           </li>
         <% }) %>
         </ul>
       </div>
-      <div>
-        <h4 class="type--body">
+      <div class="aside__content">
+        <h4 class="type--body type--s-margin">
           Industry
         </h4>
-        <ul>
+        <ul class="list">
           <% industries.forEach((elem) => { %>
-            <li>
-              <p class="type--body"><%- elem.industry %></p>
+            <li class="list__item">
+              <p class="type--body type--body-colour">
+                <%- elem.industry %>
+              </p>
             </li>
           <% }) %>
         </ul>
@@ -74,7 +78,7 @@
           </h3>
         <% } %>
         <% if(obj.intro_body !== null) { %>
-          <p class="type--body">
+          <p class="type--body type--body-colour">
             <%- obj.intro_body %>
           </p>
         <% } %>
