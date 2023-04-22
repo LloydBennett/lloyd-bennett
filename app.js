@@ -47,11 +47,13 @@ const handleRequest = async api => {
   const meta = await client.getSingle('meta')
   const navigation = await client.getSingle('navigation')
   const projects = await client.getAllByType('projects')
+  const footer = await client.getSingle('footer')
 
   return {
     meta,
     navigation,
-    projects
+    projects,
+    footer
   }
 }
 

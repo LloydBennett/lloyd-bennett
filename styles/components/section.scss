@@ -3,7 +3,7 @@
 }
 
 .section--l-top {
-  @include section--l(top);
+  @include section--l(top, padding);
 }
 
 .section--s {

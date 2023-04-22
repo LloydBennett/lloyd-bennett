@@ -3,7 +3,7 @@
 <%- include('./partials/head', { page: page } ) -%>
 
 <body>
-  <main data-page="<%- page %>">
+  <main data-page="<%- page %>" class="main <%- page %>">
     
     <% switch(page) {
       case 'project' : %>
@@ -18,7 +18,7 @@
 
   </main>
 
-  
+  <%- include('./partials/footer', { footer: footer.data }) -%>
 </body>
 
 
