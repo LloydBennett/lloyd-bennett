@@ -40,10 +40,14 @@
 
   &:nth-child(2),
   &:nth-child(8n) {
-    padding-top: spacing(28);
-
+  
     @include media-query($breakpoint--small) {
       grid-column: 5 / 7;
+      padding-top: spacing(13);
+    }
+
+    @include media-query($breakpoint--medium) {
+      padding-top: spacing(28);
     }
 
     @include media-query($breakpoint--x-large) {
@@ -75,7 +79,7 @@
     }
 
     @include media-query($breakpoint--medium) {
-      grid-column: 2 / 4;
+      grid-column: 1 / 4;
     }
 
     @include media-query($breakpoint--x-large) {
@@ -85,13 +89,15 @@
 
   &:nth-child(5),
   &:nth-child(11n) {
-
+    
     @include media-query($breakpoint--small) {
       grid-column: 4 / 7;
+      padding-top: spacing(13);
     }
 
     @include media-query($breakpoint--medium) {
       grid-column: 5 / 7;
+      padding-top: spacing(28);
     }
 
     @include media-query($breakpoint--x-large) {
@@ -105,9 +111,10 @@
       grid-column: 3 / 6;
     }
 
-    @include media-query($breakpoint--medium) {
+    @include media-query($breakpoint--x-large) {
       grid-column: 4 / 7;
     }
+    
   }
 }
 
@@ -123,5 +130,6 @@
 }
 
 .project__img {
-  height: 100%;
+  height: 500px;
+
 }
