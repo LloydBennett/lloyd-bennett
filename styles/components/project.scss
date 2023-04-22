@@ -36,13 +36,19 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 1 / 5;
     }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 98%;
+      }
+    }
   }
 
   &:nth-child(2),
   &:nth-child(8n) {
   
     @include media-query($breakpoint--small) {
-      grid-column: 5 / 7;
+      grid-column: 4 / 7;
       padding-top: spacing(13);
     }
 
@@ -52,6 +58,13 @@
 
     @include media-query($breakpoint--x-large) {
       grid-column: 6 / 9;
+    }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 130%;
+      }
+      
     }
   }
 
@@ -69,6 +82,12 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 3 / 7;
     }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 70%;
+      }
+    }
   }
 
   &:nth-child(4),
@@ -84,6 +103,13 @@
 
     @include media-query($breakpoint--x-large) {
       grid-column: 2 / 5;
+    }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 102%;
+      }
+      
     }
   }
 
@@ -103,6 +129,16 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 7 / 11;
     }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 130%;
+      }
+
+      @include media-query($breakpoint--x-large) {
+        padding-top: 75%;
+      }
+    }
   }
 
   &:nth-child(6),
@@ -114,7 +150,12 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 4 / 7;
     }
-    
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        padding-top: 80%;
+      }
+    }
   }
 }
 
@@ -130,6 +171,7 @@
 }
 
 .project__img {
-  height: 500px;
-
+  @include media-query($breakpoint--small - 1, max-width) {
+    padding-top: 100%;
+  }
 }
