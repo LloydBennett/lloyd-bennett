@@ -3,6 +3,7 @@
     <% 
     let title = document.data.title
     let titleArr = title.split(" ")
+    let image = document.data.hero_image
     
     %>
     
@@ -20,7 +21,14 @@
   
       </h1>
     </div>
-    
+    <div class="column--centered home-hero__image">
+      <picture class="home-hero__image-thumb">
+        <source media="(max-width: 700px)" srcset="<%- image.small.url %>">
+        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
+        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
+      </picture>
+    </div> 
   </div>
 
 
