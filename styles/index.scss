@@ -25,7 +25,7 @@
 @import './tools/mixins/button.scss';
 
 @import './tools/animations/link-hover.scss';
-
+@import './tools/animations/scroll-btn-hover.scss';
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- B A S E -----------------------------------------
 // ------------------------------------ // ------------------------------------------
@@ -69,6 +69,7 @@
 @import './components/list.scss';
 @import './components/services.scss';
 @import './components/belt.scss';
+@import './components/scroll-button.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- P A G E S ---------------------------------------

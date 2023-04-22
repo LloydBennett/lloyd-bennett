@@ -31,8 +31,8 @@
 
 .home-hero__image {
   margin-top: -#{spacing(8)};
-  transform: rotate(2deg);
   grid-row-start: 2;
+  position: relative;
 }
 
 .home-hero__image-thumb {
@@ -40,6 +40,14 @@
   max-width: 70rem;
   margin-left: auto;
   margin-right: auto;
+  transform: rotate(2deg);
+}
+
+.home-hero__cta {
+  position: absolute;
+  bottom: -20%;
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 .home-hero__label {

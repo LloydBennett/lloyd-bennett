@@ -1,0 +1,102 @@
+.scroll-button {
+  display: inline-block;
+  width: 11.9rem;
+  height: 11.9rem;
+  position: relative;
+  cursor: pointer;
+
+  @include media-query($breakpoint--large) {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  @include media-query($breakpoint--x-large) {
+    width: 25.5rem;
+    height: 25.5rem;
+  }
+
+  &:hover {
+    .scroll-arrow {
+      animation: scroll-btn-hover 500ms ease 0s 1 forwards;
+    }
+
+    .scroll-arrow-path {
+      transition: 400ms ease 100ms;
+      stroke: $colour--passion;
+    }
+
+    .scroll-button__highlight {
+      transition: 600ms ease;
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+.scroll-button-bg {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+
+  svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.scroll-button__circle {
+  stroke-width: 3;
+  stroke: $colour--black;
+  fill: none;
+  display: inline-block;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+
+.scroll-button__highlight {
+  stroke: $colour--passion;
+
+  stroke-dashoffset: 1500px;
+  stroke-dasharray: 1500px;
+  transition: 600ms ease;
+
+
+  @include media-query($breakpoint--x-large) {
+    stroke-dashoffset: 2057px;
+    stroke-dasharray: 2057px;
+  }
+}
+
+.scroll-arrow-path {
+  stroke: $colour--black;
+  transition: 400ms ease;
+}
+
+.scroll-button__wrapper {
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+
+  @include media-query($breakpoint--large - 1, max-width) {
+    width: 30px;
+  }
+
+  @include media-query($breakpoint--x-large) {
+    width: 60px;
+  }
+
+  svg {
+    width: 100%;
+    display: block;
+  }
+}
+
+.scroll-button--margin-top {
+  margin-top: spacing(6);
+}

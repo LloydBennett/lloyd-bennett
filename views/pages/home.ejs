@@ -30,6 +30,9 @@
         <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
         <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
       </picture>
+      <div class="home-hero__cta">
+        <%- include('../partials/scroll-button') -%>
+      </div>
     </div>
     
     <div class="home-hero__label">
@@ -50,9 +53,11 @@
         <%- document.data.hero_description %>
       </p>
     </div>
+
+    
+    
+
   </div>
-
-
 </section>
 
 <section class="section--l">
@@ -80,21 +85,7 @@
   </div>
 </section>
 
-<div class="belt">
-  <div class="belt__wrapper">
-    <% 
-    let label = document.data.belt_label
-    let count = 30
-    %>
-    
-    <% for(let i = 0; i < count; i++) { %>
-      <span class="belt__label type--alt-xl inline-block">
-        <%- label %>
-      </span>
-      <div class="belt__label belt--label-star">
-        <%- include('../partials/svg/star') -%>
-      </div>
-    <% } %>
-  </div>
-</div>
+<%- include('../partials/belt', { label: document.data.belt_label }) -%>
+
+
 
