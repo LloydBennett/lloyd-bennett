@@ -5,12 +5,12 @@
   position: relative;
   cursor: pointer;
 
-  @include media-query($breakpoint--large) {
+  @include media-query($breakpoint--small) {
     width: 18rem;
     height: 18rem;
   }
 
-  @include media-query($breakpoint--x-large) {
+  @include media-query($breakpoint--medium) {
     width: 25.5rem;
     height: 25.5rem;
   }
