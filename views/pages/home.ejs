@@ -88,4 +88,78 @@
 <%- include('../partials/belt', { label: document.data.belt_label }) -%>
 
 
+<section class="section--l">
+  <div class="projects">
+    <% projects.forEach((project, index)=> { %>
+      <% 
+        let i = index + 1 
+        let indexOutput = i.toString().padStart(2, '0')
+      %>
+      <a href="<%- project.url %>" class="project__card">
+        <div class="project__img" style="background: url('<%- project.data.hero_image.url %>')"></div>
 
+        <div class="project__meta">
+          <span class="type--s"><%- indexOutput %></span>
+          <h4 class="type--s">
+            <%- project.data.title %>
+          </h4>
+        </div>
+        
+
+      </a>
+      
+    <%})%>
+    <div class="project__card">
+      <div class="project__img" style="background: url('<%- document.data.hero_image.url %>')"></div>
+
+      <div class="project__meta">
+        <span class="type--s">03</span>
+        <h4 class="type--s">
+          Hello
+        </h4>
+      </div>
+    </div>
+    <div class="project__card">
+      <div class="project__img" style="background: url('<%- document.data.hero_image.url %>')"></div>
+
+      <div class="project__meta">
+        <span class="type--s">03</span>
+        <h4 class="type--s">
+          Hello
+        </h4>
+      </div>
+    </div>
+    <div class="project__card">
+      <div class="project__img" style="background: url('<%- document.data.hero_image.url %>')"></div>
+
+      <div class="project__meta">
+        <span class="type--s">03</span>
+        <h4 class="type--s">
+          Hello
+        </h4>
+      </div>
+    </div>
+    <div class="project__card">
+      <div class="project__img" style="background: url('<%- document.data.hero_image.url %>')"></div>
+
+      <div class="project__meta">
+        <span class="type--s">03</span>
+        <h4 class="type--s">
+          Hello
+        </h4>
+      </div>
+    </div>
+    <div class="project__card">
+      <div class="project__img" style="background: url('<%- document.data.hero_image.url %>')"></div>
+
+      <div class="project__meta">
+        <span class="type--s">03</span>
+        <h4 class="type--s">
+          Hello
+        </h4>
+      </div>
+    </div>
+
+
+  </div>
+</section>
