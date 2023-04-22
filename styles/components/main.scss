@@ -1,4 +1,6 @@
 .main {
+  @extend .section--l-top;
+  
   padding-bottom: 1px;
   position: relative;
   z-index: 2;

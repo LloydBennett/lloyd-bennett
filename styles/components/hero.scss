@@ -1,6 +1,5 @@
 .hero__project {
   @include grid(null, true);
-  @include section--l(top);
 }
 
 .hero__project-no span,

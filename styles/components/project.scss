@@ -1,3 +1,7 @@
+.project {
+  background-color: $colour--white;
+}
+
 .projects {
   @include grid;
   @include container;
