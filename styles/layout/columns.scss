@@ -2,6 +2,19 @@
 	grid-column: 1 / 7;
 }
 
+.column--centered {
+	@extend .column;
+	
+	
+	@include media-query($breakpoint--x-large) {
+		grid-column: 2 / 10;
+	}
+
+	@include media-query($breakpoint--xx-large) {
+		grid-column: 3 / 9;
+	}
+}
+
 .column--half-start {
 	@include media-query($breakpoint--medium) {
 		grid-column: 1 / 4;

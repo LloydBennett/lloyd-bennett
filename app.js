@@ -46,10 +46,14 @@ app.set('view engine', 'ejs');
 const handleRequest = async api => {
   const meta = await client.getSingle('meta')
   const navigation = await client.getSingle('navigation')
+  const projects = await client.getAllByType('projects')
+  const footer = await client.getSingle('footer')
 
   return {
     meta,
-    navigation
+    navigation,
+    projects,
+    footer
   }
 }
 
@@ -59,7 +63,6 @@ app.get('/', async (req, res) => {
   const pageType = 'home'
   const document = await client.getSingle('home')
   const defaults = await handleRequest(req)
-
   res.render('base', { ...defaults, document, pageType })
 })
 

@@ -2,6 +2,10 @@
   @include section--l;
 }
 
+.section--l-top {
+  @include section--l(top, padding);
+}
+
 .section--s {
   @include section--s;
 }

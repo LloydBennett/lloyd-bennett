@@ -1,0 +1,16 @@
+<div class="belt section--l">
+  <div class="belt__wrapper">
+    <% 
+    let count = 30
+    %>
+    
+    <% for(let i = 0; i < count; i++) { %>
+      <span class="belt__label type--alt-xl no-wrap">
+        <%- label %>
+      </span>
+      <div class="belt__label belt--label-star">
+        <%- include('./svg/star') -%>
+      </div>
+    <% } %>
+  </div>
+</div>

@@ -80,7 +80,22 @@ body {
 		line-height: 1.2;
 	}
 }
-  
+
+.type--call-out {
+	font-family: $type--family-display;
+	font-weight: $type--font-weight-reg;
+	line-height: 1.3;
+	font-size: 2.4rem;
+
+	@include media-query($breakpoint--medium) {
+		font-size: 3.9rem;
+	}
+
+	@include media-query($breakpoint--x-large) {
+		font-size: 6rem;
+	}
+}
+
 .type--body {
 	@include text-size;
 	line-height: $type--line-height;
@@ -89,6 +104,11 @@ body {
 	& + & {
 		margin-top: spacing(3);
 	}
+}
+
+.type--alt-xl {
+	@include capitalised-text(true);
+	@include text-size(1.6, 2.4, 3.2);
 }
 
 .type--alt-l {
@@ -133,6 +153,10 @@ body {
 	}
 }
 
+.type--italic {
+	font-style: italic;
+}
+
 .type--semi-bold {
 	font-weight: $type--font-weight-semi;
 }
@@ -141,6 +165,14 @@ body {
 	color: $colour--body-type;
 }
 
+.type--grit-colour {
+	color: $colour--grit;
+}
+
 .type--white {
 	color: $colour--white;
+}
+
+.type--off-white {
+	color: $colour--text-on-grit;
 }

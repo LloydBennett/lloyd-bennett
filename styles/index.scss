@@ -25,7 +25,7 @@
 @import './tools/mixins/button.scss';
 
 @import './tools/animations/link-hover.scss';
-
+@import './tools/animations/scroll-btn-hover.scss';
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- B A S E -----------------------------------------
 // ------------------------------------ // ------------------------------------------
@@ -40,6 +40,8 @@
 @import './helpers/no-margin.scss';
 @import './helpers/no-wrap.scss';
 @import './helpers/text-alignment.scss';
+@import './helpers/no-overflow.scss';
+
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- L A Y O U T -------------------------------------
@@ -65,4 +67,15 @@
 @import './components/hr.scss';
 @import './components/meta.scss';
 @import './components/list.scss';
+@import './components/services.scss';
+@import './components/belt.scss';
+@import './components/scroll-button.scss';
+@import './components/project.scss';
+@import './components/footer.scss';
+@import './components/main.scss';
 
+// ------------------------------------ // ------------------------------------------
+// -------------------------------- P A G E S ---------------------------------------
+// ------------------------------------ // ------------------------------------------
+
+@import './page/home.scss';

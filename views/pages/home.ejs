@@ -1,5 +1,91 @@
-<div class="container">
-  <h1 class="type--xl">
-    <%- document.data.title %>
-  </h1>
-</div>
+<section class="section--l">
+  <div class="container grid">
+    <% 
+    let title = document.data.title
+    let titleArr = title.split(" ")
+    let image = document.data.hero_image
+    let heroLabel = document.data.hero_label
+    let labelArr = heroLabel.split(" ")
+    
+    %>
+    
+    <div class="home-hero__title">
+      <h1 class="type--xl text-center">
+        <% titleArr.forEach((text, index) => { %>
+          <% let i = index + 1  %>
+  
+          <% if (i === titleArr.length) { %>
+            <span class="type--italic"><%- text %></span>
+          <% } else { %>
+            <span><%- text %></span>
+          <% } %>
+        <% }) %>
+  
+      </h1>
+    </div>
+    <div class="column--centered home-hero__image">
+      <picture class="home-hero__image-thumb">
+        <source media="(max-width: 700px)" srcset="<%- image.small.url %>">
+        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
+        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
+      </picture>
+      <div class="home-hero__cta">
+        <%- include('../partials/scroll-button') -%>
+      </div>
+    </div>
+    
+    <div class="home-hero__label">
+      <p class="type--alt-l text-right no-wrap">
+      <% labelArr.forEach((text, index) => { %>
+        <% let i = index + 1  %>
+
+        <% if (i === 1) { %>
+          <span class="block"><%-text %></span>
+        <%} else {%>
+        <%- text %>
+        <%}%>
+      <% }) %>
+      </p>
+    </div>
+    <div class="home-hero__intro">
+      <p class="type--body text-center">
+        <%- document.data.hero_description %>
+      </p>
+    </div>
+
+    
+    
+
+  </div>
+</section>
+
+<section class="section--l">
+  <div class="container grid">
+    <div class="column--centered section--s">
+      <h4 class="services__call-out text-center type--call-out type--grit-colour">
+        <%- document.data.call_out_text %>
+      </h4>
+    </div>
+    <div class="services">
+      <% 
+        let list = document.data.services_list
+        
+      %>
+      <ul class="services__list">
+        <% for(skill in list) { %>
+          <li>
+            <p class="services__list-item type--grit-colour">
+             <%- list[skill].service %>
+            </p>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/belt', { label: document.data.belt_label }) -%>
+
+<%- include('../partials/project-list', { project: projects }) -%>
+
