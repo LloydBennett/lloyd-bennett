@@ -48,7 +48,7 @@
   &:nth-child(8n) {
   
     @include media-query($breakpoint--small) {
-      grid-column: 4 / 7;
+      grid-column: 5 / 7;
       padding-top: spacing(13);
     }
 
@@ -57,7 +57,7 @@
     }
 
     @include media-query($breakpoint--x-large) {
-      grid-column: 6 / 9;
+      grid-column: 7 / 10;
     }
 
     .project__img {
@@ -171,6 +171,10 @@
 }
 
 .project__img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
   @include media-query($breakpoint--small - 1, max-width) {
     padding-top: 100%;
   }
