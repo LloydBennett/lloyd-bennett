@@ -4,6 +4,8 @@
     let title = document.data.title
     let titleArr = title.split(" ")
     let image = document.data.hero_image
+    let heroLabel = document.data.hero_label
+    let labelArr = heroLabel.split(" ")
     
     %>
     
@@ -28,7 +30,26 @@
         <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
         <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
       </picture>
-    </div> 
+    </div>
+    
+    <div class="home-hero__label">
+      <p class="type--alt-l text-right">
+      <% labelArr.forEach((text, index) => { %>
+        <% let i = index + 1  %>
+
+        <% if (i === 1) { %>
+          <span class="block"><%-text %></span>
+        <%} else {%>
+        <%- text %>
+        <%}%>
+      <% }) %>
+      </p>
+    </div>
+    <div class="home-hero__intro">
+      <p class="type--body text-center">
+        <%- document.data.hero_description %>
+      </p>
+    </div>
   </div>
 
 
