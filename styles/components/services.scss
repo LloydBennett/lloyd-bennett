@@ -17,9 +17,12 @@
 }
 
 .services__call-out {
-  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--medium - 1) {
+  @extend .column--centered;
+
+  @include media-query($breakpoint--xx-large) {
+		grid-column: 2 / 10;
     padding: 0 spacing(8);
-  }
+	}
 }
 
 .services__list {
