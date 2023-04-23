@@ -1,8 +1,61 @@
-<div class="container">
-  <h1 class="type--xl">
-    <%- document.data.hero_title %>
-  </h1>
-</div>
+<section class="section--l">
+  <div class="container grid">
+    <% 
+    let title = document.data.hero_title 
+    let titleArr = title.split(" ")
+    let image = document.data.hero_image_main
+    let imageAlt = document.data.hero_image_alt
+    %>
+    <div class="about__title">
+      <h1 class="type--xl text-center">
+        <% titleArr.forEach((text, index) => { %>
+          <% let i = index + 1  %>
+      
+          <% if (i === titleArr.length) { %>
+            <span class="special"><%- text %></span>
+          <% } else { %>
+            <span><%- text %></span>
+          <% } %>
+        <% }) %>
+      </h1>
+    </div>
+    
+  
+    <div class="about__intro">
+      <p class="type--body type--grit-400">
+        <%- document.data.intro %>
+      </p>
+    </div>
+  </div>
+
+  <div class="about__hero">
+    <picture>
+      <source media="(max-width: 1270px)" srcset="<%- image.url %>">
+      <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
+      <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
+    </picture>
+  </div>
+
+  <div class="about__hero-alt">
+    <picture>
+      <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
+      <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
+      <img class="block--full-width" src="<%- imageAlt.url %>" alt="<%- imageAlt.alt %>">
+    </picture>
+  </div>
+
+
+</section>
+
+
+<section class="section--l">
+  <div class="container">
+    <p class="type--call-out text-right">
+      <%- document.data.call_out_text %>
+    </p>
+  </div>
+</section>
+
 
 <%- include('../partials/belt', { label: document.data.belt_label }) -%>
  
