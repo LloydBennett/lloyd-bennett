@@ -1,5 +1,5 @@
 .home {
-  background-color: $colour--grit-50;
+  @extend .bg--grit-50;
 }
 
 .home-hero__title {

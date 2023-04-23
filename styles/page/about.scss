@@ -1,5 +1,5 @@
 .about {
-  background-color: $colour--grit-50;
+  @extend .bg--grit-50;
 }
 
 .about__intro {

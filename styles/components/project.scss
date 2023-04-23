@@ -1,5 +1,5 @@
 .project {
-  background-color: $colour--white;
+  @extend .bg--white;
 }
 
 .projects {
