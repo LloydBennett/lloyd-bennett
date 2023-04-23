@@ -1,0 +1,13 @@
+<div class="nav-menu">
+  <ul class="nav-menu__list">
+    <% for(item in navigation.data) {%>
+    <li class="nav-menu__list-item text-center">
+      <a href="" class="nav-menu__link">
+        <span class="type--white">
+          <%- item.url %>
+        </span>
+      </a>
+    </li>
+    <% } %>
+  </ul>
+</div>

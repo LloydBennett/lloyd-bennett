@@ -4,18 +4,21 @@
 
 <body>
   <main data-page="<%- page %>" class="main <%- page %>">
-    
-    <% switch(page) {
-      case 'project' : %>
-        <%- include('./pages/project') %>
-        <%  break; %>
-      <% case 'about' : %>
-        <%- include('./pages/about') -%>
-        <% break; %>
-      <% default : %>
-      <%- include('./pages/home') -%>
-    <% } %>
+    <%- include('./partials/navigation-bar') -%>
+    <%- include('./partials/navigation-menu') -%>
 
+    <div class="section--l-top">
+      <% switch(page) {
+        case 'project' : %>
+          <%- include('./pages/project') %>
+          <%  break; %>
+        <% case 'about' : %>
+          <%- include('./pages/about') -%>
+          <% break; %>
+        <% default : %>
+        <%- include('./pages/home') -%>
+      <% } %>
+    </div>
   </main>
 
   <%- include('./partials/footer', { footer: footer.data }) -%>
