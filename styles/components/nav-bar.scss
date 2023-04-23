@@ -1,5 +1,17 @@
 .nav-bar {
   padding: spacing(2) 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  .grid {
+    @include media-query($breakpoint--small - 1, max-width) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }
 
 .nav-bar__meta-one,
@@ -7,7 +19,8 @@
   display: none;
 
   @include media-query($breakpoint--medium) {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 }
 
