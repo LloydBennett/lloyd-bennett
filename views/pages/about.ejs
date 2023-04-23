@@ -6,53 +6,78 @@
     let image = document.data.hero_image_main
     let imageAlt = document.data.hero_image_alt
     %>
-    <div class="about__title">
-      <h1 class="type--xl text-center">
+    <div class="about__heading">
+      <h1 class="about__title type--xl">
         <% titleArr.forEach((text, index) => { %>
-          <% let i = index + 1  %>
-      
-          <% if (i === titleArr.length) { %>
-            <span class="special"><%- text %></span>
+          <% 
+          let i = index + 1
+          const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;  
+          
+          %>
+          
+          <% if (format.test(text)) { %>
+            <span class="about__title-special"><%- text %></span>
+          <% } else if(i === titleArr.length) { %>
+            <span class="about__title-key"><%- text %></span>
           <% } else { %>
             <span><%- text %></span>
           <% } %>
+
         <% }) %>
       </h1>
     </div>
     
-  
     <div class="about__intro">
       <p class="type--body type--grit-400">
         <%- document.data.intro %>
       </p>
     </div>
-  </div>
 
-  <div class="about__hero">
-    <picture>
-      <source media="(max-width: 1270px)" srcset="<%- image.url %>">
-      <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
-      <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
-    </picture>
-  </div>
+    <div class="about__hero">
+      <picture class="about__hero-img block">
+        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
+        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
+      </picture>
+    </div>
 
-  <div class="about__hero-alt">
-    <picture>
-      <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
-      <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
-      <img class="block--full-width" src="<%- imageAlt.url %>" alt="<%- imageAlt.alt %>">
-    </picture>
+    <div class="about__hero-alt">
+      <picture class="about__hero-alt-img block">
+        <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
+        <img class="block--full-width" src="<%- imageAlt.url %>" alt="<%- imageAlt.alt %>">
+      </picture>
+    </div>
+  
   </div>
-
 
 </section>
 
 
 <section class="section--l">
   <div class="container">
-    <p class="type--call-out text-right">
+    <p class="about__call-out type--call-out">
       <%- document.data.call_out_text %>
     </p>
+  </div>
+</section>
+
+
+<section class="section--l">
+  <div class="container grid">
+
+    <div class="aside">
+
+    </div>
+
+    <div class="about__middle">
+      <picture class="block">
+        <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
+        <img class="block--full-width" src="<%- document.data.alt_image.url %>" alt="<%- document.data.alt_image.alt %>">
+      </picture>
+    </div>
+    
   </div>
 </section>
 
@@ -60,4 +85,27 @@
 <%- include('../partials/belt', { label: document.data.belt_label }) -%>
  
 
-  
+<section class="section--l">
+  <% 
+    let process = document.data.process
+    
+  %>
+  <div class="container grid">
+    <% process.forEach((obj, counter) => { %>
+    <% 
+    let count = counter + 1 
+    let countPadded = count.toString().padStart(2, '0')
+    %>
+    <div class="two-col-offset">
+      <div class="type--s-margin">
+        <span class="type--s"><%- countPadded %></span>
+        <h4 class="type--s"><%- obj.process_title %></h4>
+      </div>
+      <p class="type--body type--grit-400">
+        <%- obj.process_body %>
+      </p>
+      
+    </div>
+    <%}) %>
+  </div>
+</section>

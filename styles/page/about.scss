@@ -4,9 +4,67 @@
 
 .about__intro {
   grid-column: 8 / 11;
+  padding-top: spacing(3);
+}
+
+.about__heading {
+  grid-column: 1 / 7;
+  position: relative;
+  z-index: 2;
 }
 
 .about__title {
-  grid-column: 1 / 6;
+  max-width: 70rem;
+
+  @include media-query($breakpoint--tweakpoint) {
+    max-width: 90rem;
+  }
+  
+  @include media-query($breakpoint--xxx-large) {
+    max-width: 95rem;
+  }
 }
+
+.about__title-key {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
+.about__title-special {
+  display: inline-block;
+  margin-left: 8%;
+}
+
+.about__hero {
+  grid-column: 1 / 5;
+  transform: translateY(-20%);
+}
+
+.about__hero-img {
+  transform: $rotation-angle--l;
+}
+
+.about__hero-alt {
+  grid-column: 8 / 11;
+  
+  @include media-query($breakpoint--tweakpoint - 1, max-width) {
+    display: flex;
+    align-items: end;
+  }
+}
+
+.about__hero-alt-img {
+  transform: $rotation-angle;
+}
+
+.about__call-out {
+  text-indent: 30%;
+}
+
+.about__middle {
+  grid-column: 4 / 11;
+}
+
+
 

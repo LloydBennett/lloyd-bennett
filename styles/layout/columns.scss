@@ -5,7 +5,6 @@
 .column--centered {
 	@extend .column;
 	
-	
 	@include media-query($breakpoint--x-large) {
 		grid-column: 2 / 10;
 	}
@@ -32,5 +31,15 @@
 
 	@include media-query($breakpoint--x-large) {
 		grid-column: 6 / 11;
+	}
+}
+
+.two-col-offset {
+	&:nth-child(odd) {
+		grid-column: 3 / 7;
+	}
+
+	&:nth-child(even) {
+		grid-column: 7 / 11;
 	}
 }
