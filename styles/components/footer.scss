@@ -2,8 +2,8 @@
   padding: spacing(8) 0 spacing(6);
   width: 100%;
   z-index: 1;
-  background-color: $colour--grit;
-  color: $colour--text-on-grit;
+  background-color: $colour--grit-500;
+  color: $colour--grit-100;
 
   @include media-query($breakpoint--small) {
     align-items: center;

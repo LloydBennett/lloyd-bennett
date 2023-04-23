@@ -1,7 +1,7 @@
 .nav-menu {
   width: 100%;
   height: 100%;
-  background-color: $colour--grit;
+  background-color: $colour--grit-500;
   position: fixed;
   left: 0;
   top: 0;
@@ -21,14 +21,14 @@
   &:nth-child(odd) {
     .nav-menu__list-img {
       right: -20%;
-      transform: translateY(-50%) scale(0.5) rotate(4deg);
+      transform: translateY(-50%) scale(1) rotate(4deg);
     }
   }
 
   &:nth-child(even) {
     .nav-menu__list-img {
       left: -20%;
-      transform: translateY(-50%) scale(0.5) rotate(-4deg);
+      transform: translateY(-50%) scale(1) rotate(-4deg);
     }
   }
 }
@@ -36,7 +36,7 @@
 .nav-menu__list-img {
   width: 25.6rem;
   height: 30.4rem;
-  background-size: cover;
+  background-size: 300%;
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
@@ -59,15 +59,7 @@
 }
 
 .nav-menu__link:hover + .nav-menu__list-img  {
-  //transform: translateY(-50%) scale(1) rotate(4deg);
+  background-size: 200%;
   transition: 200ms ease;
   opacity: 1;
-}
-
-.nav-menu__list-item:nth-child(odd) .nav-menu__link:hover + .nav-menu__list-img  {
-  transform: translateY(-50%) scale(1) rotate(4deg);
-}
-
-.nav-menu__list-item:nth-child(even) .nav-menu__link:hover +  .nav-menu__list-img  {
-  transform: translateY(-50%) scale(1) rotate(-4deg);
 }

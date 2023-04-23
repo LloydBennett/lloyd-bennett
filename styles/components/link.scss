@@ -24,13 +24,13 @@
 }
 
 .link--dark {
-  color: $colour--text-on-grit;
+  color: $colour--grit-100;
 
   &::after {
-    background-color: $colour--text-on-grit;
+    background-color: $colour--grit-100;
   }
 
   &:visited {
-    color: $colour--text-on-grit;
+    color: $colour--grit-100;
   }
 }

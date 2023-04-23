@@ -1,12 +1,14 @@
 /* Colours */
 $colour--passion: #f56308;
-$colour--grey: #F2F2F2;
-$colour--grit: #202020;
+$colour--grit-500: #202020;
+$colour--grit-400: #3C3C3C;
+$colour--grit-300: #535353;
+$colour--grit-200: #949494;
+$colour--grit-100: #D4D4D4;
+$colour--grit-50: #F2F2F2;
+
 $colour--white: white;
 $colour--black: black;
-$colour--text-on-grit: #CAC9C9;
-$colour--body-type: #464646;
-$colour--light-type: #525252;
 
 /* Type */
 $type--line-height: 1.5;
@@ -35,5 +37,5 @@ $breakpoint--xxx-large: 2000px;
 $cubic-bezier--zoom: cubic-bezier(0.420,0.000,0.002,1.000);
 
 /* Border */
-$border-top: 2px solid $colour--grit;
+$border-top: 2px solid $colour--grit-500;
 $rotation-angle: rotate(-2deg);

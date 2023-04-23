@@ -165,18 +165,31 @@ body {
 	font-weight: $type--font-weight-semi;
 }
 
-.type--body-colour {
-	color: $colour--body-type;
+.type--grit-500 {
+	color: $colour--grit-500;
 }
 
-.type--grit-colour {
-	color: $colour--grit;
+.type--grit-400 {
+	color: $colour--grit-400;
+}
+
+.type--grit-300 {
+	color: $colour--grit-300;
+}
+
+.type--grit-200 {
+	color: $colour--grit-200;
+}
+
+.type--grit-100 {
+	color: $colour--grit-100;
+}
+
+.type--grit-50 {
+	color: $colour--grit-50;
 }
 
 .type--white {
 	color: $colour--white;
 }
 
-.type--off-white {
-	color: $colour--text-on-grit;
-}
