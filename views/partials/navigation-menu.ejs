@@ -1,13 +1,21 @@
 <div class="nav-menu">
   <ul class="nav-menu__list">
-    <% for(item in navigation.data) {%>
     <li class="nav-menu__list-item text-center">
-      <a href="" class="nav-menu__link">
+      <a href="<%- navigation.data.url %>" class="nav-menu__link">
         <span class="type--white">
-          <%- item.url %>
+          <%- navigation.data.uid %>
         </span>
       </a>
     </li>
-    <% } %>
+    <% projects.forEach((project)=> { %>
+    <li class="nav-menu__list-item text-center">
+      <a href="<%- project.url %>" class="nav-menu__link">
+        <span class="type--white">
+          <%- project.data.title %>
+        </span>
+      </a>
+      <div class="nav-menu__list-img" style="background-image: url('<%- project.data.hero_image.url %>')"></div>
+    </li>
+    <% }) %>
   </ul>
 </div>
