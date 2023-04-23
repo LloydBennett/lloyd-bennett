@@ -63,7 +63,18 @@
 }
 
 .about__middle {
-  grid-column: 4 / 11;
+  grid-column: 3 / 7;
+  
+  @include media-query($breakpoint--x-large) {
+    grid-column: 4 / 11;
+  }
+}
+
+.about__process {
+  @include container;
+  @include grid;
+
+  grid-row-gap: spacing(9);
 }
 
 
