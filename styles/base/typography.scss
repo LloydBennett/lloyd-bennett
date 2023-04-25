@@ -40,10 +40,6 @@ body {
 	}
 
 	@include media-query($breakpoint--tweakpoint) {
-		font-size: 14.9rem;
-	}
-
-	@include media-query($breakpoint--xxx-large) {
 		font-size: 18rem;
 	}
 }
