@@ -74,7 +74,13 @@
   @include container;
   @include grid;
 
-  grid-row-gap: spacing(9);
+  @include media-query($breakpoint--small) {
+    grid-row-gap: spacing(5);
+  }
+
+  @include media-query($breakpoint--x-large) {
+    grid-row-gap: spacing(9);
+  }
 }
 
 
