@@ -68,10 +68,10 @@
 .about__hero-media-alt {
   grid-column: 2 / 5;
   
-  // @include media-query($breakpoint--tweakpoint - 1, max-width) {
-  //   display: flex;
-  //   align-items: end;
-  // }
+  @include media-query($breakpoint--tweakpoint) {
+    display: flex;
+    align-items: end;
+  }
 
   @include media-query($breakpoint--small) {
     grid-column: 4 / 7;
