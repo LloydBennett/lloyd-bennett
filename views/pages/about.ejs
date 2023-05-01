@@ -1,5 +1,5 @@
 <section class="section--l">
-  <div class="container grid">
+  <div class="about__hero">
     <% 
     let title = document.data.hero_title 
     let titleArr = title.split(" ")
@@ -33,15 +33,15 @@
       </p>
     </div>
 
-    <div class="about__hero">
-      <picture class="about__hero-img block">
+    <div class="about__hero-media">
+      <picture class="about__hero-media-img block">
         <source media="(max-width: 1270px)" srcset="<%- image.url %>">
         <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
         <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
       </picture>
     </div>
 
-    <div class="about__hero-alt">
+    <div class="about__hero-media-alt">
       <picture class="about__hero-alt-img block">
         <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
         <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
