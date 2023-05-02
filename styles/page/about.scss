@@ -7,15 +7,25 @@
   @include grid(null, true);
 }
 
-.about__intro {  
-  @include media-query($breakpoint--x-large - 1, max-width) {
-    grid-column: 1 / 5;
+.about__intro {
+  grid-column: 1 / 5;
+  
+  @include media-query($breakpoint--large - 1, max-width) {
     grid-row: 4;
+  }
+
+  @include media-query($breakpoint--small) {
+    grid-column: 1 / 7;
+  }
+
+  @include media-query($breakpoint--large) {
+    grid-column:  6 / 9;
+    padding-top: spacing(3);
   }
 
   @include media-query($breakpoint--x-large) {
     grid-column: 8 / 11;
-    padding-top: spacing(3);
+    
   }
 }
 
@@ -25,6 +35,14 @@
   z-index: 2;
 
   @include media-query($breakpoint--small) {
+    grid-column: 1 / 9;
+  }
+
+  @include media-query($breakpoint--large) {
+    grid-column: 1 / 6;
+  }
+
+  @include media-query($breakpoint--x-large) {
     grid-column: 1 / 7;
   }
 }
@@ -54,7 +72,15 @@
 
 .about__hero-media {
   grid-column: 1 / 5;
-  margin-top: -20%
+  margin-top: -20%;
+
+  @include media-query($breakpoint--small) {
+    grid-column: 1 / 7;
+  }
+
+  @include media-query($breakpoint--large) {
+    grid-column: 1 / 5;
+  }
 }
 
 .about__hero-media-img {
@@ -67,18 +93,25 @@
 
 .about__hero-media-alt {
   grid-column: 2 / 5;
+  margin-top: -20%;
   
-  @include media-query($breakpoint--tweakpoint) {
+  @include media-query($breakpoint--small) {
+    grid-column: 5 / 9;
+    margin-top: -40%;
+  }
+  
+  @include media-query($breakpoint--large) {
     display: flex;
     align-items: end;
   }
 
-  @include media-query($breakpoint--small) {
-    grid-column: 4 / 7;
+  @include media-query($breakpoint--large - 1, max-width) {
+    margin-bottom: spacing(8);
   }
-  
-  @include media-query($breakpoint--x-large - 1, max-width) {
-    margin: -20% 0 spacing(8);
+
+  @include media-query($breakpoint--large) {
+    grid-column: 6 / 9;
+    margin-top: 0;
   }
 
   @include media-query($breakpoint--x-large) {
@@ -89,18 +122,26 @@
 .about__hero-alt-img {
   transform: $rotation-angle--l;
 
-  @include media-query($breakpoint--x-large) {
+  @include media-query($breakpoint--large) {
     transform: $rotation-angle-minus;
   }
 }
 
 .about__call-out {
-  text-indent: 30%;
+  text-indent: 26%;
+
+  @include media-query($breakpoint--x-large) {
+    text-indent: 30%;
+  }
 }
 
 .about__middle {
-  grid-column: 3 / 7;
+  grid-column: 1 / 9;
   
+  @include media-query($breakpoint--medium) {
+    grid-column: 3 / 9;
+  }
+
   @include media-query($breakpoint--x-large) {
     grid-column: 4 / 11;
   }

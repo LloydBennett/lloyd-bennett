@@ -36,12 +36,16 @@
 
 .two-col-offset {
 	&:nth-child(odd) {
-		grid-column: 3 / 7;
+		grid-column: 3 / 9;
+
+		@include media-query($breakpoint--x-large) {
+			grid-column: 3 / 7;
+		}
 	}
 
 	&:nth-child(even) {
 		@include media-query($breakpoint--x-large - 1, max-width) {
-			grid-column: 3 / 7;
+			grid-column: 3 / 9;
 		}
 
 		@include media-query($breakpoint--x-large) {

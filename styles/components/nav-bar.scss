@@ -50,7 +50,7 @@
   justify-content: right;
 
   @include media-query($breakpoint--small) {
-    grid-column: 6 / 7;
+    grid-column: 8 / 9;
 	}
 
   @include media-query($breakpoint--x-large) {
