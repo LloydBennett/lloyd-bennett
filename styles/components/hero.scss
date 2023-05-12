@@ -2,13 +2,6 @@
   @include grid(null, true);
 }
 
-.hero__project-no span,
-.hero__project-title {
-  @include media-query($breakpoint--medium - 1, max-width) {
-    font-size: 5rem;
-  }
-}
-
 .hero__project-title {
   @include offset-content;
   grid-column: 2 / 5;
