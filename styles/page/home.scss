@@ -7,7 +7,7 @@
   z-index: 2;
 
   @include media-query($breakpoint--small) {
-    grid-column: 1 / 7;
+    grid-column: 1 / 9;
   }
 
   @include media-query($breakpoint--x-large) {
@@ -46,6 +46,10 @@
   grid-row-start: 2;
   position: relative;
 
+  @include media-query($breakpoint--x-large - 1, max-width) {
+    grid-column: 2 / 8;
+  }
+  
   @media screen and (min-width: $breakpoint--x-large) and (max-width: $breakpoint--xx-large - 1 ) {
 		grid-column: 2 / 9;
     margin-top: -#{spacing(6)};
@@ -93,14 +97,19 @@
 
 .home-hero__intro {
   display: none;
+
+  @include media-query($breakpoint--large) {
+    grid-column: 7 / 9;
+    display: flex;
+    grid-row: 2;
+    z-index: 2;
+    align-items: center;
+    transform: translateY(-20%);
+  }
   
   @include media-query($breakpoint--x-large) {
     max-width: 100rem;
     grid-column: 9 / 11;
-    grid-row: 2;
-    display: flex;
-    align-items: center;
-    transform: translateY(-20%);
   }
 
   .type--body {

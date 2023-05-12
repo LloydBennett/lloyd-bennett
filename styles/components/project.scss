@@ -34,12 +34,12 @@
   &:nth-child(7n) {
     
     @include media-query($breakpoint--small) {
-      grid-column: 1 / 4;
-    }
-
-    @include media-query($breakpoint--x-large) {
       grid-column: 1 / 5;
     }
+
+    // @include media-query($breakpoint--x-large) {
+    //   grid-column: 1 / 5;
+    // }
 
     .project__img {
       @include media-query($breakpoint--small) {
@@ -52,7 +52,7 @@
   &:nth-child(8n) {
   
     @include media-query($breakpoint--small) {
-      grid-column: 5 / 7;
+      grid-column: 6 / 9;
       padding-top: spacing(13);
     }
 
