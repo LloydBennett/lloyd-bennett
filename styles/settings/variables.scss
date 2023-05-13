@@ -22,7 +22,8 @@ $type--font-weight-bold: 700;
 
 /* Spacing */
 $spacing-rule: 0.8rem;
-$spacing-rule-half: $spacing-rule / 2;
+$spacing-rule-half: calc($spacing-rule / 2);
+$spacing-rule-quarter: calc($spacing-rule-half / 2);
 
 /* Breakpoints */
 $breakpoint--small: 550px;

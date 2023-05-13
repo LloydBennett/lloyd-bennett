@@ -80,6 +80,10 @@
 .footer__socials {
   grid-column: 7 / 9;
 
+  @include media-query($breakpoint--small) {
+    padding-top: spacing(2);
+  }
+  
   @include media-query($breakpoint--x-large - 1, max-width) {
     grid-row: 1;
   }
@@ -91,6 +95,7 @@
 
   @include media-query($breakpoint--x-large) {
     grid-column: 6 / 8;
+    padding-top: 0;
   }
 
   a {

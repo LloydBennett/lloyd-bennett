@@ -1,20 +1,50 @@
 .hero__project {
   @include grid(null, true);
-}
 
-.hero__project-title {
-  @include offset-content;
-  grid-column: 2 / 5;
-  
-  @include media-query($breakpoint--small - 1, max-width) {
-    text-align: right;
+  @include media-query($breakpoint--medium - 1, max-width) {
+    grid-row-gap: spacing(8);
   }
 }
 
-.hero__project-no {
-  grid-column: 1 / 2;
+.hero__project-title {
+  grid-column: 1 / 5;
+
+  @include media-query($breakpoint--medium - 1, max-width) {
+    text-align: center;
+  }
 
   @include media-query($breakpoint--small) {
+    grid-column: 1 / 9;
+  }
+
+  @include media-query($breakpoint--medium) {
+    grid-column: 3 / 9;
+  }
+
+  @include media-query($breakpoint--x-large) {
+		grid-column: 6 / 11;
+	}
+
+}
+
+.hero__project-no {
+  grid-column: 1 / 5;
+
+  @include media-query($breakpoint--medium - 1, max-width) {
+    text-align: center;
+  }
+
+  @include media-query($breakpoint--small) {
+    grid-column: 1 / 9;
+  }
+
+  @include media-query($breakpoint--medium) {
     grid-column: 1 / 3;
+  }
+
+  .type--xl {
+    @include media-query($breakpoint--medium - 1, max-width) {
+      font-size: 3.2rem;
+    }
   }
 }
