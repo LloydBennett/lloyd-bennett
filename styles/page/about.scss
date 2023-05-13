@@ -31,7 +31,6 @@
 
   @include media-query($breakpoint--x-large) {
     grid-column: 8 / 11;
-    
   }
 }
 
@@ -201,5 +200,32 @@
 
   @include media-query($breakpoint--x-large) {
     grid-row-gap: spacing(9);
+  }
+
+  .two-col-offset {
+
+    @include media-query($breakpoint--small - 1, max-width) {
+      margin-bottom: spacing(4);
+    }
+
+    @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--x-large - 1) {
+      padding-top: spacing(2);
+    }
+  }
+}
+
+.about__process-no {
+  display: none;
+
+  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--x-large - 1) {
+    display: block;
+    grid-column: 1 / 2;
+  }
+}
+.about__process-s-no {
+  margin-bottom: spacing(1);
+  display: block;
+  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--x-large - 1) {
+    display: none;
   }
 }
