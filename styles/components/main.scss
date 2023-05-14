@@ -1,9 +1,11 @@
 .main {
-  padding-bottom: 1px;
   position: relative;
   z-index: 2;
+}
 
+.main--margin {
   @include media-query($breakpoint--medium) {
     margin-bottom: 90vh;
+    padding-bottom: 1px;
   }
 }

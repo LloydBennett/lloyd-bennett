@@ -1,15 +1,46 @@
+<% 
+  let projectTitle = document.data.title 
+  let projectTitleArr = projectTitle.split(" ")
+  let projectIndex
+  let isNext = false
+  let nextTitle
+  let nextImg
+  let nextUrl
+  
+%>
+<% projects.forEach((obj, i) => { 
+  
+  if(obj.data.title === projectTitle) {
+    let count = i + 1 
+    let ntitle
+    projectIndex = count.toString().padStart(2, '0');
+    isNext = true;
+    
+    if(i === projects.length - 1) {
+      ntitle = projects[0].data.title 
+      console.log(projects[0].data.title)
+      nextImg = projects[0].data.hero_image.large.url
+      nextUrl = projects[0].url
+    } else {
+      ntitle = projects[count].data.title 
+      nextImg = projects[count].data.hero_image.large.url
+      nextUrl = projects[count].url
+    }
+    nextTitle = ntitle.split(" ")
+    return
+  }
+
+} ) %>
+
 <section class="section section--l">
   <div class="section--s">
     <div class="hero__project container">
       <div class="hero__project-no">
         <span class="type--xl">
-          01
+          <%- projectIndex %>
         </span>
       </div>
-      <% 
-        var projectTitle = document.data.title 
-        var projectTitleArr = projectTitle.split(" ")
-      %>
+      
       <h1 class="type--xl hero__project-title">
         <% projectTitleArr.forEach((title) => { %>
           <span class="no-wrap--and-break"><%- title %></span>
@@ -119,5 +150,19 @@
   </div>
 </section>
 
-<%- include('../partials/belt', { label: 'Next Project' }) -%>
+<%- include('../partials/belt', { label: 'Next Project', small_spacing: true }) -%>
 
+<section class="project__next">
+  <div class="container grid">
+    <div class="project__next-wrapper">
+      <h1 class="type--xl text-center project__next-title">
+        <% nextTitle.forEach((t) => { %>
+          <span class="no-wrap--and-break"><%- t %></span>
+        <% }) %>
+      </h1>
+      <a href="<%- nextUrl %>" class="project__next-thumb">
+        <div class="project__next-img" style="background-image: url('<%- nextImg %>') "></div>
+      </a>
+    </div>
+  </div>
+</section>
