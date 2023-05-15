@@ -229,3 +229,13 @@
     display: none;
   }
 }
+
+.about__aside-wrap {
+  display: flex;
+  justify-content: space-between;
+  max-height: 50rem;
+
+  @media screen and (min-width: $breakpoint--medium) {
+    flex-direction: column;
+  }
+}
