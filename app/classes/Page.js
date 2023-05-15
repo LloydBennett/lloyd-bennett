@@ -15,4 +15,20 @@ export default class Page {
     console.log('Create', this.id, this.element)
     console.log(GSAP)
   }
+  show() {
+    return new Promise(resolve => {
+      GSAP.from(this.element, {
+        autoAlpha: 0,
+        onComplete: resolve
+      })
+    })
+  }
+  hide() {
+    return new Promise(resolve => {
+      GSAP.from(this.element, {
+        autoAlpha: 0,
+        onComplete: resolve
+      })
+    })
+  }
 }

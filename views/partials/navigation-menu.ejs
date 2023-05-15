@@ -1,7 +1,7 @@
 <div class="nav-menu">
   <ul class="nav-menu__list">
     <li class="nav-menu__list-item text-center">
-      <a href="<%- navigation.data.url %>" class="nav-menu__link">
+      <a href="<%- navigation.data.url %>" class="nav-menu__link" data-page-trigger>
         <span class="type--white">
           <%- navigation.data.uid %>
         </span>
@@ -9,7 +9,7 @@
     </li>
     <% projects.forEach((project)=> { %>
     <li class="nav-menu__list-item text-center">
-      <a href="<%- project.url %>" class="nav-menu__link">
+      <a href="<%- project.url %>" class="nav-menu__link" data-page-trigger>
         <span class="type--white">
           <%- project.data.title %>
         </span>
