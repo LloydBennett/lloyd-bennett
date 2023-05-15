@@ -26,10 +26,6 @@ body {
 	font-size: 7.2rem;
 	line-height: 1.1;
 
-	// @include media-query($type--tweakpoint) {
-	// 	font-size: 7.6rem;
-	// }
-
 	@include media-query($breakpoint--small) {
 		font-size: 9.6rem;
 		line-height: 1;
