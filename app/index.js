@@ -5,9 +5,15 @@ import Navigation from 'components/Navigation'
 
 class App {
   constructor() {
-    this.createContent();
-    this.createPages();
-    this.addLinkListeners();
+    this.createContent()
+    this.createPages()
+    this.addLinkListeners()
+    this.createNavigation()
+    this.nav
+  }
+
+  createNavigation() {
+    this.navigation = new Navigation()
   }
 
   createContent() {
@@ -23,7 +29,7 @@ class App {
     }
     
     this.page = this.pages[this.template]
-    this.page.create();
+    this.page.create()
     this.page.show()
   }
 

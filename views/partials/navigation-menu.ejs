@@ -1,4 +1,18 @@
-<div class="nav-menu">
+<div class="nav-menu" data-nav-menu>
+  <div class="nav-menu__bg">
+    <svg class="bg" viewBox="0 0 100 00" preserveAspectRatio="none">
+      <path 
+      class="bg-path" 
+      stroke="#000000" 
+      fill="#000000" 
+      stroke-width="2px" 
+      dur="10s" vector-effect="non-scaling-stroke"
+      d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+      <animateMotion dur="10s" repeatCount="indefinite">
+        <mpath xlink:href="#path" />
+      </animateMotion>
+    </svg>
+  </div>
   <ul class="nav-menu__list">
     <li class="nav-menu__list-item text-center">
       <a href="<%- navigation.data.url %>" class="nav-menu__link" data-page-trigger>

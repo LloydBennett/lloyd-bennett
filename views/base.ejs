@@ -2,26 +2,34 @@
 
 <%- include('./partials/head', { page: page } ) -%>
 
-<body <% if( page !== 'project' ) { %>class="bg--grit-50"<%} %> >
+<body <% if( page !== 'project' ) { %>class="bg--grit-50"<%} %>>
+  <div class="grain"></div>
   <main data-page="<%- page %>" class="main <%- page %>">
-    <%- include('./partials/navigation-bar') -%>
+    
     <%- include('./partials/navigation-menu') -%>
 
-    <div class="section--s-top">
-      <% switch(page) {
-        case 'project' : %>
-          <%- include('./pages/project') %>
-          <%  break; %>
-        <% case 'about' : %>
-          <%- include('./pages/about') -%>
-          <% break; %>
-        <% default : %>
-        <%- include('./pages/home') -%>
-      <% } %>
+    <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
+      <%- include('./partials/navigation-bar') -%>
+      <div class="section--s-top">
+        <% switch(page) {
+          case 'project' : %>
+            <%- include('./pages/project') %>
+            <%  break; %>
+          <% case 'about' : %>
+            <%- include('./pages/about') -%>
+            <% break; %>
+          <% default : %>
+          <%- include('./pages/home') -%>
+        <% } %>
+      </div>
+      
     </div>
+    <% if( page !== 'project' ) { %>
+      <%- include('./partials/footer', { footer: footer.data }) -%>
+    <% } %>
   </main>
-
-  <%- include('./partials/footer', { footer: footer.data }) -%>
+  
+  <script src="/main.js"></script>
 </body>
 
 
