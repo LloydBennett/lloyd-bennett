@@ -9,7 +9,6 @@ class App {
     this.createPages()
     this.addLinkListeners()
     this.createNavigation()
-    this.nav
   }
 
   createNavigation() {
