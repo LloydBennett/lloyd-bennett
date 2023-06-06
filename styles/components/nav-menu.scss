@@ -60,6 +60,12 @@
   transition: 200ms ease;
   opacity: 0;
   pointer-events: none;
+
+  &.show {
+    transition: 200ms ease;
+    opacity: 1;
+    background-size: 200%;
+  }
 }
 
 .nav-menu__link {
@@ -76,10 +82,4 @@
   span {
     display: inline-block;
   }
-}
-
-.nav-menu__link:hover + .nav-menu__list-img  {
-  background-size: 200%;
-  transition: 200ms ease;
-  opacity: 1;
 }
