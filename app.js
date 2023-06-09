@@ -48,12 +48,14 @@ const handleRequest = async api => {
   const navigation = await client.getSingle('navigation')
   const projects = await client.getAllByType('projects')
   const footer = await client.getSingle('footer')
+  const about = await client.getSingle('about')
 
   return {
     meta,
     navigation,
     projects,
-    footer
+    footer,
+    about
   }
 }
 
