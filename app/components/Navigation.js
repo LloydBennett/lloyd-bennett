@@ -18,34 +18,20 @@ export default class Navigation extends Components {
     })
     this.animating = false
     this.tl = gsap.timeline({ paused: true })
+
+    this.intialiseNavText()
+    this.addEventListeners()
+    this.animate()
   }
 
   create() {
     super.create()
-    this.intialiseNavText()
-    this.addEvents()
   }
 
-  addEvents() {
-    this.elements.trigger.addEventListener('click', () => this.animate())
-    this.elements.navLinks.forEach(element => { 
-      let imagePrev = element.nextElementSibling
-      console.log(imagePrev)
-
-      element.addEventListener('mousemove', (e) => {
-        this.getPos(e, imagePrev)
-      })
-
-      element.addEventListener('mouseenter', (e) => {
-        setTimeout(function() {
-            
-          imagePrev.classList.add('show')
-      
-        }, 10);
-      })
-
-      element.addEventListener('mouseleave', () => imagePrev.classList.remove('show')) 
-
+  addEventListeners() {
+    this.elements.trigger.addEventListener('click', () => {
+      this.animating = !this.animating
+      this.tl.reversed(!this.tl.reversed());
     })
   }
 
@@ -64,27 +50,56 @@ export default class Navigation extends Components {
     });
   }
 
+  intialiseNavLinks() {
+    this.elements.navLinks.forEach(element => { 
+      let imagePrev = element.nextElementSibling
+
+      element.addEventListener('mousemove', (e) => {
+        this.getPos(e, imagePrev)
+      })
+
+      element.addEventListener('mouseenter', (e) => {
+        setTimeout(function() {
+          
+          imagePrev.classList.add('show')
+      
+        }, 10);
+      })
+
+      element.addEventListener('mouseleave', () => imagePrev.classList.remove('show')) 
+
+    })
+  }
+
   animate() {
     const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z"
     const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z"
     let path = document.querySelector('.bg-path')
     let spans = document.querySelectorAll('[data-link-text] span')
+    let hamburgerIcon = this.elements.navBar.querySelectorAll('.hamburger__line')
+    let newTl = gsap.timeline()
 
-    //this.animating = !this.animating
-    
-    //console.log(this.animating)
+    this.tl.to(this.elements.navBar, 
+    { 
+      duration: 0.3, 
+      opacity: 0
+    })
 
-    this.elements.navBar.classList.toggle('inverted')
-    
-    this.tl.fromTo(this.element, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" })
+    this.tl.fromTo(this.element, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
 
-    this.tl.to(path, { duration: 0.8, attr: { d: start }, ease: "power3.in" })
+    this.tl.to(path, { duration: 0.8, attr: { d: start }, ease: "power3.in" }, "-=0.5")
         .to(path, { duration: 0.4, attr: { d: end }, ease: "power3.out" })
+        .reverse()
+
+    this.tl.to(this.elements.navBar, { duration: 0.3, opacity: 1, color: "white" }, '-=0.3 nav')
+    this.tl.to(hamburgerIcon, { duration: 0.3, "background-color": "white" }, '-=0.3 nav')
     
-    this.tl.fromTo(spans, { duration: 0.4, y: "100%" }, { y: 0, stagger: 0.05 })
-    .reverse()
-    
-    this.tl.reversed(!this.tl.reversed());
+    if(this.animating) {
+      newTl.fromTo(spans, { duration: 0.4, y: "100%" }, { y: 0, stagger: 0.03 }, '-=0.3')
+    }
+    else {
+      newTl.fromTo(spans, { duration: 0.4, y: 0 }, { y: "100%" }, '-=0.3')
+    }
   }
 
   getPos(e, el) {
