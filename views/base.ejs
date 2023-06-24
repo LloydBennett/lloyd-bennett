@@ -3,8 +3,8 @@
 <%- include('./partials/head', { page: page } ) -%>
 
 <body <% if( page !== 'project' ) { %>class="bg--grit-50"<%} %>>
-  <div class="grain"></div>
-  <main data-page="<%- page %>" class="main <%- page %>">
+  <style>.main::after { background-image: url('/noise.png');}</style>
+  <main id="main" data-page="<%- page %>" data-scroll-speed="-14" class="main <%- page %>">
     
     <%- include('./partials/navigation-menu') -%>
 
