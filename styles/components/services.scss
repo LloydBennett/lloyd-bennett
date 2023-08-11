@@ -23,7 +23,7 @@
   @extend .column--centered;
 
   @include media-query($breakpoint--xx-large) {
-		grid-column: 2 / 10;
+		grid-column: 1 / 11;
     padding: 0 spacing(8);
 	}
 

@@ -22,6 +22,10 @@
   }
 
   @include media-query($breakpoint--x-large) {
+		grid-column: 4 / 11;
+	}
+
+  @include media-query($breakpoint--tweakpoint) {
 		grid-column: 6 / 11;
 	}
 
