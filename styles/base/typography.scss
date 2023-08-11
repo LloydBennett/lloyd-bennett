@@ -38,6 +38,11 @@ body {
 	@include media-query($breakpoint--x-large) {
 		font-size: 18rem;
 	}
+
+	@include media-query($breakpoint--xxx-large) {
+		font-size: 22rem;
+	}
+
 }
 
 .type--xxl {
@@ -45,6 +50,10 @@ body {
 
 	@include media-query($breakpoint--tweakpoint) {
 		font-size: 22rem;
+	}
+
+	@include media-query($breakpoint--xxx-large) {
+		font-size: 26rem;
 	}
 }
 

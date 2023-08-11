@@ -50,6 +50,10 @@
   @include media-query($breakpoint--x-large) {
     grid-column: 1 / 7;
   }
+
+  @include media-query($breakpoint--tweakpoint) {
+    grid-column: 1 / 8;
+  }
 }
 
 .about__title {
@@ -68,7 +72,7 @@
   }
   
   @include media-query($breakpoint--xxx-large) {
-    max-width: 95rem;
+    max-width: none;
   }
 }
 
