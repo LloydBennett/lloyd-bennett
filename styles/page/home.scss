@@ -32,6 +32,10 @@
     }
 
     @include media-query($breakpoint--tweakpoint) {
+      max-width: 120rem;
+    }
+
+    @include media-query($breakpoint--xxx-large) {
       max-width: 140rem;
     }
   }
