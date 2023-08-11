@@ -26,15 +26,19 @@
     @include media-query($breakpoint--medium) {
       max-width: 70rem;
     }
+    
+    @include media-query($breakpoint--x-large) {
+      max-width: 100rem;
+    }
 
     @include media-query($breakpoint--tweakpoint) {
-      max-width: 100rem;
+      max-width: 120rem;
     }
   }
 }
 
 .home-hero__title-last {
-  line-height: 1;
+  line-height: 0.8;
 }
 
 .home-hero__image {
