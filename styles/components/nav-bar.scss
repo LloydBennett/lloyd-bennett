@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 500;
 
   .grid {
     @include media-query($breakpoint--small - 1, max-width) {

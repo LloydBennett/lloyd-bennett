@@ -1,18 +1,25 @@
 .belt {
   padding: spacing(6) 0;
   overflow: hidden;
-
+  
   @include media-query($breakpoint--medium) {
-    margin-left: spacing(4);
+    //margin-left: spacing(4);
     padding: spacing(13) 0;
   }
 }
 
 .belt__wrapper {
-  display: flex;
-  align-items: center;
   transform: $rotation-angle-minus;
 }
+
+.belt__inner {
+  display: flex;
+  align-items: center;
+  animation: marquee 1.5s linear infinite;
+  //transform: translateX(calc(-22% + 20vw))
+  transform: translateX(-33.3%);
+}
+
 
 .belt__label {
   & + & {
@@ -38,5 +45,16 @@
   svg {
     height: 100%;
     display: block;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    //transform: translateX(calc(-22% + 20vw));
+    transform: translateX(-33.3%);
+  }
+  100% {
+    //transform: translateX(calc(-61% + 20vw));
+    transform: translateX(-66.6%);
   }
 }

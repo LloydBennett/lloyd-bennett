@@ -10,7 +10,7 @@
     %>
     
     <div class="home-hero__title">
-      <h1 class="type--xl text-center">
+      <h1 class="type--xxl text-center">
         <% titleArr.forEach((text, index) => { %>
           <% let i = index + 1  %>
   
@@ -59,7 +59,7 @@
 <section class="section--l section--l-top">
   <div class="container grid">
     <div class="services__call-out section--s">
-      <h4 class="text-center type--call-out type--grit-400">
+      <h4 class="text-center type--call-out">
         <%- document.data.call_out_text %>
       </h4>
     </div>
@@ -71,7 +71,7 @@
       <ul class="services__list">
         <% for(skill in list) { %>
           <li>
-            <p class="services__list-item type--grit-400">
+            <p class="services__list-item">
              <%- list[skill].service %>
             </p>
           </li>

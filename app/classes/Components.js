@@ -3,7 +3,7 @@ export default class Components {
     this.selector = element
     this.selectorChildren = { ...elements }
     this.create()
-    this.addEventListeners()
+    //this.addEventListeners()
   }
   create() {
     //check to see if the selector is HTML element
@@ -27,13 +27,12 @@ export default class Components {
           this.elements[obj] = null
         } else if (this.elements[obj].length == 1) {
           this.elements[obj] = document.querySelector(el)
+          //console.log(this.elements[obj])
         }
       }
     }
-    // this.selectorChildren.forEach(element => {
-      
-    // });
   }
+  
   addEventListeners() {
 
   }

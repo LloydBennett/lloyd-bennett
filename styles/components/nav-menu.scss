@@ -4,7 +4,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  z-index: 300;
   overflow-y: scroll;
   display: none;
 
@@ -14,7 +14,7 @@
 }
 
 .nav-menu__bg {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -33,38 +33,26 @@
 .nav-menu__list-item {
   padding: spacing(4) 0;
   position: relative;
-
-  &:nth-child(odd) {
-    .nav-menu__list-img {
-      right: -20%;
-      transform: translateY(-50%) scale(1) rotate(4deg);
-    }
-  }
-
-  &:nth-child(even) {
-    .nav-menu__list-img {
-      left: -20%;
-      transform: translateY(-50%) scale(1) rotate(-4deg);
-    }
-  }
 }
 
 .nav-menu__list-img {
   width: 25.6rem;
   height: 30.4rem;
-  background-size: 300%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  top: 50%;
+  //top: 50%;
+  left: 0;
+  //transform: translateY(-50%);
   transition: 200ms ease;
+  display: block;
   opacity: 0;
   pointer-events: none;
 
   &.show {
     transition: 200ms ease;
     opacity: 1;
-    background-size: 200%;
   }
 }
 

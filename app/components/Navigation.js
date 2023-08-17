@@ -1,5 +1,4 @@
 import Components from 'classes/Components'
-import { split } from 'utils/text';
 import gsap from 'gsap'
 
 export default class Navigation extends Components {

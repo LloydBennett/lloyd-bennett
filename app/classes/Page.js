@@ -13,7 +13,6 @@ export default class Page {
       
     // });
     console.log('Create', this.id, this.element)
-    console.log(GSAP)
   }
   show() {
     return new Promise(resolve => {
