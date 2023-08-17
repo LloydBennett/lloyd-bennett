@@ -1,4 +1,4 @@
-<% var page = pageType %>
+<% let page = pageType %>
 
 <%- include('./partials/head', { page: page } ) -%>
 
@@ -6,8 +6,6 @@
   <style>.main::after { background-image: url('/noise.png');}</style>
   <main id="main" data-page="<%- page %>" data-scroll-speed="-14" class="main <%- page %>">
     
-    <%- include('./partials/navigation-menu') -%>
-
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
       <%- include('./partials/navigation-bar') -%>
       <div class="section--s-top">
