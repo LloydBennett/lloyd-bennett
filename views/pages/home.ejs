@@ -1,4 +1,4 @@
-<section class="section--l">
+<section>
   <div class="container grid">
     <% 
     let title = document.data.title
@@ -10,12 +10,12 @@
     %>
     
     <div class="home-hero__title">
-      <h1 class="type--xl text-center">
+      <h1 class="type--xxl text-center">
         <% titleArr.forEach((text, index) => { %>
           <% let i = index + 1  %>
   
           <% if (i === titleArr.length) { %>
-            <span class="type--italic"><%- text %></span>
+            <span class="type--italic home-hero__title-last"><%- text %></span>
           <% } else { %>
             <span><%- text %></span>
           <% } %>
@@ -36,7 +36,7 @@
     </div>
     
     <div class="home-hero__label">
-      <p class="type--alt-l text-right no-wrap">
+      <p class="type--alt-l text-right no-wrap type--grit-400">
       <% labelArr.forEach((text, index) => { %>
         <% let i = index + 1  %>
 
@@ -49,21 +49,17 @@
       </p>
     </div>
     <div class="home-hero__intro">
-      <p class="type--body text-center">
+      <p class="type--body text-center type--grit-400">
         <%- document.data.hero_description %>
       </p>
     </div>
-
-    
-    
-
   </div>
 </section>
 
-<section class="section--l">
+<section class="section--l section--l-top">
   <div class="container grid">
-    <div class="column--centered section--s">
-      <h4 class="services__call-out text-center type--call-out type--grit-colour">
+    <div class="services__call-out section--s">
+      <h4 class="text-center type--call-out">
         <%- document.data.call_out_text %>
       </h4>
     </div>
@@ -75,7 +71,7 @@
       <ul class="services__list">
         <% for(skill in list) { %>
           <li>
-            <p class="services__list-item type--grit-colour">
+            <p class="services__list-item">
              <%- list[skill].service %>
             </p>
           </li>
@@ -85,7 +81,7 @@
   </div>
 </section>
 
-<%- include('../partials/belt', { label: document.data.belt_label }) -%>
+<%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
 
 <%- include('../partials/project-list', { project: projects }) -%>
 

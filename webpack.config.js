@@ -10,7 +10,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev';
 
 const dirApp = path.join(__dirname, 'app');
-// const dirShared = path.join(__dirname, 'shared');
+const dirShared = path.join(__dirname, 'shared');
 const dirStyles = path.join(__dirname, 'styles');
 const dirNode = 'node_modules';
 
@@ -22,7 +22,7 @@ module.exports = {
   resolve: {
     modules: [
       dirApp,
-      // dirShared,
+      dirShared,
       dirStyles,
       dirNode
     ]
@@ -33,14 +33,14 @@ module.exports = {
       IS_DEVELOPMENT
     }),
 
-    // new CopyWebpackPlugin({
-    //   patterns: [
-		// 		{
-    //       from: './shared',
-		// 			to: ''
-		// 		}
-		// 	]
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+				{
+          from: './shared',
+					to: ''
+				}
+			]
+    }),
 
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -79,6 +79,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
+        type: 'asset/resource',
         loader: 'file-loader',
         options: {
           name(file) {

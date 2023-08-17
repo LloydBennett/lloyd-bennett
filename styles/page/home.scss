@@ -1,5 +1,5 @@
 .home {
-  background-color: $colour--grey;
+  @extend .bg--grit-50;
 }
 
 .home-hero__title {
@@ -7,7 +7,7 @@
   z-index: 2;
 
   @include media-query($breakpoint--small) {
-    grid-column: 1 / 7;
+    grid-column: 1 / 9;
   }
 
   @include media-query($breakpoint--x-large) {
@@ -15,32 +15,55 @@
   }
 
   h1 {
-    max-width: 55rem;
+    max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
+
+    @include media-query($breakpoint--small) {
+      max-width: 55rem;
+    }
 
     @include media-query($breakpoint--medium) {
       max-width: 70rem;
     }
+    
+    @include media-query($breakpoint--x-large) {
+      max-width: 100rem;
+    }
 
     @include media-query($breakpoint--tweakpoint) {
-      max-width: 80rem;
+      max-width: 120rem;
     }
 
     @include media-query($breakpoint--xxx-large) {
-      max-width: 100rem;
+      max-width: 140rem;
     }
   }
 }
 
+.home-hero__title-last {
+  line-height: 0.8;
+}
+
 .home-hero__image {
-  transform: translateY(-#{spacing(8)});
+  margin-top: -#{spacing(4)};
   grid-row-start: 2;
   position: relative;
 
+  @include media-query($breakpoint--small) {
+    margin-top: -#{spacing(6)};
+  }
+
+  @include media-query($breakpoint--large) {
+    margin-top: -#{spacing(8)};
+  }
+
+  @include media-query($breakpoint--x-large - 1, max-width) {
+    grid-column: 2 / 8;
+  }
+  
   @media screen and (min-width: $breakpoint--x-large) and (max-width: $breakpoint--xx-large - 1 ) {
-		grid-column: 2 / 9;
-    transform: translate(5%, -#{spacing(6)});
+    margin-top: -#{spacing(6)};
 	}
 }
 
@@ -53,14 +76,14 @@
 }
 
 .home-hero__cta {
-  transform: translateY(-50%);
+  margin-top: -13%;
   width: 100%;
   grid-column: 1 / 7;
   text-align: center;
 
   @include media-query($breakpoint--x-large) {
 		grid-column: 2 / 9;
-    transform: translateY(-45%);
+    margin-top: -10%;
 	}
 
 	@include media-query($breakpoint--xx-large) {
@@ -85,14 +108,19 @@
 
 .home-hero__intro {
   display: none;
+
+  @include media-query($breakpoint--large) {
+    grid-column: 7 / 9;
+    display: flex;
+    grid-row: 2;
+    z-index: 2;
+    align-items: center;
+    transform: translateY(-20%);
+  }
   
   @include media-query($breakpoint--x-large) {
     max-width: 100rem;
     grid-column: 9 / 11;
-    grid-row: 2;
-    display: flex;
-    align-items: center;
-    transform: translateY(-20%);
   }
 
   .type--body {

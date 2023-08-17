@@ -1,10 +1,13 @@
 .column {
-	grid-column: 1 / 7;
+	grid-column: 1 / 9;
+
+	@include media-query($breakpoint--x-large) {
+		grid-column: 1 / 7;
+	}
 }
 
 .column--centered {
 	@extend .column;
-	
 	
 	@include media-query($breakpoint--x-large) {
 		grid-column: 2 / 10;
@@ -32,5 +35,27 @@
 
 	@include media-query($breakpoint--x-large) {
 		grid-column: 6 / 11;
+	}
+}
+
+.two-col-offset {
+	grid-column: 3 / 9;
+	
+	& + & {
+		@include media-query($breakpoint--small - 1, max-width) {
+			margin-top: spacing(4);
+		}
+	}
+}
+
+.two-col-offset--one {
+	@include media-query($breakpoint--x-large) {
+		grid-column: 3 / 7;
+	}
+}
+
+.two-col-offset--two {
+	@include media-query($breakpoint--x-large) {
+		grid-column: 7 / 11;
 	}
 }

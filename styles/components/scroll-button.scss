@@ -6,8 +6,8 @@
   cursor: pointer;
 
   @include media-query($breakpoint--small) {
-    width: 18rem;
-    height: 18rem;
+    width: 14rem;
+    height: 14rem;
   }
 
   @include media-query($breakpoint--medium) {

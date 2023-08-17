@@ -1,10 +1,116 @@
-<div class="container">
-  <h1 class="type--xl">
-    <%- document.data.hero_title %>
-  </h1>
-</div>
+<section class="section--l">
+  <div class="about__hero">
+    <% 
+    let title = document.data.hero_title 
+    let titleArr = title.split(" ")
+    let image = document.data.hero_image_main
+    let imageAlt = document.data.hero_image_alt
+    let stats = document.data.stats
+    %>
+    <div class="about__heading">
+      <h1 class="about__title type--xl">
+        <% titleArr.forEach((text, index) => { %>
+          <span><%- text %></span>
+        <% }) %>
+      </h1>
+    </div>
+    
+    <div class="about__intro">
+      <p class="type--body type--grit-400">
+        <%- document.data.intro %>
+      </p>
+    </div>
 
-<%- include('../partials/belt', { label: document.data.belt_label }) -%>
+    <div class="about__hero-media">
+      <picture class="about__hero-media-img block">
+        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
+        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
+      </picture>
+    </div>
+
+    <div class="about__hero-media-alt">
+      <picture class="about__hero-alt-img block">
+        <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
+        <img class="block--full-width" src="<%- imageAlt.url %>" alt="<%- imageAlt.alt %>">
+      </picture>
+    </div>
+  
+  </div>
+
+</section>
+
+
+<section class="section--l about--hidden">
+  <div class="container">
+    <p class="about__call-out type--call-out">
+      <%- document.data.call_out_text %>
+    </p>
+  </div>
+</section>
+
+
+<section class="section--l">
+  <div class="container about__middle">
+
+    <div class="aside about__aside-wrap">
+     <% stats.forEach((obj)=> { %>
+      <div>
+        <span class="block type--l type--s-margin">
+          <%- obj.value %>
+        </span>
+        <span class="block type--alt-s type--letter-sp">
+          <%- obj.unit %>
+        </span>
+      </div>
+     <% })%>
+    </div>
+
+    <div class="about__middle-img">
+      <picture class="block">
+        <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
+        <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
+        <img class="block--full-width" src="<%- document.data.alt_image.url %>" alt="<%- document.data.alt_image.alt %>">
+      </picture>
+    </div>
+
+    <p class="about__call-out type--call-out">
+      <%- document.data.call_out_text %>
+    </p>
+    
+  </div>
+</section>
+
+
+<%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
  
 
-  
+<section class="section--l">
+  <% 
+    let process = document.data.process
+    
+  %>
+  <div class="about__process">
+    <% process.forEach((obj, counter) => { %>
+    <% 
+    let count = counter + 1 
+    let countPadded = count.toString().padStart(2, '0')
+    %>
+    <div class="about__process-no">
+      <span class="type--l"><%- countPadded %></span>
+    </div>
+
+    <div class="two-col-offset <% if(count % 2 == 0){ %>two-col-offset--two<% } else { %>two-col-offset--one<% } %>">
+      <div class="type--s-margin">
+        <span class="type--s about__process-s-no"><%- countPadded %></span>
+        <h4 class="type--s"><%- obj.process_title %></h4>
+      </div>
+      <p class="type--body type--grit-400">
+        <%- obj.process_body %>
+      </p>
+      
+    </div>
+    <%}) %>
+  </div>
+</section>

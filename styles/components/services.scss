@@ -1,10 +1,13 @@
 .services {
   @include media-query($breakpoint--small) {
-    grid-column: 2 / 7;
+    grid-column: 2 / 8;
   }
 
   @include media-query($breakpoint--medium) {
-    grid-column: 2 / 6;
+    grid-column: 2 / 8;
+  }
+  @include media-query($breakpoint--large) {
+    grid-column: 3 / 8;
   }
 
   @include media-query($breakpoint--x-large) {
@@ -17,8 +20,28 @@
 }
 
 .services__call-out {
-  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--medium - 1) {
+  @extend .column--centered;
+
+  @include media-query($breakpoint--xx-large) {
+		grid-column: 1 / 11;
     padding: 0 spacing(8);
+	}
+
+  .type--call-out {
+    max-width: 70rem;
+
+    @include media-query($breakpoint--large) {
+      max-width: 95rem;
+    }
+
+    @include media-query($breakpoint--x-large) {
+      max-width: none;
+    }
+
+    @include media-query($breakpoint--x-large - 1, max-width) {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }
 
@@ -31,6 +54,10 @@
   @include media-query($breakpoint--small) {
     grid-column-gap: spacing(3);
     grid-row-gap: spacing(3);
+  }
+
+  @include media-query($breakpoint--small - 1, max-width) {
+    text-align: center;
   }
 }
 

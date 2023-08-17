@@ -21,14 +21,10 @@ body {
 	font-family: $type--family-display;
 	font-weight: 700;
 }
-  
-.type--xl {
-	font-size: 6rem;
-	line-height: 1.1;
 
-	@include media-query($type--tweakpoint) {
-		font-size: 7.6rem;
-	}
+.type--xl {
+	font-size: 7.2rem;
+	line-height: 1.1;
 
 	@include media-query($breakpoint--small) {
 		font-size: 9.6rem;
@@ -36,15 +32,28 @@ body {
 	}
 
 	@include media-query($breakpoint--medium) {
-		font-size: 11.8rem;
+		font-size: 12.8rem;
 	}
 
-	@include media-query($breakpoint--tweakpoint) {
-		font-size: 14.9rem;
+	@include media-query($breakpoint--x-large) {
+		font-size: 18rem;
 	}
 
 	@include media-query($breakpoint--xxx-large) {
-		font-size: 18rem;
+		font-size: 22rem;
+	}
+
+}
+
+.type--xxl {
+	@extend .type--xl;
+
+	@include media-query($breakpoint--tweakpoint) {
+		font-size: 22rem;
+	}
+
+	@include media-query($breakpoint--xxx-large) {
+		font-size: 26rem;
 	}
 }
 
@@ -57,27 +66,40 @@ body {
 	}
 
 	@include media-query($breakpoint--medium) {
-		font-size: 7.6rem;
+		font-size: 7.2rem;
+	}
+
+	@include media-query($breakpoint--x-large) {
+		font-size: 8.4rem;
 	}
 }
   
 .type--m {
-	font-size: 3.9rem;
+	font-size: 3.2rem;
 	line-height: 1.3;
 
 	@include media-query($breakpoint--medium) {
-		font-size: 6rem;
+		font-size: 4.8rem;
 		line-height: 1.1;
 	}
+
+	@include media-query($breakpoint--x-large) {
+		font-size: 6rem;
+	}
+
 }
  
 .type--s {
-	font-size: 2.5rem;
+	font-size: 2.4rem;
 	line-height: 1.3;
 
 	@include media-query($breakpoint--medium) {
-		font-size: 3.9rem;
+		font-size: 3.2rem;
 		line-height: 1.2;
+	}
+
+	@include media-query($breakpoint--x-large) {
+		font-size: 4.8rem;
 	}
 }
 
@@ -85,14 +107,10 @@ body {
 	font-family: $type--family-display;
 	font-weight: $type--font-weight-reg;
 	line-height: 1.3;
-	font-size: 2.4rem;
+	font-size: 4.2vw;
 
 	@include media-query($breakpoint--medium) {
-		font-size: 3.9rem;
-	}
-
-	@include media-query($breakpoint--x-large) {
-		font-size: 6rem;
+		font-size: 5vw;
 	}
 }
 
@@ -161,18 +179,31 @@ body {
 	font-weight: $type--font-weight-semi;
 }
 
-.type--body-colour {
-	color: $colour--body-type;
+.type--grit-500 {
+	color: $colour--grit-500;
 }
 
-.type--grit-colour {
-	color: $colour--grit;
+.type--grit-400 {
+	color: $colour--grit-400;
+}
+
+.type--grit-300 {
+	color: $colour--grit-300;
+}
+
+.type--grit-200 {
+	color: $colour--grit-200;
+}
+
+.type--grit-100 {
+	color: $colour--grit-100;
+}
+
+.type--grit-50 {
+	color: $colour--grit-50;
 }
 
 .type--white {
 	color: $colour--white;
 }
 
-.type--off-white {
-	color: $colour--text-on-grit;
-}
