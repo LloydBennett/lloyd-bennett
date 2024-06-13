@@ -43,18 +43,12 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 1 / 6;
     }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 68%;
-      }
-    }
   }
 
   &:nth-child(2),
   &:nth-child(8n) {
     @include media-query($breakpoint--small) {
-      grid-column: 3 / 10;
+      grid-column: 5 / 10;
     }
 
     @include media-query($breakpoint--medium) {
@@ -64,17 +58,6 @@
 
     @include media-query($breakpoint--x-large) {
       grid-column: 8 / 11;
-    }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 110%;
-      }
-
-      @include media-query($breakpoint--medium) {
-        padding-top: 130%;
-      }
-      
     }
   }
 
@@ -86,19 +69,9 @@
     }
 
     @include media-query($breakpoint--medium) {
-      grid-column: 3 / 6;
-    }
-
-    @include media-query($breakpoint--x-large) {
       grid-column: 3 / 7;
     }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 70%;
-      }
-    }
-  }p
+  }
 
   &:nth-child(4),
   &:nth-child(10n) {
@@ -114,18 +87,10 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 2 / 5;
     }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 102%;
-      }
-      
-    }
   }
 
   &:nth-child(5),
   &:nth-child(11n) {
-    
     @include media-query($breakpoint--small) {
       grid-column: 4 / 7;
       padding-top: spacing(13);
@@ -139,16 +104,6 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 7 / 11;
     }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 130%;
-      }
-
-      @include media-query($breakpoint--x-large) {
-        padding-top: 75%;
-      }
-    }
   }
 
   &:nth-child(6),
@@ -160,12 +115,6 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 4 / 7;
     }
-
-    .project__img {
-      @include media-query($breakpoint--small) {
-        padding-top: 80%;
-      }
-    }
   }
 }
 
@@ -176,17 +125,6 @@
 
   @include media-query($breakpoint--medium) {
     padding-top: spacing(5);
-  }
-  
-}
-
-.project__img {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  @include media-query($breakpoint--small - 1, max-width) {
-    padding-top: 100%;
   }
 }
 
