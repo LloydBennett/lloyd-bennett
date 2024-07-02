@@ -8,12 +8,13 @@ class App {
     this.createContent()
     this.createPages()
     this.addLinkListeners()
-    this.createNavigation()
+
+    //this.createNavigation()
   }
 
-  createNavigation() {
-    this.navigation = new Navigation()
-  }
+  // createNavigation() {
+  //   this.navigation = new Navigation()
+  // }
 
   createContent() {
     this.content = document.querySelector('.main')
