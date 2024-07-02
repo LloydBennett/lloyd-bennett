@@ -23,7 +23,7 @@ body {
 }
 
 .type--xl {
-	font-size: 7.2rem;
+	font-size: 6.4rem;
 	line-height: 1.1;
 
 	@include media-query($breakpoint--small) {
@@ -107,7 +107,11 @@ body {
 	font-family: $type--family-display;
 	font-weight: $type--font-weight-reg;
 	line-height: 1.3;
-	font-size: 4.2vw;
+	font-size: 2.4rem;
+
+	@include media-query($breakpoint--small) {
+		font-size: 3.2rem;
+	}
 
 	@include media-query($breakpoint--medium) {
 		font-size: 5vw;
