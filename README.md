@@ -1,2 +1,2 @@
-# lloyd-bennett
-My latest portfolio site
+# Lloyd Bennett Portfolio Site
+A website that showcases my design work
