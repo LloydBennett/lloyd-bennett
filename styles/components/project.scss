@@ -48,11 +48,11 @@
   &:nth-child(2),
   &:nth-child(8n) {
     @include media-query($breakpoint--small) {
-      grid-column: 5 / 10;
+      grid-column: 3 / 7;
     }
 
     @include media-query($breakpoint--medium) {
-      padding-top: spacing(28);
+      padding-top: spacing(45);
       grid-column: 6 / 9;
     }
 

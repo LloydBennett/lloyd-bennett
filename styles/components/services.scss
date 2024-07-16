@@ -1,11 +1,8 @@
 .services {
   @include media-query($breakpoint--small) {
-    grid-column: 2 / 8;
+    grid-column: 1 / 8;
   }
 
-  @include media-query($breakpoint--medium) {
-    grid-column: 2 / 8;
-  }
   @include media-query($breakpoint--large) {
     grid-column: 3 / 8;
   }
@@ -20,20 +17,18 @@
 }
 
 .services__call-out {
-  @extend .column--centered;
+  text-align: right;
+  grid-column: 1 / 9;
 
-  @include media-query($breakpoint--xx-large) {
-		grid-column: 1 / 11;
-    padding: 0 spacing(8);
-	}
+  @include media-query($breakpoint--large) {
+    text-align: center;
+  }
+
+  @include media-query($breakpoint--x-large) {
+    grid-column: 1 / 11;
+  }
 
   .type--call-out {
-    max-width: 70rem;
-
-    @include media-query($breakpoint--large) {
-      max-width: 95rem;
-    }
-
     @include media-query($breakpoint--x-large) {
       max-width: none;
     }
@@ -54,10 +49,6 @@
   @include media-query($breakpoint--small) {
     grid-column-gap: spacing(3);
     grid-row-gap: spacing(3);
-  }
-
-  @include media-query($breakpoint--small - 1, max-width) {
-    text-align: center;
   }
 }
 
