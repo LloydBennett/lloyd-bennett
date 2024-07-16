@@ -8,9 +8,9 @@
     let stats = document.data.stats
     %>
     <div class="about__heading">
-      <h1 class="about__title type--xl">
+      <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <span><%- text %></span>
+          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block"><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>

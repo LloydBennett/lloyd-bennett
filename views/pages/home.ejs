@@ -19,6 +19,8 @@
 
           <% if (i === titleArr.length) { %>
             <span class="type--italic home-hero__title-last mask-title__word inline-block no-overflow">
+          <% } else if (i === (titleArr.length - 1)) { %>
+            <span class="home-hero__title-pen mask-title__word inline-block no-overflow">
           <% } else { %>
             <span class="mask-title__word inline-block no-overflow">
           <% } %>

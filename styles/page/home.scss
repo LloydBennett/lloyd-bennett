@@ -47,6 +47,12 @@
   margin-left: -3%;
 }
 
+.home-hero__title-pen {
+  @include media-query($breakpoint--small) {
+    transform: translateX(3%);
+  }
+}
+
 .home-hero__image {
   margin-top: -#{spacing(4)};
   grid-row-start: 2;
