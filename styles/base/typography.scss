@@ -120,9 +120,12 @@ body {
 
 .type--body {
 	@include text-size;
-	line-height: $type--line-height;
-	margin: 0;
 
+	& {
+		line-height: $type--line-height;
+		margin: 0;
+	}
+	
 	& + & {
 		margin-top: spacing(3);
 	}
