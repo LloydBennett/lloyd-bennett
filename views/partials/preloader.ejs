@@ -1,0 +1,7 @@
+<% let svgPath = "M 0 100 V 0 Q 50 0 100 0 V 100 z" %>
+
+<div class="fixed overlay z-index--3" data-loader>
+  <div class="absolute overlay" data-loader-bg>
+    <%- include('./svg/background', { classList: "block", path: svgPath }) -%>
+  </div>
+</div>

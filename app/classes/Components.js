@@ -2,6 +2,7 @@ export default class Components {
   constructor({ elements }) {
     this.selectors = { ...elements }
     this.create()
+    this.addEventListeners()
   }
   create() {
     this.elements = {}
@@ -21,5 +22,13 @@ export default class Components {
         }
       }
     }
+  }
+
+  addEventListeners() {
+
+  }
+
+  removeEventListeners() {
+
   }
 }
