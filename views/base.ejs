@@ -4,6 +4,9 @@
 
 <body <% if( page !== 'project' ) { %>class="bg--grit-50"<%} %>>
   <style>.main::after { background-image: url('/noise.png');}</style>
+  
+  <%- include('./partials/preloader') -%>
+  
   <main id="main" data-page="<%- page %>" data-scroll-speed="-14" class="main <%- page %>">
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
