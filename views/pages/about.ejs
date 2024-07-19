@@ -10,7 +10,7 @@
     <div class="about__heading">
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block"><%- char %></span><% })%></span>
+          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>

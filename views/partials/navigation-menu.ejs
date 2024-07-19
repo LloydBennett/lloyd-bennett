@@ -1,8 +1,8 @@
 <% let svg = "M 0 100 V 100 Q 50 100 100 100 V 100 z" %>
 
 <div class="nav-menu" data-nav-menu>
-  <div class="nav-menu__bg" data-nav-menu-bg>
-    <%- include('./svg/background', path: svg) -%>
+  <div class="nav-menu__bg">
+    <%- include('./svg/background', { path: svg, dataAttr: "data-nav-menu-bg" }) -%>
   </div>
   <ul class="nav-menu__list">
     <li class="nav-menu__list-item text-center">
