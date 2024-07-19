@@ -4,12 +4,11 @@ import gsap from 'gsap'
 export default class Navigation extends Components {
   constructor() {
     super({
-      element: '[data-nav-menu]',
       elements: {
+        navMenu: '[data-nav-menu]',
         trigger: '[data-nav-trigger]',
         body: 'body',
         bg: '[data-nav-menu-bg]',
-        bgPath: '.bg-path',
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
         navLinks: '.nav-menu__list-item [data-page-trigger]'
