@@ -8,7 +8,10 @@ export default class Preloader extends Components {
         loader: '[data-loader]', 
         background: '[data-preloader-bg]',
         titleSpans: '[data-title-reveal]',
-        navBar: '[data-nav-bar]'
+        imageReveal: '[data-image-reveal]',
+        heroImage: '[data-hero-image]',
+        navBar: '[data-nav-bar]',
+        text: '[data-text-reveal]'
       }
     })
     this.start = "M 0 0 V 100 Q 50 100 100 100 V 0 z"
@@ -28,6 +31,9 @@ export default class Preloader extends Components {
             })
 
     this.tl.fromTo(this.elements.titleSpans, { y: "200%" }, { y: 0, stagger: { each: 0.03, duration: 0.4 }}, "-=0.2")
+    this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4 }, "-=0.2")
+    this.tl.fromTo(this.elements.heroImage, { backgroundSize: "200%" }, { backgroundSize: "100%", duration: 0.8 }, "-=0.4")
+    this.tl.to(this.elements.imageReveal, { height: 0, duration: 0.4 }, "-=0.6")
     this.tl.fromTo(this.elements.navBar, { opacity: 0 }, { opacity: 1, duration: 0.4 }, "-=0.2")
 
   }

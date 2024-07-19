@@ -31,26 +31,25 @@
       </h1>
     </div>
     <div class="column--centered home-hero__image">
-      <picture class="home-hero__image-thumb">
-        <source media="(max-width: 700px)" srcset="<%- image.small.url %>">
-        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
-        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
-        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
-      </picture>
+      <div class="home-hero__image-wrapper relative center-block rotate--s">
+        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
+        <div class="home-hero__image-thumb" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+      </div>
+      
       <div class="home-hero__cta">
         <%- include('../partials/scroll-button') -%>
       </div>
     </div>
     
     <div class="home-hero__label">
-      <p class="type--alt-l text-right no-wrap type--grit-400">
+      <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
       <% labelArr.forEach((text, index) => { %>
         <% let i = index + 1  %>
 
         <% if (i === 1) { %>
-          <span class="block"><%-text %></span>
+          <span class="no-overflow block"><span class="inline-block" data-text-reveal><%-text %></span></span>
         <%} else {%>
-        <%- text %>
+          <span class="inline-block" data-text-reveal><%- text %></span>
         <%}%>
       <% }) %>
       </p>
