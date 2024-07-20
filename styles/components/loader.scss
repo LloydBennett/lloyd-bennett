@@ -1,0 +1,17 @@
+.loader__circle {
+  fill: none;
+  stroke-width: 0.3rem;
+}
+
+.loader-circle--progress {
+  //stroke: $colour--grit-200;
+  stroke: lighten($colour--grit-400, 20%);
+}
+
+.loader-circle--loaded {
+  stroke: $colour--passion;
+  stroke-dashoffset: 520px;
+  stroke-dasharray: 520px;
+  transform: rotate(-90deg);
+  transform-origin: 50%;
+}
