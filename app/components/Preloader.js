@@ -13,7 +13,7 @@ export default class Preloader extends Components {
         navBar: '[data-nav-bar]',
         text: '[data-text-reveal]',
         loaderIcon: '[data-loader-icon]',
-        loaderIconCircle: '[data-loader-spinner] circle',
+        loaderIconCircle: '[data-loader-spinner-circle]',
         loaderIconSpinner: '[data-loader-spinner]',
       }
     })
@@ -28,6 +28,7 @@ export default class Preloader extends Components {
     this.LSPINNER_CIRCUMFERENCE = 2 * Math.PI * this.LSPINNER_RADIUS;
 
     this.tl = gsap.timeline()
+    this.elements.loaderIconCircle.style.strokeDasharray = this.LSPINNER_CIRCUMFERENCE;
     this.calculatePageLoadTime(0);
   }
 
@@ -48,18 +49,18 @@ export default class Preloader extends Components {
   updateLoading(amount) {
     let progress = amount / 100;
     let dashoffset = this.LSPINNER_CIRCUMFERENCE * (1 - progress);
-    this.elements.loaderIconSpinner.style.strokeDashoffset = dashoffset;
+    this.elements.loaderIconCircle.style.strokeDashoffset = dashoffset;
   }
 
   animate () {
     this.tl.set(this.elements.background, { attr: { d: this.start }})
            .to(this.elements.background, { duration: 0.8, attr: { d: this.middle }, ease: "power2.in" }, 0)
            .to(this.elements.background, { duration: 0.3, attr: { d: this.end }, ease: 'power4', 
-              onComplete: () => { 
-                //this.tl.set(this.elements.loader, { display: "none" })
-              console.log('hey!!')              }
+              onComplete: () => {
+                this.tl.set(this.elements.loader, { display: "none" })
+              }
             })
-
+    this.tl.to(this.elements.loaderIcon, { opacity: 0, duration: 0.4, ease: 'power3.out' }, "-=0.4 icon")
     this.tl.fromTo(this.elements.titleSpans, { y: "200%" }, { y: 0, stagger: { each: 0.03, duration: 0.4 }}, "-=0.2")
     this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4 }, "-=0.2")
     this.tl.fromTo(this.elements.heroImage, { backgroundSize: "200%" }, { backgroundSize: "100%", duration: 0.8 }, "-=0.4")

@@ -4,8 +4,7 @@
 }
 
 .loader-circle--progress {
-  //stroke: $colour--grit-200;
-  stroke: lighten($colour--grit-400, 20%);
+  stroke: $colour--grit-200;
 }
 
 .loader-circle--loaded {
