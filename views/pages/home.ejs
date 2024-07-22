@@ -6,7 +6,10 @@
     let image = document.data.hero_image
     let heroLabel = document.data.hero_label
     let labelArr = heroLabel.split(" ")
-    
+    let firstLabel = labelArr[0]
+    let newLabel = labelArr.splice(1, 2).toString().replace(/,/g, " ")
+    let description = ["I help early-stage start-ups", "establish their brand identity."]
+
     %>
     
     <div class="home-hero__title">
@@ -43,20 +46,24 @@
     
     <div class="home-hero__label">
       <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
-      <% labelArr.forEach((text, index) => { %>
-        <% let i = index + 1  %>
 
-        <% if (i === 1) { %>
-          <span class="no-overflow block"><span class="inline-block" data-text-reveal><%-text %></span></span>
-        <%} else {%>
-          <span class="inline-block" data-text-reveal><%- text %></span>
-        <%}%>
-      <% }) %>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- firstLabel %></span>
+        </span>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- newLabel %></span>
+        </span>
       </p>
     </div>
+
     <div class="home-hero__intro">
       <p class="type--body text-center type--grit-400">
-        <%- document.data.hero_description %>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- description[0] %></span>
+        </span>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- description[1] %></span>
+        </span>
       </p>
     </div>
   </div>
