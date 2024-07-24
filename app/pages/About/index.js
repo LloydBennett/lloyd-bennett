@@ -4,7 +4,9 @@ export default class About extends Page {
   constructor() {
     super({
       id: 'about',
-      element: '.about'
+      elements: {
+        heroText: '[data-intro-text]'
+      }
     })
   }
 }

@@ -7,6 +7,7 @@
     let imageAlt = document.data.hero_image_alt
     let stats = document.data.stats
     %>
+
     <div class="about__heading">
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
@@ -16,7 +17,7 @@
     </div>
     
     <div class="about__intro">
-      <p class="type--body type--grit-400">
+      <p class="type--body type--grit-400" data-intro-text>
         <%- document.data.intro %>
       </p>
     </div>
