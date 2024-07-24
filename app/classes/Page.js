@@ -7,16 +7,8 @@ export default class Page {
     this.selectors = { ...elements }
     Page.prototype.create = create 
     this.create()
-    console.log(this)
   }
-  // create() {
-  //   this.element = document.querySelector(this.selector)
-  //   this.elements = {}
-  //   // this.selectorChildren.forEach(element => {
-      
-  //   // });
-  //   console.log('Create', this.id, this.element)
-  // }
+  
   show() {
     return new Promise(resolve => {
       // GSAP.from(this.element, {
