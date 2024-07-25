@@ -1,6 +1,7 @@
 import About from 'pages/About'
 import Home from 'pages/Home'
 import Project from 'pages/Project'
+import Preloader from 'components/Preloader'
 import Navigation from 'components/Navigation'
 
 class App {
@@ -8,6 +9,7 @@ class App {
     this.createContent()
     this.createPages()
     this.addLinkListeners()
+    this.createPreloader()
 
     //this.createNavigation()
   }
@@ -15,6 +17,9 @@ class App {
   // createNavigation() {
   //   this.navigation = new Navigation()
   // }
+  createPreloader() {
+    this.preloader = new Preloader()
+  }
 
   createContent() {
     this.content = document.querySelector('.main')

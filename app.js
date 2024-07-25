@@ -85,5 +85,5 @@ app.get('/projects/:uid', async (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`)
+  console.log(`Lloyd Portfolio listening on port http://localhost:${port}`)
 })

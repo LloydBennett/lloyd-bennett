@@ -1,0 +1,21 @@
+.rotate--s {
+  transform: $rotation-angle;
+}
+
+.rotate--s-minus {
+  transform: $rotation-angle-minus;
+}
+
+.rotate--s-minus-l {
+  @include media-query($breakpoint--large) {
+    transform: $rotation-angle-minus !important;
+  }
+}
+
+.rotate--l {
+  transform: $rotation-angle--l;
+}
+
+.rotate--l-minus {
+  transform: $rotation-angle-minus--l;
+}

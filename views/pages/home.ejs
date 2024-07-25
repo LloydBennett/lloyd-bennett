@@ -6,51 +6,59 @@
     let image = document.data.hero_image
     let heroLabel = document.data.hero_label
     let labelArr = heroLabel.split(" ")
-    
+    let firstLabel = labelArr[0]
+    let newLabel = labelArr.splice(1, 2).toString().replace(/,/g, " ")
+    let description = document.data.hero_description
+
     %>
     
     <div class="home-hero__title">
-      <h1 class="type--xxl text-center">
+      <h1 class="type--xxl text-center mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <% let i = index + 1  %>
-  
+          <% 
+          let i = index + 1  
+          let letters = text.split("")
+          %>
+
           <% if (i === titleArr.length) { %>
-            <span class="type--italic home-hero__title-last"><%- text %></span>
+            <span class="type--italic home-hero__title-last mask-title__word inline-block no-overflow">
+          <% } else if (i === (titleArr.length - 1)) { %>
+            <span class="home-hero__title-pen mask-title__word inline-block no-overflow">
           <% } else { %>
-            <span><%- text %></span>
+            <span class="mask-title__word inline-block no-overflow">
           <% } %>
+            <% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%>
+          </span>
         <% }) %>
   
       </h1>
     </div>
     <div class="column--centered home-hero__image">
-      <picture class="home-hero__image-thumb">
-        <source media="(max-width: 700px)" srcset="<%- image.small.url %>">
-        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
-        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
-        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
-      </picture>
+      <div class="home-hero__image-wrapper relative center-block rotate--s">
+        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
+        <div class="home-hero__image-thumb" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+      </div>
+      
       <div class="home-hero__cta">
         <%- include('../partials/scroll-button') -%>
       </div>
     </div>
     
     <div class="home-hero__label">
-      <p class="type--alt-l text-right no-wrap type--grit-400">
-      <% labelArr.forEach((text, index) => { %>
-        <% let i = index + 1  %>
+      <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
 
-        <% if (i === 1) { %>
-          <span class="block"><%-text %></span>
-        <%} else {%>
-        <%- text %>
-        <%}%>
-      <% }) %>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- firstLabel %></span>
+        </span>
+        <span class="no-overflow block">
+          <span class="inline-block" data-text-reveal><%- newLabel %></span>
+        </span>
       </p>
     </div>
+
     <div class="home-hero__intro">
-      <p class="type--body text-center type--grit-400">
-        <%- document.data.hero_description %>
+      <p class="type--body text-center type--grit-400" data-intro-text>
+        <%- description %>
       </p>
     </div>
   </div>
@@ -59,7 +67,7 @@
 <section class="section--l section--l-top">
   <div class="container grid">
     <div class="services__call-out section--s">
-      <h4 class="text-center type--call-out">
+      <h4 class="type--call-out">
         <%- document.data.call_out_text %>
       </h4>
     </div>
@@ -80,8 +88,6 @@
     </div>
   </div>
 </section>
-
-<%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
 
 <%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
 

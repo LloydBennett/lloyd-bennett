@@ -1,0 +1,10 @@
+<% let svgPath = "M 0 100 V 0 Q 50 0 100 0 V 100 z" %>
+
+<div class="fixed flex center-flex overlay z-index--3" data-loader>
+  <div class="fixed overlay" data-loader-bg>
+    <%- include('./svg/background', { path: svgPath, dataAttr: "data-preloader-bg" }) -%>
+  </div>
+  <div class="loader__content absolute overlay flex center-flex" data-loader-icon>
+    <%- include('./svg/loader-icon') -%>
+  </div>
+</div>

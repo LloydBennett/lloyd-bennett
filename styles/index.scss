@@ -41,6 +41,8 @@
 @import './helpers/no-wrap.scss';
 @import './helpers/text-alignment.scss';
 @import './helpers/no-overflow.scss';
+@import './helpers/position.scss';
+@import './helpers/center-block.scss';
 
 
 // ------------------------------------ // ------------------------------------------
@@ -74,6 +76,11 @@
 @import './components/footer.scss';
 @import './components/main.scss';
 @import './components/bg.scss';
+@import './components/mask.scss';
+@import './components/overlay.scss';
+@import './components/z-index.scss';
+@import './components/rotate.scss';
+@import './components/loader.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- P A G E S ---------------------------------------

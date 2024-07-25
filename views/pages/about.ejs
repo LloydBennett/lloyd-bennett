@@ -7,34 +7,35 @@
     let imageAlt = document.data.hero_image_alt
     let stats = document.data.stats
     %>
+
     <div class="about__heading">
-      <h1 class="about__title type--xl">
+      <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <span><%- text %></span>
+          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>
     
     <div class="about__intro">
-      <p class="type--body type--grit-400">
+      <p class="type--body type--grit-400" data-intro-text>
         <%- document.data.intro %>
       </p>
     </div>
 
     <div class="about__hero-media">
-      <picture class="about__hero-media-img block">
-        <source media="(max-width: 1270px)" srcset="<%- image.url %>">
-        <source media="(min-width: 1271px)" srcset="<%- image.large.url %>">
-        <img class="block--full-width" src="<%- image.url %>" alt="<%- image.alt %>">
-      </picture>
+      <div class="relative center-block rotate--l-minus">
+        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
+        <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+      </div>
     </div>
-
+    
     <div class="about__hero-media-alt">
-      <picture class="about__hero-alt-img block">
-        <source media="(max-width: 1270px)" srcset="<%- imageAlt.url %>">
-        <source media="(min-width: 1271px)" srcset="<%- imageAlt.large.url %>">
-        <img class="block--full-width" src="<%- imageAlt.url %>" alt="<%- imageAlt.alt %>">
-      </picture>
+      <div class="relative rotate--l rotate--s-minus-l">
+        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
+        <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+      </div>
+
+     
     </div>
   
   </div>

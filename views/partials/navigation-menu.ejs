@@ -1,12 +1,8 @@
+<% let svg = "M 0 100 V 100 Q 50 100 100 100 V 100 z" %>
+
 <div class="nav-menu" data-nav-menu>
-  <div class="nav-menu__bg" data-nav-menu-bg>
-    <svg class="bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path 
-      class="bg-path"
-      vector-effect="non-scaling-stroke"
-      d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
-    </svg>
-    
+  <div class="nav-menu__bg">
+    <%- include('./svg/background', { path: svg, dataAttr: "data-nav-menu-bg" }) -%>
   </div>
   <ul class="nav-menu__list">
     <li class="nav-menu__list-item text-center">

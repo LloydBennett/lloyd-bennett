@@ -42,7 +42,15 @@
 }
 
 .home-hero__title-last {
-  line-height: 0.8;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin-left: -3%;
+}
+
+.home-hero__title-pen {
+  @include media-query($breakpoint--small) {
+    transform: translateX(3%);
+  }
 }
 
 .home-hero__image {
@@ -57,22 +65,23 @@
   @include media-query($breakpoint--large) {
     margin-top: -#{spacing(8)};
   }
-
+  
   @include media-query($breakpoint--x-large - 1, max-width) {
     grid-column: 2 / 8;
   }
-  
-  @media screen and (min-width: $breakpoint--x-large) and (max-width: $breakpoint--xx-large - 1 ) {
-    margin-top: -#{spacing(6)};
-	}
+
+  @include media-query($breakpoint--x-large) {
+    margin-top: -#{spacing(12)};
+  }
+}
+
+.home-hero__image-wrapper {
+  max-width: 70rem;
 }
 
 .home-hero__image-thumb {
-  display: block;
-  max-width: 70rem;
-  margin-left: auto;
-  margin-right: auto;
-  transform: rotate(2deg);
+  padding-top: calc(759.57 / 725.25 * 100%);
+  width: 100%;
 }
 
 .home-hero__cta {

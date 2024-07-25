@@ -9,3 +9,8 @@
 .no-overflow-y {
   overflow-y: hidden;
 }
+
+.no-scrolling {
+  overflow: hidden;
+  width: 100%;
+}
