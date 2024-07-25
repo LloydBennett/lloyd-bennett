@@ -8,7 +8,7 @@
     let labelArr = heroLabel.split(" ")
     let firstLabel = labelArr[0]
     let newLabel = labelArr.splice(1, 2).toString().replace(/,/g, " ")
-    let description = ["I help early-stage start-ups", "establish their brand identity."]
+    let description = document.data.hero_description
 
     %>
     
@@ -57,13 +57,8 @@
     </div>
 
     <div class="home-hero__intro">
-      <p class="type--body text-center type--grit-400">
-        <span class="no-overflow block">
-          <span class="inline-block" data-text-reveal><%- description[0] %></span>
-        </span>
-        <span class="no-overflow block">
-          <span class="inline-block" data-text-reveal><%- description[1] %></span>
-        </span>
+      <p class="type--body text-center type--grit-400" data-intro-text>
+        <%- description %>
       </p>
     </div>
   </div>

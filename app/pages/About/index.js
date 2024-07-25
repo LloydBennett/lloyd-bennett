@@ -11,7 +11,7 @@ export default class About extends Page {
     this.splitLines()
     this.showLines()
   }
-  
+
   showLines() {
     let lines = this.getLines();
     let txt = this.elements.heroText
@@ -21,11 +21,13 @@ export default class About extends Page {
       i = i + 1;
 
       l.forEach((w) => {
-        w.classList.add('inline-block', "white-space")
+        let span = document.createElement('span')
+        span.classList.add('inline-block', 'no-overflow-y')
+        w.classList.add('inline-block')
         w.innerHTML += "&nbsp;"
         w.setAttribute('data-text-reveal', i)
-        
-        txt.appendChild(w)
+        span.appendChild(w)
+        txt.appendChild(span)
       })
       
     })

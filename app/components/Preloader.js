@@ -66,12 +66,12 @@ export default class Preloader extends Components {
             })
     this.tl.to(this.elements.loaderIcon, { opacity: 0, duration: 0.4, ease: 'power3.out' }, "-=0.4 icon")
     this.tl.fromTo(this.elements.titleSpans, { y: "200%" }, { y: 0, duration: 0.65, ease: "power2.easeOut", stagger: { amount: 0.6 }}, "-=0.2")
-    this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4, ease: "power2.easeOut", stagger: { amount: 0.2 } }, "-=0.2")
+    this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4, ease: "power2.easeOut", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
     this.tl.fromTo(this.elements.heroImage, { backgroundSize: "200%" }, { backgroundSize: "100%", duration: 0.8, ease: "power2.easeOut" }, "-=0.3")
-    this.tl.to(this.elements.imageReveal, { height: 0, duration: 0.6, ease: "power2.easeOut", stagger: { amount: 0.4 } }, "-=0.8")
+    this.tl.to(this.elements.imageReveal, { height: 0, duration: 0.6, ease: "power2.easeOut", stagger: { amount: 0.4 } }, "-=1")
     
     if (this.elements.scrollBtnCircle) {
-      this.tl.fromTo(this.elements.scrollBtnCircle, { strokeDashoffset: 2057, strokeDasharray: 2057 }, { strokeDashoffset:0, duration: 1.2, ease: "power2.easeOut" }, "-=0.8");
+      this.tl.fromTo(this.elements.scrollBtnCircle, { strokeDashoffset: 2057, strokeDasharray: 2057 }, { strokeDashoffset:0, duration: 1.2, ease: "power2.easeOut" }, "-=1");
       this.tl.fromTo(this.elements.scrollBtnArrow, { y: -100 }, { y: 0, duration: 0.4, ease: "power2.easeOut" }, "-=0.6");
     }
     
