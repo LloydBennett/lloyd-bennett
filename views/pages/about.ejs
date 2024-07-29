@@ -22,14 +22,14 @@
       </p>
     </div>
 
-    <div class="about__hero-media">
+    <div class="about__hero-media" data-scroll data-scroll-speed="1">
       <div class="relative center-block rotate--l-minus">
         <div class="absolute overlay bg--grit-50" data-image-reveal></div>
         <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
       </div>
     </div>
     
-    <div class="about__hero-media-alt">
+    <div class="about__hero-media-alt" data-scroll data-scroll-speed="4">
       <div class="relative rotate--l rotate--s-minus-l">
         <div class="absolute overlay bg--grit-50" data-image-reveal></div>
         <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
@@ -68,7 +68,7 @@
      <% })%>
     </div>
 
-    <div class="about__middle-img">
+    <div class="about__middle-img" data-scroll data-scroll-speed="1">
       <picture class="block">
         <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
         <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
