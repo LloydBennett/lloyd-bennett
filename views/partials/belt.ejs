@@ -2,17 +2,28 @@
   <div class="belt__wrapper">
     <div class="belt__inner" data-marquee-belt>
       <% 
-        let count = 20
+        let count = 150
       %>
     
       <% for(let i = 0; i < count; i++) { %>
-        <span class="belt__label type--alt-xl no-wrap">
-          <%- label %>
-        </span>
-        <div class="belt__label belt--label-star">
-          <%- include('./svg/star') -%>
+        <div class="belt__item flex center-flex" data-marquee-item>
+          <span class="belt__label type--alt-xl no-wrap">
+            <%- label %>
+          </span>
+          <div class="belt__label belt--label-star">
+            <%- include('./svg/star') -%>
+          </div>
+          <span class="belt__label type--alt-xl no-wrap">
+            <%- label %>
+          </span>
+          <div class="belt__label belt--label-star">
+            <%- include('./svg/star') -%>
+          </div>
         </div>
+        
       <% } %>
+
+      
     </div>
     
   </div>
