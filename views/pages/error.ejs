@@ -1,0 +1,66 @@
+<%
+  let title = document.data.title
+  let titleArr = title.split(" ")
+  let socialMedia = footer.data.social_media
+  let errorMessage = "The page you are looking for doesn't exist or has been moved. Let’s return to the home page to get you back on track."
+
+  console.log(footer)
+%>
+
+<div class="grid container">
+  <div class="error-grid__logo">
+    <a href="../../" data-fade-element>
+      <span class="meta__content meta--body-text">
+        Lloyd<span class="hide-mobile">&ndash;Jamie</span><span class="show-mobile">&nbsp;Bennett</span><span class="show-mobile">&nbsp;&mdash;</span>
+      </span>
+      <span class="meta__content meta--body-text">
+        <span class="hide-mobile">Bennett</span><span class="show-mobile">Brand &amp; Web Designer </span>
+      </span>
+    </a>
+  </div>
+
+  <div class="error-grid__column">
+    <div class="error-grid__column-content">
+      <div class="meta meta--head meta--margin-bottom" data-meta-info>
+        <div class="hr"></div>
+        <span class="type--alt-s type--letter-sp type--semi-bold mask-title__word">
+          Error
+        </span>
+      </div>
+      <h1 class="type--xl mask-title--l type--s-margin">
+        <% titleArr.forEach((text, index) => { %>
+          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+        <% }) %>
+      </h1>
+      <div data-hero-content-group>
+        <p class="type--body type--grit-400 type--m-margin" data-intro-text>
+          <%- errorMessage %>
+        </p>
+
+        <%- include('../partials/button', { link: "/", buttonText: "Back To Home" }) -%>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="error__image thumbnail--block" data-fade-element></div>
+
+  <div class="error-grid__socials" data-fade-element>
+    <% socialMedia.forEach((link) =>  { %>  
+      <a class="link" href="<%- link.social_media_link %>" target="_blank">
+        <span class="type--body"><%- link.social_media_name %></span>
+      </a>
+    <% }) %>
+  </div>
+
+  <div class="error-grid__code" data-fade-element>
+    <div>
+      <span class="title-mask">4</span>
+      <span class="title-mask">0</span>
+      <span class="title-mask">4</span>
+    </div>
+
+  </div>
+</div>

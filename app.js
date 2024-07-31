@@ -84,6 +84,16 @@ app.get('/projects/:uid', async (req, res) => {
   res.render('base', { ...defaults, document, pageType })
 })
 
+app.get('*', async (req, res) => {
+  let pageType = "error"
+  
+  let document = {
+    data: { title: "Page can’t be found" }
+  }
+  const defaults = await handleRequest(req)
+  res.render('base', { ...defaults, document, pageType })
+});
+
 app.listen(port, () => {
   console.log(`Lloyd Portfolio listening on port http://localhost:${port}`)
 })
