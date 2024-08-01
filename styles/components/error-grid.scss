@@ -61,10 +61,6 @@
     grid-row-end: 5;
     align-self: flex-end;
   }
-
-  @include media-query($breakpoint--xx-large) {
-    grid-column: 3 / 5;
-  }
 }
 
 .error-grid__socials {

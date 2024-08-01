@@ -3,8 +3,7 @@
   let titleArr = title.split(" ")
   let socialMedia = footer.data.social_media
   let errorMessage = "The page you are looking for doesn't exist or has been moved. Let’s return to the home page to get you back on track."
-
-  console.log(footer)
+  let imageAlt = about.data.hero_image_alt
 %>
 
 <div class="grid--all container">
@@ -45,7 +44,7 @@
 
   </div>
 
-  <div class="error-grid__image" data-fade-element></div>
+  <div class="error-grid__image" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover"></div>
 
   <div class="error-grid__socials" data-fade-element>
     <% socialMedia.forEach((link) =>  { %>  
