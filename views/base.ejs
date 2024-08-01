@@ -10,11 +10,10 @@
   <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container>
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
-      <%- include('./partials/navigation-bar') -%>
       <% if( page !== 'error' ) { %>
         <%- include('./partials/navigation-bar') -%>
       <% } %>
-      <div class="section--s-top">
+      <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--s-top<% } %>">
         <% switch(page) {
           case 'project' : %>
             <%- include('./pages/project') %>
@@ -31,7 +30,6 @@
       </div>
       
     </div>
-    <% if( page !== 'project' ) { %>
     <% if( page !== 'project' && page !== 'error' ) { %>
       <%- include('./partials/footer', { footer: footer.data }) -%>
     <% } %>

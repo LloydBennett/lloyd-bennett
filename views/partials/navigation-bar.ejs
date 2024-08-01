@@ -1,6 +1,6 @@
 <div class="nav-bar" data-nav-bar data-scroll data-scroll-target="main" data-scroll-sticky>
   <div class="container grid--all">
-    <a href="/" class="nav-bar__logo" data-page-trigger>
+    <a href="/" class="nav-bar__logo">
       <span class="type--alt-s no-wrap--and-break">
         Lloyd-Jamie&nbsp;
       </span>
@@ -31,10 +31,7 @@
     </div>
 
     <div class="nav-bar__trigger">
-      <a href="/about" class="button button--main">
-        <span class="button__text">Info</span>
-        <span class="button__line"></span>
-      </a>
+      <%- include('../partials/button', { link: "/about", buttonText: "Info" }) -%>
     </div>
 
   </div>

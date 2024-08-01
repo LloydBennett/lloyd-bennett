@@ -7,14 +7,14 @@
   console.log(footer)
 %>
 
-<div class="grid container">
+<div class="grid--all container">
   <div class="error-grid__logo">
-    <a href="../../" data-fade-element>
-      <span class="meta__content meta--body-text">
-        Lloyd<span class="hide-mobile">&ndash;Jamie</span><span class="show-mobile">&nbsp;Bennett</span><span class="show-mobile">&nbsp;&mdash;</span>
+    <a href="/" data-fade-element>
+      <span class="type--alt-s no-wrap--and-break">
+        Lloyd-Jamie&nbsp;
       </span>
-      <span class="meta__content meta--body-text">
-        <span class="hide-mobile">Bennett</span><span class="show-mobile">Brand &amp; Web Designer </span>
+      <span class="type--alt-s no-wrap--and-break">
+        Bennett
       </span>
     </a>
   </div>
@@ -29,7 +29,7 @@
       </div>
       <h1 class="type--xl mask-title--l type--s-margin">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
       <div data-hero-content-group>
@@ -45,7 +45,7 @@
 
   </div>
 
-  <div class="error__image thumbnail--block" data-fade-element></div>
+  <div class="error-grid__image" data-fade-element></div>
 
   <div class="error-grid__socials" data-fade-element>
     <% socialMedia.forEach((link) =>  { %>  
@@ -56,11 +56,15 @@
   </div>
 
   <div class="error-grid__code" data-fade-element>
-    <div>
-      <span class="title-mask">4</span>
-      <span class="title-mask">0</span>
-      <span class="title-mask">4</span>
+    <div class="error-grid__char type--m flex flex--end">
+      <span>4</span>
     </div>
-
+    <div class="error-grid__char error--grid__c-pad type--m flex flex--end">
+      <span>0</span> 
+    </div>
+    <div class="error-grid__char type--m flex flex--end">
+      <span>4</span>
+    </div>
   </div>
+
 </div>

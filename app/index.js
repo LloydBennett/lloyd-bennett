@@ -33,9 +33,12 @@ class App {
       project: new Project()
     }
     
-    this.page = this.pages[this.template]
-    this.page.create()
-    this.page.show()
+    if(this.pages[this.template] !== undefined || null) {
+      this.page = this.pages[this.template]
+      this.page.create()
+      this.page.show()
+    }
+    
   }
 
   onPopState () {
