@@ -1,38 +1,40 @@
-<footer id="contact" class="footer" data-footer>
-	<div class="container footer__grid">
-		<div class="footer__heading">
-      <% 
-        
-        let socialMedia = footer.social_media
-      %>
-			<h2 class="footer__title type--l type--white type--m-margin">
-        <%- footer.title %>
-			</h2>
-
-			<p class="type--body type--grit-100">
-        <%- footer.message %>
-			</p>
-		</div>
-
-    <p class="footer__connect type--body type--grit-100">
-      <%- footer.email_alt_text %>
-      <a class="link footer__email" href="mailto:=<%- footer.email %>">
-        <%- footer.email %>
-      </a>
-    </p>
-    
-    <div class="footer__socials">
-      <% socialMedia.forEach((link) =>  { %>
+<footer id="footer" class="footer relative flex" data-footer>
+  <div class="fixed flex footer__content flex--end" data-scroll="true" data-scroll-speed="-8" data-scroll-position="bottom" >
+    <div class="container footer__grid">
+      <div class="footer__heading">
+        <% 
+          
+          let socialMedia = footer.social_media
+        %>
+        <h2 class="footer__title type--l type--white type--m-margin">
+          <%- footer.title %>
+        </h2>
+  
+        <p class="type--body type--grit-100">
+          <%- footer.message %>
+        </p>
+      </div>
+  
+      <p class="footer__connect type--body type--grit-100">
+        <%- footer.email_alt_text %>
+        <a class="link footer__email" href="mailto:=<%- footer.email %>">
+          <%- footer.email %>
+        </a>
+      </p>
       
-      <a class="link" href="<%- link.social_media_link %>" target="_blank">
-        <span class="type--body"><%- link.social_media_name %></span>
-      </a>
-      <% }) %>
+      <div class="footer__socials">
+        <% socialMedia.forEach((link) =>  { %>
+        
+        <a class="link" href="<%- link.social_media_link %>" target="_blank">
+          <span class="type--body"><%- link.social_media_name %></span>
+        </a>
+        <% }) %>
+      </div>
+  
+      <div class="footer__copyright">
+        <% let year = new Date().getFullYear() %>
+        <p class="type--body type--grit-100">&copy;<%- year %></p>
+      </div>
     </div>
-
-		<div class="footer__copyright">
-      <% let year = new Date().getFullYear() %>
-			<p class="type--body type--grit-100">&copy;<%- year %></p>
-		</div>
   </div>
 </footer>
