@@ -2,7 +2,7 @@
 
 <%- include('./partials/head', { page: page } ) -%>
 
-<body class="no-scrolling <% if( page !== 'project' ) { %>bg--grit-50<%} %>" data-body>
+<body id="body" class="no-scrolling <% if( page !== 'project' ) { %>bg--grit-50<%} %>" data-body>
   <style>.main::after { background-image: url('/noise.png');}</style>
   
   <%- include('./partials/preloader') -%>
