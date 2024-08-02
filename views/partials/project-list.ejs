@@ -1,4 +1,4 @@
-<section class="section--l">
+<section id="work" class="section--l" data-work>
   <%
   projects.sort((a, b) => {
     let aNum = a.data.order
@@ -7,7 +7,7 @@
     return aNum - bNum
   })
   %>
-  <div class="projects">
+  <div class="grid container projects">
     <% projects.forEach((project, index)=> { %>
       <% 
         let i = index + 1 
@@ -15,7 +15,6 @@
         let projectTitle = project.data.title 
         let projectTitleArr = projectTitle.split(" ")
       %>
-
       <div class="project__card">
         <a href="<%- project.data.project_link.url %>" class="block" target="_blank">
           
@@ -26,19 +25,18 @@
             <source media="(max-width: 549px)" srcset="<%- project.data.thumbnail.url %>">
             <img class="block--full-width" src="<%- project.data.thumbnail.url %>" alt="<%- project.data.title %>">
           </picture>
-
-          <div class="project__meta">
-            <span class="type--s"><%- indexOutput %></span>
-            <h4 class="type--s">
-              <% projectTitleArr.forEach((title) => { %>
-                <span class="no-wrap--and-break"><%- title %></span>
-              <% }) %>
-              
-            </h4>
-          </div>
         </a>
+
+        <div class="project__meta">
+          <span class="type--s"><%- indexOutput %></span>
+          <h4 class="type--s">
+            <% projectTitleArr.forEach((title) => { %>
+              <span class="no-wrap--and-break"><%- title %></span>
+            <% }) %>
+            
+          </h4>
+        </div>
       </div>
-      
     <%})%>
   </div>
 </section>

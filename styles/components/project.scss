@@ -3,9 +3,6 @@
 }
 
 .projects {
-  @include grid;
-  @include container;
-
   grid-row-gap: spacing(10);
 
 	@include media-query($breakpoint--medium) {
