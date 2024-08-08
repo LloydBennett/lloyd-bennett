@@ -7,20 +7,22 @@ export default class Navigation extends Components {
       elements: {
         navMenu: '[data-nav-menu]',
         trigger: '[data-nav-trigger]',
-        body: 'body',
+        body: '[data-body]',
         bg: '[data-nav-menu-bg]',
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
-        navLinks: '.nav-menu__list-item [data-page-trigger]'
+        navLinks: '.nav-menu__list-item [data-page-trigger]',
+        linkTextChar: '[data-link-text] span',
+        menuMove: '[data-menu-move]'
       }
     })
-    this.animating = false
-    this.tl = gsap.timeline({ paused: true })
+
+    this.isAnimating = false
+    this.isMenuOpen = false
+    
+    this.svgPath = {}
     this.linkSpans = []
 
-    this.intialiseNavText()
-    this.addEventListeners()
-    this.animate()
   }
 
   create() {
@@ -28,28 +30,13 @@ export default class Navigation extends Components {
   }
 
   addEventListeners() {
-    this.elements.trigger.addEventListener('click', () => {
-      this.animating = !this.animating
-      this.tl.reversed(!this.tl.reversed());
+    this.elements.trigger.addEventListener('click', (e) => {
+      if (this.isAnimating) return
+      this.animate()
+      this.isMenuOpen = !this.isMenuOpen
     })
 
-    this.intialiseNavLinks()
-  }
-
-  intialiseNavText() {
-    this.elements.linkText.forEach((element) => {
-      let word = element.innerHTML.trim().replace(/ /g, '\u00a0')
-      let letters = word.split("");
-      
-      element.innerHTML = ''
-      
-      letters.forEach((l, i)=> {
-        let elSpan = document.createElement('span')
-        elSpan.innerHTML = l
-        element.appendChild(elSpan)
-        this.linkSpans.push(elSpan)
-      })
-    });
+    //this.intialiseNavLinks()
   }
 
   intialiseNavLinks() {
@@ -88,19 +75,17 @@ export default class Navigation extends Components {
   }
 
   animate() {
-    const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z"
-    const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z"
-    let path = document.querySelector('.bg-path')
-    let hamburgerIcon = this.elements.navBar.querySelectorAll('.hamburger__line')
-    let newTl = gsap.timeline()
+    this.isAnimating = true
+    let tl = gsap.timeline()
 
-    this.tl.to(this.elements.navBar, 
-    { 
-      duration: 0.3, 
-      opacity: 0
+    tl.to(this.elements.navBar, { duration: 0.3, opacity: 0, ease: "power2.out" })
+    this.elements.navBar.classList.toggle('inverted')
+    this.isMenuOpen? this.closeMenu() : this.openMenu()
+  }
+  openMenu() {
+    let tl = gsap.timeline({
+      onComplete: () => this.isAnimating = false
     })
-
-    this.tl.fromTo(this.element, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
 
     this.tl.to(path, { duration: 0.8, attr: { d: start }, ease: "power3.in" }, "-=0.5")
         .to(path, { duration: 0.4, attr: { d: end }, ease: "power3.out" })
@@ -108,15 +93,39 @@ export default class Navigation extends Components {
 
     this.tl.to(this.elements.navBar, { duration: 0.3, opacity: 1, color: "white" }, '-=0.3 nav')
     this.tl.to(hamburgerIcon, { duration: 0.3, "background-color": "white" }, '-=0.3 nav')
+    tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
+    tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
     
+    tl.to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
+        .to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.end }, ease: "power2" })
+    tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
+    
+    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 1 } })
+
+    tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
+  }
+  closeMenu() {
+    let tl = gsap.timeline({
+      onComplete: () => this.isAnimating = false
+    })
 
     this.elements.navLinks.forEach((els) => {
 
       let spans = els.querySelectorAll('span')
+    tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     
       this.tl.fromTo(spans, { duration: 0.4, y: "100%" }, { y: 0, stagger: 0.03 }, "startTime-=0.3")
+    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.6, stagger: { amount: 0.5 } })
 
     })
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power2.in" }, "-=0.5")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power4" })
+
+    tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=1')
+
+    tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
+
+    tl.to(this.elements.navMenu, { duration: 0.4, opacity: 0, display: "none" })
   }
 
   getPos( e, el, imgDimension) {

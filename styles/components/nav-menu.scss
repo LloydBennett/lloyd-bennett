@@ -31,7 +31,7 @@
 }
 
 .nav-menu__list-item {
-  padding: spacing(4) 0;
+  padding: spacing(3) 0;
   position: relative;
 }
 
@@ -65,9 +65,5 @@
 
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;
-  }
-
-  span {
-    display: inline-block;
   }
 }

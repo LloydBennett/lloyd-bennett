@@ -6,12 +6,12 @@
   z-index: 500;
 
   &.inverted {
-    transition: 300ms ease;
+    transition: color 300ms ease;
     color: $colour--white;
 
     .hamburger__line {
       background-color: $colour--white;
-      transition: 300ms ease;
+      transition: background-color 300ms ease;
     }
   }
 }
