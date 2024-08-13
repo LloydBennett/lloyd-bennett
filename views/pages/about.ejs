@@ -11,7 +11,7 @@
     <div class="about__heading">
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>
@@ -52,7 +52,7 @@
 </section>
 
 
-<section class="section--l">
+<section class="section--s">
   <div class="container about__middle">
 
     <div class="aside about__aside-wrap">
@@ -82,7 +82,7 @@
     
   </div>
 </section>
-
+<%- include('../partials/client-list') -%>
 
 <%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
  
