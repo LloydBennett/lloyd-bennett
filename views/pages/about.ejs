@@ -54,20 +54,6 @@
 
 <section class="section--s">
   <div class="container about__middle">
-
-    <div class="aside about__aside-wrap">
-     <% stats.forEach((obj)=> { %>
-      <div>
-        <span class="block type--l type--s-margin">
-          <%- obj.value %>
-        </span>
-        <span class="block type--alt-s type--letter-sp">
-          <%- obj.unit %>
-        </span>
-      </div>
-     <% })%>
-    </div>
-
     <div class="about__middle-img" data-scroll data-scroll-speed="1">
       <picture class="block">
         <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
