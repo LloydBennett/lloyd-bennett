@@ -7,12 +7,14 @@
   
   <%- include('./partials/preloader') -%>
   
+  <% if( page !== 'error' ) { %>
+    <%- include('./partials/navigation-bar') -%>
+    <%- include('./partials/navigation-menu') -%>
+  <% } %>
+  
   <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container>
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
-      <% if( page !== 'error' ) { %>
-        <%- include('./partials/navigation-bar') -%>
-      <% } %>
       <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--s-top<% } %>">
         <% switch(page) {
           case 'project' : %>

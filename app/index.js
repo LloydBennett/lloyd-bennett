@@ -1,3 +1,4 @@
+import LocomotiveScroll from 'locomotive-scroll'
 import About from 'pages/About'
 import Home from 'pages/Home'
 import Project from 'pages/Project'
@@ -6,17 +7,44 @@ import Navigation from 'components/Navigation'
 
 class App {
   constructor() {
+    this.locomotiveScroll = new LocomotiveScroll( {
+      el: document.querySelector('[data-scroll-container]'),
+      smooth: true
+    })
+
     this.createContent()
     this.createPages()
     this.addLinkListeners()
     this.createPreloader()
-
-    //this.createNavigation()
+    this.createNavigation()
+    this.updateScroll()
   }
 
-  // createNavigation() {
-  //   this.navigation = new Navigation()
-  // }
+  updateScroll() {
+    // Create an observer instance linked to the callback function
+    let body = document.body
+    const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
+
+    const observer = new MutationObserver(entries => {
+      console.log('observing')
+      for (let i = 0; i < entries.length; i++) {
+        console.log(entries[i].target)
+        if(entries[i].target.classList.contains('no-scrolling')) {
+          this.locomotiveScroll.stop()
+        }
+        else {
+          this.locomotiveScroll.start()
+        }
+      }
+    })
+
+    observer.observe(body, config)
+  }
+
+  createNavigation() {
+    this.navigation = new Navigation()
+  }
+  
   createPreloader() {
     this.preloader = new Preloader()
   }
@@ -39,6 +67,7 @@ class App {
       this.page.show()
     }
     
+    }  
   }
 
   onPopState () {

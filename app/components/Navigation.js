@@ -87,17 +87,15 @@ export default class Navigation extends Components {
       onComplete: () => this.isAnimating = false
     })
 
-    this.tl.to(path, { duration: 0.8, attr: { d: start }, ease: "power3.in" }, "-=0.5")
-        .to(path, { duration: 0.4, attr: { d: end }, ease: "power3.out" })
-        .reverse()
+    this.svgPath.start = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
+    this.svgPath.middle = 'M 0 100 V 50 Q 50 0 100 50 V 100 z'
+    this.svgPath.end = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
 
-    this.tl.to(this.elements.navBar, { duration: 0.3, opacity: 1, color: "white" }, '-=0.3 nav')
-    this.tl.to(hamburgerIcon, { duration: 0.3, "background-color": "white" }, '-=0.3 nav')
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
     
-    tl.to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
-        .to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.end }, ease: "power2" })
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
     tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
     
     tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 1 } })
@@ -110,6 +108,9 @@ export default class Navigation extends Components {
     })
 
     this.elements.navLinks.forEach((els) => {
+    this.svgPath.start = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
+    this.svgPath.middle = 'M 0 100 V 50 Q 50 0 100 50 V 100 z'
+    this.svgPath.end = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
 
       let spans = els.querySelectorAll('span')
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
@@ -120,6 +121,8 @@ export default class Navigation extends Components {
     })
     tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power2.in" }, "-=0.5")
       .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power4" })
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in" }, "-=0.8")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
 
     tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=1')
 
