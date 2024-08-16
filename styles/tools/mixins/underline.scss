@@ -1,0 +1,9 @@
+@mixin underline ($height: 0.2rem, $margin: true) {
+  display: block;
+  height: $height;
+  width: 100%;
+
+  @if $margin == true {
+    margin-top: $spacing-rule-half;
+  }
+}

@@ -32,6 +32,10 @@
 .nav-menu__list-item {
   padding: spacing(3) 0;
   position: relative;
+
+  .mask-title__word {
+    transition: color 300ms ease;
+  }
 }
 
 .nav-menu__list-img {
@@ -65,4 +69,24 @@
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;
   }
+}
+
+.nav-menu__list-item:hover ~ .nav-menu__list-item .mask-title__word,
+.nav-menu__list-item:has(~ .nav-menu__list-item:hover .mask-title__word) {
+  color: $colour--grit-300 !important;
+}
+
+.nav-menu__list-item:hover .nav-link__line {
+  transform: translateX(0);
+  transition: transform 300ms ease;
+}
+
+.nav-link__line {
+  @include underline(0.3rem, false);
+  position: absolute;
+  left: 0;
+  bottom: 20%;
+  background-color: $colour--white;
+  transform: translateX(-100%);
+  transition: transform 300ms ease;
 }
