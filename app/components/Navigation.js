@@ -12,8 +12,10 @@ export default class Navigation extends Components {
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
         navLinks: '.nav-menu__list-item [data-page-trigger]',
+        navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
         linkTextChar: '[data-link-text] span',
-        menuMove: '[data-menu-move]'
+        menuMove: '[data-menu-move]',
+        imgPreview: '[data-nav-menu-preview]'
       }
     })
 
@@ -22,7 +24,6 @@ export default class Navigation extends Components {
     
     this.svgPath = {}
     this.linkSpans = []
-
   }
 
   create() {
@@ -36,41 +37,53 @@ export default class Navigation extends Components {
       this.isMenuOpen = !this.isMenuOpen
     })
 
-    //this.intialiseNavLinks()
+    this.intialiseNavLinks()
   }
 
   intialiseNavLinks() {
     let elTl = gsap.timeline()
 
-    this.elements.navLinks.forEach((element, id) => { 
-      let imagePrev = document.querySelectorAll('.nav-menu__list-img')[id]
-
-      let currentSpan = element.querySelectorAll('span')
+    this.elements.navLinks.forEach((element, id) => {
+      let tag = element.dataset.tag
+      let imagePrev = document.querySelector(`[data-tag-prev=${tag}]`)
+      let imageH = this.elements.imgPreview.offsetHeight
+      let imageW = this.elements.imgPreview.offsetWidth
       
-      let imageBounds = imagePrev.getBoundingClientRect()
-      console.log(imagePrev.clientHeight)
+      const hoverAnim = (e) => {
+        gsap.to(imagePrev, { opacity: 1 })
+        gsap.to(this.elements.imgPreview, { 
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", 
+          duration: 0.6, 
+          ease: "power3.out"
+        })
+      }
+
+      const hoverOutAnim = (e) => {
+        gsap.to(this.elements.imgPreview, 
+        { 
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", 
+          duration: 0.6, 
+          ease: "power3.out" 
+        })
+        gsap.to(imagePrev, { opacity: 0 })
+      }
       
-      element.addEventListener('mousemove', (e) => {
-        //let bounds = e.target.getBoundingClientRect()
+      element.addEventListener('mouseover', hoverAnim)
+      element.addEventListener('mouseout', hoverOutAnim)
+      
+      document.addEventListener('mousemove', (e) => {
+        let x = e.clientX - (imageW / 2)
+        let y = e.clientY - (imageH / 2)
 
         
-        this.getPos(e, imagePrev, imageBounds)
+        gsap.to(this.elements.imgPreview, { 
+          x: x, 
+          y: y,
+          rotate: "4deg",
+          duration: 0.8,
+          ease: "power3.out"
+        })
       })
-
-      element.addEventListener('mouseenter', (e) => {
-        
-        elTl.to(this.linkSpans, { duration: 0.3, color: COLOUR_GRIT_300 }, 'hover-link')
-        elTl.to(currentSpan, { duration: 0.3, color: COLOUR_WHITE }, 'hover-link')
-        
-        gsap.set(imagePrev, { scale: 0.8, xPercent: 25, yPercent: 50, rotation: -15 })
-        gsap.to(imagePrev, { duration: 0.1, opacity: 1 , scale: 1, yPercent: 0, rotation: 0 })
-      })
-
-      element.addEventListener('mouseleave', () => {
-        gsap.to(imagePrev, { duration: 0.1, opacity: 0, scale: 0.8, xPercent: 25, yPercent: 50, rotation: -15 })
-        gsap.to(this.linkSpans, { duration: 0.3, color: COLOUR_WHITE })
-      }) 
-
     })
   }
 
@@ -81,10 +94,15 @@ export default class Navigation extends Components {
     tl.to(this.elements.navBar, { duration: 0.3, opacity: 0, ease: "power2.out" })
     this.elements.navBar.classList.toggle('inverted')
     this.isMenuOpen? this.closeMenu() : this.openMenu()
+    this.elements.body.classList.toggle('no-scrolling')
+    this.elements.navMenu.classList.add('is-animating')
   }
   openMenu() {
     let tl = gsap.timeline({
-      onComplete: () => this.isAnimating = false
+      onComplete: () => {
+        
+        this.isAnimating = false
+      }
     })
 
     this.svgPath.start = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
@@ -92,7 +110,7 @@ export default class Navigation extends Components {
     this.svgPath.end = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
 
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
-    tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
+    tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible" } , "-=0.8")
     
     tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
       .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
@@ -102,86 +120,27 @@ export default class Navigation extends Components {
 
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
   }
+
   closeMenu() {
     let tl = gsap.timeline({
       onComplete: () => this.isAnimating = false
     })
 
-    this.elements.navLinks.forEach((els) => {
     this.svgPath.start = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
     this.svgPath.middle = 'M 0 100 V 50 Q 50 0 100 50 V 100 z'
     this.svgPath.end = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
 
-      let spans = els.querySelectorAll('span')
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     
-      this.tl.fromTo(spans, { duration: 0.4, y: "100%" }, { y: 0, stagger: 0.03 }, "startTime-=0.3")
     tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.6, stagger: { amount: 0.5 } })
 
-    })
-    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power2.in" }, "-=0.5")
-      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power4" })
     tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in" }, "-=0.8")
       .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
 
-    tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=1')
+    tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=0.5')
 
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
 
-    tl.to(this.elements.navMenu, { duration: 0.4, opacity: 0, display: "none" })
-  }
-
-  getPos( e, el, imgDimension) {
-    // Get coordinates for the current cursor position
-    let x = e.x
-    let y = e.y
-
-    //console.log(e)
-
-    // image y pos = height of the image / position of the menu link
-    // image x pos = width of the menu link, 
-    
-    let elBounds = e.target.getBoundingClientRect()
-    //let yOffset = elBounds.top / iBounds.height
-    //yOffset = gsap.utils.mapRange(0, 1.5, -150, 150, yOffset)
-
-    console.log(imgDimension)
-    // gsap.to(el, {
-    //   duration: 0.8,
-    //   x: Math.abs(x - elBounds.left) - imgDimension.width / 2,
-    //   y: Math.abs(y - elBounds.top) - imgDimension.height / 2,
-    // })
-
-    gsap.to(el, {
-      duration: 0.8,
-      x: Math.abs(x - elBounds.width) /  256,
-      y: Math.abs(y - elBounds.top) - 304
-    })
-
-    //console.log(`x: ${Math.abs(x - elBounds.left) - imgDimension.width / 2}`)
-
-    // this.animatableProperties.ty.current = Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height/2;
-    // this.animatableProperties.tx.current = Math.abs(mousepos.x - this.bounds.el.left) - this.bounds.reveal.width/2;
-
-    // gsap.to(el, {
-    //   duration: 1.25,
-    //   x: Math.abs(x - elBounds.left) - iBounds.width / 1.55,
-    //   y: Math.abs(y - elBounds.top) - iBounds.height / 2 - yOffset
-    // })
-    
-    // var xPos = 0,
-    //     yPos = 0;
-
-    // let centerY = trigger.offsetTop + trigger.offsetHeight / 2;
-    
-    // xPos = (el.offsetLeft - el.scrollLeft + el.clientLeft);
-    // //yPos = (el.offsetTop - el.scrollTop + el.clientTop);
-    
-    // yPos = (((el.offsetTop - el.scrollTop) - centerY) + el.clientTop);
-    // var mouseX = e.clientX - xPos,
-    //     mouseY = e.clientY - yPos; 
-    
-    // el.style.top = '' + mouseY + 'px';
-    // el.style.left = '' + mouseX + 'px';
+    tl.to(this.elements.navMenu, { duration: 0.4, opacity: 0, visibility: "hidden" })
   }
 }
