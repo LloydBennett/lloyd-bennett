@@ -37,7 +37,7 @@
       %>
     <li class="nav-menu__list-item type--white text-center">
       <div class="no-overflow inline-block relative">
-        <a href="<%- project.url %>" class="nav-menu__link" target="_blank" data-tag="<%- projectTag %>" data-page-trigger>
+        <a href="<%- project.data.project_link.url %>" class="nav-menu__link" target="_blank" data-tag="<%- projectTag %>" data-page-trigger>
           <span class="flex mask-title__word no-overflow-y" data-link-text>
             <% letters.forEach((l) => { %>
               <% if(l === " ") { %>
