@@ -15,20 +15,18 @@ class App {
     this.createContent()
     this.createPages()
     this.addLinkListeners()
+    //this.addLinkListeners()
     this.createPreloader()
     this.createNavigation()
     this.updateScroll()
   }
 
   updateScroll() {
-    // Create an observer instance linked to the callback function
     let body = document.body
     const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
 
     const observer = new MutationObserver(entries => {
-      console.log('observing')
       for (let i = 0; i < entries.length; i++) {
-        console.log(entries[i].target)
         if(entries[i].target.classList.contains('no-scrolling')) {
           this.locomotiveScroll.stop()
         }
