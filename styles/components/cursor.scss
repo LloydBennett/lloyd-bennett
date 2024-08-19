@@ -1,0 +1,12 @@
+.cursor {
+  width: 4.8rem;
+  height: 4.8rem;
+  border: 0.2rem solid $colour--grit-400;
+  border-radius: 100%;
+  z-index: 60;
+  position: absolute;
+}
+
+.touch .cursor {
+  display: none;
+}
