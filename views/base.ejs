@@ -11,10 +11,12 @@
     <%- include('./partials/navigation-bar') -%>
     <%- include('./partials/navigation-menu') -%>
   <% } %>
-  
+
+  <%- include('./partials/cursor') -%>
   <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container>
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
+      
       <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--s-top<% } %>">
         <% switch(page) {
           case 'project' : %>

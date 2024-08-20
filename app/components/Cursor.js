@@ -20,13 +20,13 @@ export default class Cursor extends Components {
   }
   addEventListeners() {
     document.addEventListener("mousemove", (e) => {
-      let x = e.clientX - (this.width / 2 )
-      let y = e.clientY - (this.height / 2 )
+      let x = e.clientX
+      let y = e.clientY
 
       gsap.to(this.elements.cursor, { 
-        x: x, 
-        y: y,
-        duration: 0.4,
+        top: y, 
+        left: x,
+        duration: 0.6,
         ease: "power2.out"
       })
     })
