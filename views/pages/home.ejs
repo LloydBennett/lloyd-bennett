@@ -12,7 +12,7 @@
 
     %>
     
-    <div class="home-hero__title">
+    <div class="home-hero__title" data-menu-move>
       <h1 class="type--xxl text-center mask-title--l">
         <% titleArr.forEach((text, index) => { %>
           <% 
@@ -33,18 +33,18 @@
   
       </h1>
     </div>
-    <div class="column--centered home-hero__image">
+    <div class="column--centered home-hero__image" data-menu-move>
       <div class="home-hero__image-wrapper relative center-block rotate--s">
         <div class="absolute overlay bg--grit-50" data-image-reveal></div>
         <div class="home-hero__image-thumb" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
       </div>
       
-      <div class="home-hero__cta">
+      <div class="home-hero__cta" data-home-cta data-menu-move>
         <%- include('../partials/scroll-button') -%>
       </div>
     </div>
     
-    <div class="home-hero__label">
+    <div class="home-hero__label" data-menu-move>
       <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
 
         <span class="no-overflow block">
@@ -56,7 +56,7 @@
       </p>
     </div>
 
-    <div class="home-hero__intro">
+    <div class="home-hero__intro" data-menu-move>
       <p class="type--body text-center type--grit-400" data-intro-text>
         <%- description %>
       </p>
