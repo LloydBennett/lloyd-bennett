@@ -17,9 +17,7 @@
   position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  transition-property: border-color, width, height, background-color;
-  transition-timing-function: ease;
-  transition-duration: 300ms;
+  transition: border-color 100ms ease, width 300ms ease, height 300ms ease, background-color 300ms ease;
 
   @include media-query($breakpoint--large) {
     width: 4.8rem;
@@ -29,7 +27,7 @@
 
 .cursor--inverted {
   border-color: $colour--white;
-  transition-property: border-color 300ms ease;
+  transition: border-color 100ms ease;
 }
 
 .cursor--expanded {

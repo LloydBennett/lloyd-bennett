@@ -5,6 +5,16 @@ export default class Home extends Page {
     super({
       id: 'home',
       element: '.home'
+      elements: {
+        cta: '[data-home-cta]',
+        workSection: '[data-work]'
+      }
     })
+    this.addLinkListeners()
+
+  }
+  addLinkListeners() {
+    if(this.elements.cta) {
+      this.elements.cta.addEventListener('click', () => {
   }
 }

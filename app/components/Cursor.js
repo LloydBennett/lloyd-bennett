@@ -36,7 +36,9 @@ export default class Cursor extends Components {
         this.elements.cursor.classList.add("cursor--inverted")
       }
       else {
-        this.elements.cursor.classList.remove("cursor--inverted")
+        if(!this.elements.navMenu.classList.contains('menu-is-open')) {
+          this.elements.cursor.classList.remove("cursor--inverted")
+        }
       }
     })
 

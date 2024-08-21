@@ -101,12 +101,11 @@ export default class Navigation extends Components {
   )
     this.isMenuOpen? this.closeMenu() : this.openMenu()
     this.elements.body.classList.toggle('no-scrolling')
-    this.elements.navMenu.classList.add('is-animating')
+    this.elements.navMenu.classList.toggle('menu-is-open')
   }
   openMenu() {
     let tl = gsap.timeline({
       onComplete: () => {
-        
         this.isAnimating = false
       }
     })
