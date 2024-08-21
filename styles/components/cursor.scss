@@ -7,8 +7,8 @@
 }
 
 .cursor {
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 3.6rem;
+  height: 3.6rem;
   border-color: $colour--grit-400;
   border-width: 0.2rem; 
   border-style: solid; 
@@ -20,6 +20,11 @@
   transition-property: border-color, width, height, background-color;
   transition-timing-function: ease;
   transition-duration: 300ms;
+
+  @include media-query($breakpoint--large) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
 }
 
 .cursor--inverted {

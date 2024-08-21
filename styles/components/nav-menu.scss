@@ -37,13 +37,18 @@
 }
 
 .nav-menu__preview {
-  width: 25.6rem;
-  height: 30.4rem;
+  width: 17rem;
+  height: 20.26rem;
   top: 0;
   left: 0;
   pointer-events: none;
   position: absolute;
-  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);  
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+
+  @include media-query($breakpoint--medium) {
+    width: 25.6rem;
+    height: 30.4rem;
+  }
 }
 
 .nav-menu-preview__img {
@@ -86,6 +91,6 @@
   left: 0;
   bottom: 20%;
   background-color: $colour--white;
-  transform: translateX(-100%);
+  transform: translateX(-101%);
   transition: transform 300ms ease;
 }

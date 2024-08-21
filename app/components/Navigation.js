@@ -95,8 +95,10 @@ export default class Navigation extends Components {
     this.isAnimating = true
     let tl = gsap.timeline()
 
-    tl.to(this.elements.navBar, { duration: 0.3, opacity: 0, ease: "power2.out" })
-    this.elements.navBar.classList.toggle('inverted')
+    tl.to(this.elements.navBar, { duration: 0.3, opacity: 0, ease: "power2.out", onComplete: () => {
+      this.elements.navBar.classList.toggle('inverted')
+    }}
+  )
     this.isMenuOpen? this.closeMenu() : this.openMenu()
     this.elements.body.classList.toggle('no-scrolling')
     this.elements.navMenu.classList.add('is-animating')
