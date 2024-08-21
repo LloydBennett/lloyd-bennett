@@ -69,10 +69,15 @@
   display: inline-block;
   z-index: 2;
   position: relative;
+  pointer-events: none;
 
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;
   }
+}
+
+.menu-is-open .nav-menu__link {
+  pointer-events: auto;
 }
 
 .nav-menu__list-item:hover ~ .nav-menu__list-item .mask-title__word,
@@ -80,7 +85,7 @@
   color: $colour--grit-300 !important;
 }
 
-.nav-menu__list-item:hover .nav-link__line {
+.menu-is-open .nav-menu__list-item:hover .nav-link__line {
   transform: translateX(0);
   transition: transform 300ms ease;
 }
