@@ -23,6 +23,7 @@ export default class Cursor extends Components {
     document.addEventListener("mousemove", (e) => {
       let x = e.clientX
       let y = e.clientY
+      let isCursorTouchingFooter = this.cursorDetection(this.elements.footer)
 
       gsap.to(this.elements.cursor, { 
         top: y, 
@@ -30,6 +31,13 @@ export default class Cursor extends Components {
         duration: 0.6,
         ease: "power2.out"
       })
+
+      if(isCursorTouchingFooter) {
+        this.elements.cursor.classList.add("cursor--inverted")
+      }
+      else {
+        this.elements.cursor.classList.remove("cursor--inverted")
+      }
     })
 
     this.elements.projects.forEach(element => {
@@ -42,5 +50,22 @@ export default class Cursor extends Components {
       })
     });
 
+    console.log(this.elements.footer.getBoundingClientRect())
+  }
+
+  cursorDetection(elem){
+    let ePos = elem.getBoundingClientRect()
+    let cursorPos = this.elements.cursor.getBoundingClientRect()
+    
+    if ( 
+      ePos.right >= cursorPos.left && 
+      ePos.left <= cursorPos.right && 
+      ePos.bottom >= cursorPos.top && 
+      ePos.top <= cursorPos.bottom 
+    ) { 
+      return true 
+    } else { 
+      return false
+    }
   }
 }
