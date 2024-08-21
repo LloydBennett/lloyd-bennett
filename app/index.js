@@ -1,4 +1,5 @@
 import LocomotiveScroll from 'locomotive-scroll'
+import Cursor from './components/Cursor'
 import About from 'pages/About'
 import Home from 'pages/Home'
 import Project from 'pages/Project'
@@ -15,6 +16,7 @@ class App {
     this.createContent()
     this.createPages()
     this.addLinkListeners()
+    this.createCursor()
     //this.addLinkListeners()
     this.createPreloader()
     this.createNavigation()
@@ -37,6 +39,10 @@ class App {
     })
 
     observer.observe(body, config)
+  }
+
+  createCursor() {
+    this.cursor = new Cursor()
   }
 
   createNavigation() {
@@ -63,8 +69,6 @@ class App {
       this.page = this.pages[this.template]
       this.page.create()
       this.page.show()
-    }
-    
     }  
   }
 
