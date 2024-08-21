@@ -5,14 +5,15 @@ export default class Cursor extends Components {
   constructor() {
     super({
       elements: {
-        cursor: '[data-cursor]'
+        cursor: '[data-cursor]',
+        projects: '[data-project-card]',
+        footer: '[data-footer]',
+        navMenu: '[data-nav-menu]'
       }
     })
     
     this.width = this.elements.cursor.offsetWidth
     this.height = this.elements.cursor.offsetHeight
-
-    console.log(this.width)
   }
 
   create() {
@@ -30,5 +31,16 @@ export default class Cursor extends Components {
         ease: "power2.out"
       })
     })
+
+    this.elements.projects.forEach(element => {
+      element.addEventListener("mouseover", () => {
+        this.elements.cursor.classList.add("cursor--expanded")
+      })
+
+      element.addEventListener("mouseleave", () => {
+        this.elements.cursor.classList.remove("cursor--expanded")
+      })
+    });
+
   }
 }

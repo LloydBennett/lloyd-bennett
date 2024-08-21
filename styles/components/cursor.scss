@@ -9,10 +9,37 @@
 .cursor {
   width: 4.8rem;
   height: 4.8rem;
-  border: 0.2rem solid $colour--grit-400;
+  border-color: $colour--grit-400;
+  border-width: 0.2rem; 
+  border-style: solid; 
   border-radius: 100%;
   z-index: 4;
   position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  transition-property: border-color, width, height, background-color;
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+}
+
+.cursor--inverted {
+  border-color: $colour--white;
+  transition-property: border-color 300ms ease;
+}
+
+.cursor--expanded {
+  width: 9.6rem;
+  height: 9.6rem;
+  background-color: $colour--white;
+  border-color: $colour--white;
+
+  .cursor__text {
+    transform: translateY(0);
+    transition: 100ms ease;
+  }
+}
+
+.cursor__text {
+  transform: translateY(100%);
+  transition: 100ms ease;
 }

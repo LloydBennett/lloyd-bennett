@@ -15,7 +15,8 @@ export default class Navigation extends Components {
         navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
         linkTextChar: '[data-link-text] span',
         menuMove: '[data-menu-move]',
-        imgPreview: '[data-nav-menu-preview]'
+        imgPreview: '[data-nav-menu-preview]',
+        cursor: '[data-cursor]'
       }
     })
 
@@ -50,12 +51,14 @@ export default class Navigation extends Components {
       let imageW = this.elements.imgPreview.offsetWidth
       
       const hoverAnim = (e) => {
+        // add a delay if animating is true then wait until its false
         gsap.to(imagePrev, { opacity: 1 })
         gsap.to(this.elements.imgPreview, { 
           clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", 
           duration: 0.6, 
           ease: "power3.out"
         })
+        gsap.to(this.elements.cursor, { opacity: 0 })
       }
 
       const hoverOutAnim = (e) => {
@@ -66,6 +69,7 @@ export default class Navigation extends Components {
           ease: "power3.out" 
         })
         gsap.to(imagePrev, { opacity: 0 })
+        gsap.to(this.elements.cursor, { opacity: 1 })
       }
       
       element.addEventListener('mouseover', hoverAnim)
@@ -113,10 +117,10 @@ export default class Navigation extends Components {
     tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible" } , "-=0.8")
     
     tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
-      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out", onComplete: () => { this.elements.cursor.classList.add("cursor--inverted")} })
     tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
     
-    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 1 } })
+    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
 
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
   }
@@ -132,15 +136,19 @@ export default class Navigation extends Components {
 
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     
-    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.6, stagger: { amount: 0.5 } })
+    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
 
-    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in" }, "-=0.8")
-      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" })
+    setTimeout(() => {
+      this.elements.cursor.classList.remove("cursor--inverted")  
+    }, 400);
 
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in" }, "-=1.1")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" }, "-=0.3")
+    
     tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=0.5')
-
+    
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
 
-    tl.to(this.elements.navMenu, { duration: 0.4, opacity: 0, visibility: "hidden" })
+    tl.to(this.elements.navMenu, { duration: 0.6, opacity: 0, visibility: "hidden" })
   }
 }
