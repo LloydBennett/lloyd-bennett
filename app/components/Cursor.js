@@ -42,17 +42,17 @@ export default class Cursor extends Components {
       }
     })
 
-    this.elements.projects.forEach(element => {
-      element.addEventListener("mouseover", () => {
-        this.elements.cursor.classList.add("cursor--expanded")
-      })
-
-      element.addEventListener("mouseleave", () => {
-        this.elements.cursor.classList.remove("cursor--expanded")
-      })
-    });
-
-    console.log(this.elements.footer.getBoundingClientRect())
+    if(this.elements.projects) {
+      this.elements.projects.forEach(element => {
+        element.addEventListener("mouseover", () => {
+          this.elements.cursor.classList.add("cursor--expanded")
+        })
+  
+        element.addEventListener("mouseleave", () => {
+          this.elements.cursor.classList.remove("cursor--expanded")
+        })
+      });
+    }    
   }
 
   cursorDetection(elem){

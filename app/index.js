@@ -15,9 +15,8 @@ class App {
 
     this.createContent()
     this.createPages()
-    this.addLinkListeners()
-    this.createCursor()
     //this.addLinkListeners()
+    this.createCursor()
     this.createPreloader()
     this.createNavigation()
     this.updateScroll()
