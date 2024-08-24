@@ -1,5 +1,5 @@
-import LocomotiveScroll from 'locomotive-scroll'
-import Cursor from './components/Cursor'
+import { scroll } from 'utils/locomotive-scroll'
+import Cursor from 'components/Cursor'
 import About from 'pages/About'
 import Home from 'pages/Home'
 import Project from 'pages/Project'
@@ -8,11 +8,8 @@ import Navigation from 'components/Navigation'
 
 class App {
   constructor() {
-    this.locomotiveScroll = new LocomotiveScroll( {
-      el: document.querySelector('[data-scroll-container]'),
-      smooth: true
-    })
-
+    this.locomotiveScroll = scroll
+    
     this.createContent()
     this.createPages()
     //this.addLinkListeners()
@@ -57,7 +54,7 @@ class App {
     this.template = this.content.getAttribute('data-page')
   }
 
-  createPages(){
+  createPages() {
     this.pages = {
       home: new Home(),
       about: new About(),
@@ -111,6 +108,7 @@ class App {
       console.log('Error loading page!')
     }
   }
+
   addEventListeners () {
     window.addEventListener('popstate', this.onPopState.bind(this))
   }
