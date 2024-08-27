@@ -13,11 +13,11 @@
   <% } %>
 
   <%- include('./partials/cursor') -%>
-  <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container>
+  <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container data-scroll-section-inview>
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
       
-      <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--s-top<% } %>">
+      <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--container<% } %>">
         <% switch(page) {
           case 'project' : %>
             <%- include('./pages/project') %>

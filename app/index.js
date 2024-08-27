@@ -17,6 +17,7 @@ class App {
     this.createPreloader()
     this.createNavigation()
     this.updateScroll()
+    this.locomotiveScroll.init()
   }
 
   updateScroll() {

@@ -1,8 +1,9 @@
 .nav-bar {
   padding: spacing(2) 0;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
 
   &.inverted {
     transition: color 300ms ease;
