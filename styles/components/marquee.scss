@@ -57,6 +57,12 @@
   }
 }
 
+.marquee__label-hide {
+  @include media-query($breakpoint--large) {
+    display: none;
+  }
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);

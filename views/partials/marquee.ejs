@@ -1,0 +1,39 @@
+<div class="marquee <% if (small_spacing) {%>section--s<%} else {%>section--l<%}%>" data-marquee>
+  <div class="marquee__wrapper">
+    <div class="marquee__inner" data-marquee-marquee>
+      <% 
+        let count = 4
+      %>
+    
+      <% for(let i = 0; i < count; i++) { %>
+        <div class="flex center-flex marquee__item">
+          <span class="marquee__label marquee__text type--uppercase type--letter-sp type--family-alt no-wrap">
+            <%- label %>
+          </span>
+          <div class="marquee__label marquee--label-star">
+            <%- include('./svg/star') -%>
+          </div>
+          <span class="marquee__label marquee__text type--uppercase type--letter-sp type--family-alt no-wrap">
+            <%- label %>
+          </span>
+          <div class="marquee__label marquee--label-star">
+            <%- include('./svg/star') -%>
+          </div>
+          
+          <span class="marquee__label <% if (hide_extra_labels) { %>marquee__label-hide <%}%>marquee__text type--uppercase type--letter-sp type--family-alt no-wrap">
+            <%- label %>
+          </span>
+          <div class="marquee__label <% if (hide_extra_labels) { %>marquee__label-hide <%}%>marquee--label-star">
+            <%- include('./svg/star') -%>
+          </div>
+
+        </div>
+       
+        
+      <% } %>
+
+      
+    </div>
+    
+  </div>
+</div>
