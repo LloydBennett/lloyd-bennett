@@ -8,8 +8,8 @@ export default class Preloader extends Components {
         loader: '[data-loader]', 
         background: '[data-preloader-bg]',
         titleSpans: '[data-title-reveal]',
-        imageReveal: '[data-image-reveal]',
         heroImage: '[data-hero-image]',
+        heroImgContainer: '[data-hero-image-container]',
         navBar: '[data-nav-bar]',
         text: '[data-text-reveal]',
         loaderIcon: '[data-loader-icon]',
@@ -67,9 +67,10 @@ export default class Preloader extends Components {
     this.tl.to(this.elements.loaderIcon, { opacity: 0, duration: 0.4, ease: 'power2.out' }, "-=0.55 icon")
     this.tl.fromTo(this.elements.titleSpans, { y: "200%" }, { y: 0, duration: 0.65, ease: "power2.out", stagger: { amount: 0.6 }}, "-=0.2")
     this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
-    this.tl.fromTo(this.elements.heroImage, { backgroundSize: "200%" }, { backgroundSize: "100%", duration: 0.8, ease: "power2.out" }, "-=0.3")
-    this.tl.to(this.elements.imageReveal, { height: 0, duration: 0.6, ease: "power2.out", stagger: { amount: 0.4 } }, "-=1")
-    
+    this.tl.fromTo(this.elements.heroImgContainer, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", duration: 0.6, stagger: { amount: 0.4 }, ease: "power2.out" }, "-=1")
+    this.tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.4 }, ease: "power2.out" }, "-=1")
+
+
     if (this.elements.scrollBtnCircle) {
       this.tl.fromTo(this.elements.scrollBtnCircle, { strokeDashoffset: 2057, strokeDasharray: 2057 }, { strokeDashoffset:0, duration: 1.2, ease: "power2.out" }, "-=1");
       this.tl.fromTo(this.elements.scrollBtnArrow, { y: -100 }, { y: 0, duration: 0.4, ease: "power2.out" }, "-=0.6");

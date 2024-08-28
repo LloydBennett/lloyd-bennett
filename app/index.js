@@ -110,7 +110,7 @@ class App {
     }
   }
 
-  addEventListeners () {
+  addEventListeners() {
     window.addEventListener('popstate', this.onPopState.bind(this))
   }
 
