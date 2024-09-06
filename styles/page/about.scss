@@ -57,7 +57,7 @@
 }
 
 .about__title {
-  max-width: 40rem;
+  max-width: 35rem;
 
   @include media-query($breakpoint--small) {
     max-width: 55rem;
@@ -87,11 +87,7 @@
 
 .about__hero-media-img {
   padding-top: calc(783.53 / 658.17 * 100%);
-  width: 90%;
-
-  @include media-query($breakpoint--x-large) {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .about__hero-alt-img {

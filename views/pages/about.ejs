@@ -8,7 +8,7 @@
     let stats = document.data.stats
     %>
 
-    <div class="about__heading" data-menu-move>
+    <div class="about__heading mix-blend__diff type--white" data-menu-move>
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
           <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
@@ -43,7 +43,7 @@
 
 <section class="section--l about--hidden">
   <div class="container">
-    <p class="about__call-out type--call-out">
+    <p class="about__call-out type--call-out" data-text>
       <%- document.data.call_out_text %>
     </p>
   </div>
