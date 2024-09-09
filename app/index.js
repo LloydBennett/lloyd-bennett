@@ -1,15 +1,18 @@
 import { scroll } from 'utils/locomotive-scroll'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Cursor from 'components/Cursor'
 import About from 'pages/About'
 import Home from 'pages/Home'
 import Project from 'pages/Project'
 import Preloader from 'components/Preloader'
 import Navigation from 'components/Navigation'
+import SplitText from 'components/SplitText'
 
 class App {
   constructor() {
     this.locomotiveScroll = scroll
-    
+    this.setUpScrollTrigger()
     this.createContent()
     this.createPages()
     //this.addLinkListeners()
@@ -17,9 +20,34 @@ class App {
     this.createPreloader()
     this.createNavigation()
     this.updateScroll()
+    
     this.locomotiveScroll.init()
-  }
+    this.addEventListeners()
+    this.createSplitText()
 
+  }
+  setUpScrollTrigger() {
+    gsap.registerPlugin(ScrollTrigger)
+
+    let container = document.querySelector('[data-scroll-container]')
+    this.locomotiveScroll.on('scroll', ScrollTrigger.update)
+    
+    ScrollTrigger.scrollerProxy('[data-scroll-container]', {
+      scrollTop: (value) => {
+        return arguments.length ? this.locomotiveScroll.scrollTo(value, 0 , 0) : this.locomotiveScroll.scroll.instance.scroll.y
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        }
+      },
+      pinType: container.style.transform ? "transform" : "fixed"
+    })
+
+  }
   updateScroll() {
     let body = document.body
     const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
@@ -48,6 +76,10 @@ class App {
   
   createPreloader() {
     this.preloader = new Preloader()
+  }
+
+  createSplitText() {
+    this.splitText = new SplitText()
   }
 
   createContent() {
@@ -111,7 +143,8 @@ class App {
   }
 
   addEventListeners() {
-    window.addEventListener('popstate', this.onPopState.bind(this))
+    ScrollTrigger.addEventListener('refresh', () => this.locomotiveScroll.update())
+    ScrollTrigger.defaults({ scroller: '[data-scroll-container]' })
   }
 
   addLinkListeners() {
