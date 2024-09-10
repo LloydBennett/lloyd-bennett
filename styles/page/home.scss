@@ -59,11 +59,11 @@
   position: relative;
 
   @include media-query($breakpoint--small) {
-    margin-top: -#{spacing(6)};
+    margin-top: -#{spacing(7)};
   }
 
   @include media-query($breakpoint--large) {
-    margin-top: -#{spacing(8)};
+    margin-top: -#{spacing(10)};
   }
   
   @include media-query($breakpoint--x-large - 1, max-width) {
@@ -71,7 +71,7 @@
   }
 
   @include media-query($breakpoint--x-large) {
-    margin-top: -#{spacing(12)};
+    margin-top: -#{spacing(14)};
   }
 }
 
