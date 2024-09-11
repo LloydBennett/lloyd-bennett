@@ -1,0 +1,44 @@
+.touch .cursor {
+  display: none;
+}
+
+.cursor {
+  width: 4.2rem;
+  height: 4.2rem;
+  border-color: $colour--grit-400;
+  border-width: 0.2rem; 
+  border-style: solid; 
+  border-radius: 100%;
+  z-index: 4;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: border-color 100ms ease, width 300ms ease, height 300ms ease, background-color 300ms ease;
+
+  @include media-query($breakpoint--large) {
+    width: 5.6rem;
+    height: 5.6rem;
+  }
+}
+
+.cursor--inverted {
+  border-color: $colour--white;
+  transition: border-color 100ms ease;
+}
+
+.cursor--expanded {
+  width: 9.6rem;
+  height: 9.6rem;
+  background-color: $colour--white;
+  border-color: $colour--white;
+
+  .cursor__text {
+    transform: translateY(0);
+    transition: 100ms ease;
+  }
+}
+
+.cursor__text {
+  transform: translateY(100%);
+  transition: 100ms ease;
+}

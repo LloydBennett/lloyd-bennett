@@ -146,6 +146,11 @@ body {
 	@include text-size(1.2, null, 1.4);
 }
 
+.type--alt-xs {
+	@include capitalised-text(true);
+	@include text-size(1.2, null, 1.2);
+}
+
 .type--letter-sp {
 	letter-spacing: 1px;
 }
@@ -182,6 +187,10 @@ body {
 	font-style: italic;
 }
 
+.type--uppercase {
+	@include capitalised-text;
+}
+
 .type--semi-bold {
 	font-weight: $type--font-weight-semi;
 }
@@ -214,3 +223,10 @@ body {
 	color: $colour--white;
 }
 
+.type--family-alt {
+	font-family: $type--family-alt;
+}
+
+.white-space {
+	white-space: pre;
+}

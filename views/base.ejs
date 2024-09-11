@@ -2,16 +2,22 @@
 
 <%- include('./partials/head', { page: page } ) -%>
 
-<body class="no-scrolling <% if( page !== 'project' ) { %>bg--grit-50<%} %>" data-body>
+<body id="body" class="no-scrolling <% if( page !== 'project' ) { %>bg--grit-50<%} %>" data-body>
   <style>.main::after { background-image: url('/noise.png');}</style>
   
   <%- include('./partials/preloader') -%>
   
-  <main id="main" data-page="<%- page %>" data-scroll-speed="-14" class="main <%- page %>">
+  <% if( page !== 'error' ) { %>
+    <%- include('./partials/navigation-bar') -%>
+    <%- include('./partials/navigation-menu') -%>
+  <% } %>
+
+  <%- include('./partials/cursor') -%>
+  <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container data-scroll-section-inview>
     
     <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
-      <%- include('./partials/navigation-bar') -%>
-      <div class="section--s-top">
+      
+      <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--container<% } %>">
         <% switch(page) {
           case 'project' : %>
             <%- include('./pages/project') %>
@@ -19,13 +25,16 @@
           <% case 'about' : %>
             <%- include('./pages/about') -%>
             <% break; %>
+          <% case 'error' : %>
+            <%- include('./pages/error') -%>
+            <% break; %>
           <% default : %>
           <%- include('./pages/home') -%>
         <% } %>
       </div>
       
     </div>
-    <% if( page !== 'project' ) { %>
+    <% if( page !== 'project' && page !== 'error' ) { %>
       <%- include('./partials/footer', { footer: footer.data }) -%>
     <% } %>
   </main>

@@ -3,7 +3,6 @@
   z-index: 2;
 
   &::after {
-    animation: grain 8s steps(10) infinite;
     content: '';
     height: 300%;
     left: -50%;
@@ -11,14 +10,8 @@
     position: fixed;
     top: -100%;
     width: 300%;
+    animation: grain 8s steps(10) infinite;
     pointer-events: none;
-  }
-}
-
-.main--margin {
-  @include media-query($breakpoint--medium) {
-    margin-bottom: 90vh;
-    padding-bottom: 1px;
   }
 }
 

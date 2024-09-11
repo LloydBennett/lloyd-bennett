@@ -16,5 +16,4 @@ export default function create() {
       }
     }
   }
-  console.log(this.elements)
 }

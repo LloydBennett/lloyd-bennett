@@ -8,35 +8,40 @@ export default class About extends Page {
         heroText: '[data-intro-text]'
       }
     })
+    this.text = this.elements.heroText.innerText
     this.splitLines()
     this.showLines()
+    this.addEventListeners()
   }
-
-  showLines() {
-    let lines = this.getLines();
-    let txt = this.elements.heroText
-    console.log(lines)
-
-    lines.forEach((l, i) => {
-      i = i + 1;
-
-      l.forEach((w) => {
-        let span = document.createElement('span')
-        span.classList.add('inline-block', 'no-overflow-y')
-        w.classList.add('inline-block')
-        w.innerHTML += "&nbsp;"
-        w.setAttribute('data-text-reveal', i)
-        span.appendChild(w)
-        txt.appendChild(span)
-      })
-      
+  addEventListeners() {
+    window.addEventListener('resize', () => {
+      this.splitLines()
+      this.showLines()
     })
   }
   
+  showLines() {
+    let lines = this.getLines();
+
+    lines.forEach((l, i) => {
+      let lineSpan = document.createElement('span')
+      lineSpan.classList.add('inline-block', 'no-overflow-y', 'white-space')
+      i = i + 1;
+      
+      l.forEach((w) => {
+        w.classList.add('inline-block')
+        w.innerHTML += "&nbsp;"
+        w.setAttribute('data-text-reveal', i)
+        lineSpan.appendChild(w)
+        this.elements.heroText.appendChild(lineSpan)
+      })
+    })
+  }
+
   splitLines() {
     let heroText = this.elements.heroText
     
-    heroText.innerHTML = heroText.innerText.split(/\s/).map(function(word) {
+    heroText.innerHTML = this.text.split(/\s/).map(function(word) {
       return '<span>' + word + '</span>'
     }).join(' ');
   }
@@ -45,7 +50,7 @@ export default class About extends Page {
     let lines = [];
     let line
     let text = this.elements.heroText
-    let words = text.getElementsByTagName('span');
+    let words = text.getElementsByTagName('span')
     let lastTop;
 
     for (var i = 0; i < words.length; i++) {

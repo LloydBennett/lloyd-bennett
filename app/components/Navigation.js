@@ -7,20 +7,24 @@ export default class Navigation extends Components {
       elements: {
         navMenu: '[data-nav-menu]',
         trigger: '[data-nav-trigger]',
-        body: 'body',
+        body: '[data-body]',
         bg: '[data-nav-menu-bg]',
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
-        navLinks: '.nav-menu__list-item [data-page-trigger]'
+        navLinks: '.nav-menu__list-item [data-page-trigger]',
+        navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
+        linkTextChar: '[data-link-text] span',
+        menuMove: '[data-menu-move]',
+        imgPreview: '[data-nav-menu-preview]',
+        cursor: '[data-cursor]'
       }
     })
-    this.animating = false
-    this.tl = gsap.timeline({ paused: true })
-    this.linkSpans = []
 
-    this.intialiseNavText()
-    this.addEventListeners()
-    this.animate()
+    this.isAnimating = false
+    this.isMenuOpen = false
+    
+    this.svgPath = {}
+    this.linkSpans = []
   }
 
   create() {
@@ -28,148 +32,124 @@ export default class Navigation extends Components {
   }
 
   addEventListeners() {
-    this.elements.trigger.addEventListener('click', () => {
-      this.animating = !this.animating
-      this.tl.reversed(!this.tl.reversed());
+    this.elements.trigger.addEventListener('click', (e) => {
+      if (this.isAnimating) return
+      this.animate()
+      this.isMenuOpen = !this.isMenuOpen
     })
 
     this.intialiseNavLinks()
   }
 
-  intialiseNavText() {
-    this.elements.linkText.forEach((element) => {
-      let word = element.innerHTML.trim().replace(/ /g, '\u00a0')
-      let letters = word.split("");
-      
-      element.innerHTML = ''
-      
-      letters.forEach((l, i)=> {
-        let elSpan = document.createElement('span')
-        elSpan.innerHTML = l
-        element.appendChild(elSpan)
-        this.linkSpans.push(elSpan)
-      })
-    });
-  }
-
   intialiseNavLinks() {
     let elTl = gsap.timeline()
 
-    this.elements.navLinks.forEach((element, id) => { 
-      let imagePrev = document.querySelectorAll('.nav-menu__list-img')[id]
-
-      let currentSpan = element.querySelectorAll('span')
+    this.elements.navLinks.forEach((element, id) => {
+      let tag = element.dataset.tag
+      let imagePrev = document.querySelector(`[data-tag-prev=${tag}]`)
+      let imageH = this.elements.imgPreview.offsetHeight
+      let imageW = this.elements.imgPreview.offsetWidth
       
-      let imageBounds = imagePrev.getBoundingClientRect()
-      console.log(imagePrev.clientHeight)
+      const hoverAnim = (e) => {
+        // add a delay if animating is true then wait until its false
+        gsap.to(imagePrev, { opacity: 1 })
+        gsap.to(this.elements.imgPreview, { 
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", 
+          duration: 0.6, 
+          ease: "power3.out"
+        })
+        gsap.to(this.elements.cursor, { opacity: 0 })
+      }
+
+      const hoverOutAnim = (e) => {
+        gsap.to(this.elements.imgPreview, 
+        { 
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", 
+          duration: 0.6, 
+          ease: "power3.out" 
+        })
+        gsap.to(imagePrev, { opacity: 0 })
+        gsap.to(this.elements.cursor, { opacity: 1 })
+      }
       
-      element.addEventListener('mousemove', (e) => {
-        //let bounds = e.target.getBoundingClientRect()
+      element.addEventListener('mouseover', hoverAnim)
+      element.addEventListener('mouseout', hoverOutAnim)
+      
+      document.addEventListener('mousemove', (e) => {
+        let x = e.clientX - (imageW / 2)
+        let y = e.clientY - (imageH / 2)
 
         
-        this.getPos(e, imagePrev, imageBounds)
+        gsap.to(this.elements.imgPreview, { 
+          x: x, 
+          y: y,
+          rotate: "4deg",
+          duration: 0.8,
+          ease: "power3.out"
+        })
       })
-
-      element.addEventListener('mouseenter', (e) => {
-        
-        elTl.to(this.linkSpans, { duration: 0.3, color: COLOUR_GRIT_300 }, 'hover-link')
-        elTl.to(currentSpan, { duration: 0.3, color: COLOUR_WHITE }, 'hover-link')
-        
-        gsap.set(imagePrev, { scale: 0.8, xPercent: 25, yPercent: 50, rotation: -15 })
-        gsap.to(imagePrev, { duration: 0.1, opacity: 1 , scale: 1, yPercent: 0, rotation: 0 })
-      })
-
-      element.addEventListener('mouseleave', () => {
-        gsap.to(imagePrev, { duration: 0.1, opacity: 0, scale: 0.8, xPercent: 25, yPercent: 50, rotation: -15 })
-        gsap.to(this.linkSpans, { duration: 0.3, color: COLOUR_WHITE })
-      }) 
-
     })
   }
 
   animate() {
-    const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z"
-    const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z"
-    let path = document.querySelector('.bg-path')
-    let hamburgerIcon = this.elements.navBar.querySelectorAll('.hamburger__line')
-    let newTl = gsap.timeline()
+    this.isAnimating = true
+    let tl = gsap.timeline()
 
-    this.tl.to(this.elements.navBar, 
-    { 
-      duration: 0.3, 
-      opacity: 0
+    tl.to(this.elements.navBar, { duration: 0.3, opacity: 0, ease: "power2.out", onComplete: () => {
+      this.elements.navBar.classList.toggle('inverted')
+    }}
+  )
+    this.isMenuOpen? this.closeMenu() : this.openMenu()
+    this.elements.body.classList.toggle('no-scrolling')
+    this.elements.navMenu.classList.toggle('menu-is-open')
+  }
+  openMenu() {
+    let tl = gsap.timeline({
+      onComplete: () => {
+        this.isAnimating = false
+      }
     })
 
-    this.tl.fromTo(this.element, { duration: 0.4, opacity: 0, display: "none" }, { opacity: 1, display: "block" } , "-=0.8")
+    this.svgPath.start = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
+    this.svgPath.middle = 'M 0 100 V 50 Q 50 0 100 50 V 100 z'
+    this.svgPath.end = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
 
-    this.tl.to(path, { duration: 0.8, attr: { d: start }, ease: "power3.in" }, "-=0.5")
-        .to(path, { duration: 0.4, attr: { d: end }, ease: "power3.out" })
-        .reverse()
-
-    this.tl.to(this.elements.navBar, { duration: 0.3, opacity: 1, color: "white" }, '-=0.3 nav')
-    this.tl.to(hamburgerIcon, { duration: 0.3, "background-color": "white" }, '-=0.3 nav')
+    tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
+    tl.fromTo(this.elements.navMenu, { duration: 0.4, opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible" } , "-=0.8")
     
-
-    this.elements.navLinks.forEach((els) => {
-
-      let spans = els.querySelectorAll('span')
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out", onComplete: () => { this.elements.cursor.classList.add("cursor--inverted")} })
+    tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
     
-      this.tl.fromTo(spans, { duration: 0.4, y: "100%" }, { y: 0, stagger: 0.03 }, "startTime-=0.3")
+    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
 
-    })
+    tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
   }
 
-  getPos( e, el, imgDimension) {
-    // Get coordinates for the current cursor position
-    let x = e.x
-    let y = e.y
-
-    //console.log(e)
-
-    // image y pos = height of the image / position of the menu link
-    // image x pos = width of the menu link, 
-    
-    let elBounds = e.target.getBoundingClientRect()
-    //let yOffset = elBounds.top / iBounds.height
-    //yOffset = gsap.utils.mapRange(0, 1.5, -150, 150, yOffset)
-
-    console.log(imgDimension)
-    // gsap.to(el, {
-    //   duration: 0.8,
-    //   x: Math.abs(x - elBounds.left) - imgDimension.width / 2,
-    //   y: Math.abs(y - elBounds.top) - imgDimension.height / 2,
-    // })
-
-    gsap.to(el, {
-      duration: 0.8,
-      x: Math.abs(x - elBounds.width) /  256,
-      y: Math.abs(y - elBounds.top) - 304
+  closeMenu() {
+    let tl = gsap.timeline({
+      onComplete: () => this.isAnimating = false
     })
 
-    //console.log(`x: ${Math.abs(x - elBounds.left) - imgDimension.width / 2}`)
+    this.svgPath.start = 'M 0 100 V 0 Q 50 0 100 0 V 100 z'
+    this.svgPath.middle = 'M 0 100 V 50 Q 50 0 100 50 V 100 z'
+    this.svgPath.end = 'M 0 100 V 100 Q 50 100 100 100 V 100 z'
 
-    // this.animatableProperties.ty.current = Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height/2;
-    // this.animatableProperties.tx.current = Math.abs(mousepos.x - this.bounds.el.left) - this.bounds.reveal.width/2;
+    tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
+    
+    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
 
-    // gsap.to(el, {
-    //   duration: 1.25,
-    //   x: Math.abs(x - elBounds.left) - iBounds.width / 1.55,
-    //   y: Math.abs(y - elBounds.top) - iBounds.height / 2 - yOffset
-    // })
-    
-    // var xPos = 0,
-    //     yPos = 0;
+    setTimeout(() => {
+      this.elements.cursor.classList.remove("cursor--inverted")  
+    }, 400);
 
-    // let centerY = trigger.offsetTop + trigger.offsetHeight / 2;
+    tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in" }, "-=1.1")
+      .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" }, "-=0.3")
     
-    // xPos = (el.offsetLeft - el.scrollLeft + el.clientLeft);
-    // //yPos = (el.offsetTop - el.scrollTop + el.clientTop);
+    tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=0.5')
     
-    // yPos = (((el.offsetTop - el.scrollTop) - centerY) + el.clientTop);
-    // var mouseX = e.clientX - xPos,
-    //     mouseY = e.clientY - yPos; 
-    
-    // el.style.top = '' + mouseY + 'px';
-    // el.style.left = '' + mouseX + 'px';
+    tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
+
+    tl.to(this.elements.navMenu, { duration: 0.6, opacity: 0, visibility: "hidden" })
   }
 }

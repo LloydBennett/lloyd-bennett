@@ -1,0 +1,69 @@
+<%
+  let title = document.data.title
+  let titleArr = title.split(" ")
+  let socialMedia = footer.data.social_media
+  let errorMessage = "The page you are looking for doesn't exist or has been moved. Let’s return to the home page to get you back on track."
+  let imageAlt = about.data.hero_image_alt
+%>
+
+<div class="grid--all container">
+  <div class="error-grid__logo">
+    <a href="/" data-fade-element>
+      <span class="type--alt-s no-wrap--and-break">
+        Lloyd-Jamie&nbsp;
+      </span>
+      <span class="type--alt-s no-wrap--and-break">
+        Bennett
+      </span>
+    </a>
+  </div>
+
+  <div class="error-grid__column">
+    <div class="error-grid__column-content">
+      <div class="meta meta--head meta--margin-bottom" data-meta-info>
+        <div class="hr"></div>
+        <span class="type--alt-s type--letter-sp type--semi-bold mask-title__word">
+          Error
+        </span>
+      </div>
+      <h1 class="type--xl mask-title--l type--s-margin">
+        <% titleArr.forEach((text, index) => { %>
+          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+        <% }) %>
+      </h1>
+      <div data-hero-content-group>
+        <p class="type--body type--grit-400 type--m-margin" data-intro-text>
+          <%- errorMessage %>
+        </p>
+
+        <%- include('../partials/button', { link: "/", buttonText: "Back To Home" }) -%>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="error-grid__image" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover"></div>
+
+  <div class="error-grid__socials" data-fade-element>
+    <% socialMedia.forEach((link) =>  { %>  
+      <a class="link" href="<%- link.social_media_link %>" target="_blank">
+        <span class="type--body"><%- link.social_media_name %></span>
+      </a>
+    <% }) %>
+  </div>
+
+  <div class="error-grid__code" data-fade-element>
+    <div class="error-grid__char type--m flex flex--end">
+      <span>4</span>
+    </div>
+    <div class="error-grid__char error--grid__c-pad type--m flex flex--end">
+      <span>0</span> 
+    </div>
+    <div class="error-grid__char type--m flex flex--end">
+      <span>4</span>
+    </div>
+  </div>
+
+</div>

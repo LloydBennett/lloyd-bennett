@@ -6,6 +6,10 @@
   @include section--l(top, padding);
 }
 
+.section--l-bottom {
+  @include section--l(bottom, padding);
+}
+
 .section--s {
   @include section--s;
 }
@@ -16,4 +20,24 @@
 
 .section-xs {
   @include section--xs;
+}
+
+.section--container {
+  padding-top: spacing(6) + 5.6rem;
+
+  @include media-query($breakpoint--small) {
+    padding-top: spacing(8)+ 5.6rem;
+  }
+  
+  @include media-query($breakpoint--medium) {
+    padding-top: spacing(10) + 5.6rem;
+  }
+
+  @include media-query($breakpoint--x-large) {
+    padding-top: spacing(13) + 5.6rem;
+  }
+
+  @include media-query($breakpoint--xx-large) {
+    padding-top: spacing(13) + 6rem;
+  }
 }

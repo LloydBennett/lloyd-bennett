@@ -1,27 +1,64 @@
-<% let svg = "M 0 100 V 100 Q 50 100 100 100 V 100 z" %>
+<% 
+  let svg = "M 0 100 V 100 Q 50 100 100 100 V 100 z" 
+  let aboutTitle = about.data.nav_menu_alias
+  let aTitle = aboutTitle.split("")
+  let projectObj = []
+%>
 
-<div class="nav-menu" data-nav-menu>
+<div class="nav-menu z-index--3" data-nav-menu>
   <div class="nav-menu__bg">
     <%- include('./svg/background', { path: svg, dataAttr: "data-nav-menu-bg" }) -%>
   </div>
+  
   <ul class="nav-menu__list">
-    <li class="nav-menu__list-item text-center">
-      <a href="<%- navigation.data.about.url %>" class="nav-menu__link" data-page-trigger>
-        <span class="type--white no-overflow-y" data-link-text>
-          <%- about.data.nav_menu_alias %>
-        </span>
-      </a>
-      <div class="nav-menu__list-img" style="background-image: url('<%- about.data.hero_image_main.url %>')"></div>
+    <li class="nav-menu__list-item type--white text-center">
+      <div class="no-overflow inline-block relative">
+        <a href="<%- navigation.data.about.url %>" class="nav-menu__link" data-tag="about" data-page-trigger>
+          <span class="flex mask-title__word no-overflow-y" data-link-text>
+            <% aTitle.forEach((a) => { %>
+              <% if(a === " ") { %>
+                <span class="no-wrap">&nbsp;</span>
+              <% } else { %> 
+                <span><%- a %></span>
+              <% } %>
+            <% }) %>
+          </span>
+        </a>
+        <span class="nav-link__line" data-nav-link-line></span>
+      </div>
     </li>
-    <% projects.forEach((project)=> { %>
-    <li class="nav-menu__list-item text-center">
-      <a href="<%- project.url %>" class="nav-menu__link" data-page-trigger>
-        <span class="type--white no-overflow-y" data-link-text>
-          <%- project.data.title %>
-        </span>
-      </a>
-      <div class="nav-menu__list-img" style="background-image: url('<%- project.data.hero_image.url %>')"></div>
+
+    <% projects.forEach((project) => { %>
+      <%
+        let title = project.data.title
+        let letters = title.split("")
+        let projectTag = title.replace(/\s+/g, '-').toLowerCase();
+        projectObj.push({ tag: projectTag, img: project.data.hero_image.url })
+      %>
+    <li class="nav-menu__list-item type--white text-center">
+      <div class="no-overflow inline-block relative">
+        <a href="<%- project.data.project_link.url %>" class="nav-menu__link" target="_blank" data-tag="<%- projectTag %>" data-page-trigger>
+          <span class="flex mask-title__word no-overflow-y" data-link-text>
+            <% letters.forEach((l) => { %>
+              <% if(l === " ") { %>
+                <span>&nbsp;</span>
+              <% } else { %> 
+                <span><%- l %></span>
+              <% } %>
+            <% }) %>
+          </span>
+        </a>
+        <span class="nav-link__line" data-nav-link-line></span>
+      </div>
     </li>
     <% }) %>
   </ul>
+
+  <div class="nav-menu__preview z-index--5" data-nav-menu-preview>
+    <div class="nav-menu-preview__img" style="background-image: url('<%- about.data.hero_image_main.url %>')" data-tag-prev="about"></div>
+
+    <% projectObj.forEach((proj) => { %>
+      <div class="nav-menu-preview__img" style="background-image: url('<%- proj.img %>')" data-tag-prev="<%- proj.tag %>"></div>
+    <%}) %>
+  </div>
 </div>

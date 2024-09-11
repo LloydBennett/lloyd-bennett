@@ -3,9 +3,6 @@
 }
 
 .projects {
-  @include grid;
-  @include container;
-
   grid-row-gap: spacing(10);
 
 	@include media-query($breakpoint--medium) {
@@ -52,7 +49,7 @@
     }
 
     @include media-query($breakpoint--medium) {
-      padding-top: spacing(45);
+      margin-top: spacing(45);
       grid-column: 6 / 9;
     }
 
@@ -93,12 +90,12 @@
   &:nth-child(11n) {
     @include media-query($breakpoint--small) {
       grid-column: 4 / 7;
-      padding-top: spacing(13);
+      margin-top: spacing(13);
     }
 
     @include media-query($breakpoint--medium) {
       grid-column: 5 / 7;
-      padding-top: spacing(28);
+      margin-top: spacing(28);
     }
 
     @include media-query($breakpoint--x-large) {

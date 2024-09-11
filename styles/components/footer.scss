@@ -1,21 +1,26 @@
 .footer {
-  padding: spacing(8) 0 spacing(6);
   width: 100%;
   z-index: 1;
   background-color: $colour--grit-500;
   color: $colour--grit-100;
+  clip-path: polygon(0 0 , 100% 0, 100% 100%, 0 100%);
+  height: 70rem;
 
   @include media-query($breakpoint--small) {
     align-items: center;
     display: flex;
   }
 
-  @include media-query($breakpoint--medium) {
-    position: fixed;
-    bottom: 0;
-    min-height: 90vh;
-    z-index: -1;
+  @include media-query($breakpoint--x-large) {
+    height: 80rem;
   }
+}
+
+.footer__content {
+  padding: spacing(8) 0 spacing(6);
+  height: 100%;
+  bottom: 0;
+  width: 100%;
 
   @include media-query($breakpoint--large) {
     padding: spacing(10) 0 spacing(7);
@@ -29,15 +34,6 @@
 .footer__grid {
   @include grid;
   grid-row-gap: spacing(20);
-}
-
-.footer-spacer {
-  display: none;
-
-  @include media-query($breakpoint--medium) {
-    display: block;
-    height: 1px;
-  }
 }
 
 .footer__heading {

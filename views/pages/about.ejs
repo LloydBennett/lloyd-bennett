@@ -8,31 +8,29 @@
     let stats = document.data.stats
     %>
 
-    <div class="about__heading">
+    <div class="about__heading mix-blend__diff type--white" data-menu-move>
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>
     
-    <div class="about__intro">
+    <div class="about__intro" data-menu-move>
       <p class="type--body type--grit-400" data-intro-text>
         <%- document.data.intro %>
       </p>
     </div>
 
-    <div class="about__hero-media">
-      <div class="relative center-block rotate--l-minus">
-        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
-        <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+    <div class="about__hero-media" data-scroll data-scroll-speed="1" data-menu-move>
+      <div class="relative center-block rotate--l-minus" data-hero-image-container>
+        <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
       </div>
     </div>
     
-    <div class="about__hero-media-alt">
-      <div class="relative rotate--l rotate--s-minus-l">
-        <div class="absolute overlay bg--grit-50" data-image-reveal></div>
-        <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: 100%" data-hero-image></div>
+    <div class="about__hero-media-alt" data-scroll data-scroll-speed="4" data-menu-move>
+      <div class="relative rotate--l rotate--s-minus-l" data-hero-image-container>
+        <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
       </div>
 
      
@@ -45,30 +43,16 @@
 
 <section class="section--l about--hidden">
   <div class="container">
-    <p class="about__call-out type--call-out">
+    <p class="about__call-out type--call-out" data-text>
       <%- document.data.call_out_text %>
     </p>
   </div>
 </section>
 
 
-<section class="section--l">
+<section class="section--s">
   <div class="container about__middle">
-
-    <div class="aside about__aside-wrap">
-     <% stats.forEach((obj)=> { %>
-      <div>
-        <span class="block type--l type--s-margin">
-          <%- obj.value %>
-        </span>
-        <span class="block type--alt-s type--letter-sp">
-          <%- obj.unit %>
-        </span>
-      </div>
-     <% })%>
-    </div>
-
-    <div class="about__middle-img">
+    <div class="about__middle-img" data-scroll data-scroll-speed="1">
       <picture class="block">
         <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
         <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
@@ -82,9 +66,9 @@
     
   </div>
 </section>
+<%- include('../partials/client-list') -%>
 
-
-<%- include('../partials/belt', { label: document.data.belt_label, small_spacing: false }) -%>
+<%- include('../partials/marquee', { label: document.data.belt_label, small_spacing: false, hide_extra_labels: true }) -%>
  
 
 <section class="section--l">

@@ -9,7 +9,7 @@
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- T O O L S ---------------------------------------
 // ------------------------------------ // ------------------------------------------
-
+@import '../node_modules/locomotive-scroll/dist/locomotive-scroll';
 @import './tools/functions/spacing.scss';
 @import './tools/functions/px-to-em.scss';
 
@@ -23,7 +23,7 @@
 @import './tools/mixins/section-xsmall.scss';
 @import './tools/mixins/captialised-text.scss';
 @import './tools/mixins/button.scss';
-
+@import './tools/mixins/underline.scss';
 @import './tools/animations/link-hover.scss';
 @import './tools/animations/scroll-btn-hover.scss';
 // ------------------------------------ // ------------------------------------------
@@ -36,6 +36,7 @@
 // -------------------------------- H E L P E R S -----------------------------------
 // ------------------------------------ // ------------------------------------------
 
+@import './helpers/scroll-container.scss';
 @import './helpers/display.scss';
 @import './helpers/no-margin.scss';
 @import './helpers/no-wrap.scss';
@@ -70,7 +71,7 @@
 @import './components/meta.scss';
 @import './components/list.scss';
 @import './components/services.scss';
-@import './components/belt.scss';
+@import './components/marquee.scss';
 @import './components/scroll-button.scss';
 @import './components/project.scss';
 @import './components/footer.scss';
@@ -81,6 +82,9 @@
 @import './components/z-index.scss';
 @import './components/rotate.scss';
 @import './components/loader.scss';
+@import './components/error-grid.scss';
+@import './components/cursor.scss';
+@import './components/mix-blend-mode.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- P A G E S ---------------------------------------

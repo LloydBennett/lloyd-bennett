@@ -43,10 +43,7 @@
 }
 
 .button__line {
-  display: block;
-  height: 0.2rem;
-  width: 100%;
-  margin-top: $spacing-rule-half;
+  @include underline;
   transition: transform 500ms ease;
 }
 
