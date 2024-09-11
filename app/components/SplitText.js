@@ -29,7 +29,6 @@ export default class Navigation extends Components {
       scrollTrigger: {
         trigger: '.type--call-out',
         start: 'top 80%',
-        end: 'top 20%',
         scrub: true,
         markers: false
       },
