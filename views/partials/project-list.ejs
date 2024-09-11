@@ -14,13 +14,15 @@
         let indexOutput = i.toString().padStart(2, '0')
         let projectTitle = project.data.title 
         let projectTitleArr = projectTitle.split(" ")
+        let scrollSpeed = i * 0.5
       %>
-      <div class="project__card">
-        <a href="<%- project.data.project_link.url %>" class="block" target="_blank" data-project-card>
+
+      <div class="project__card" data-scroll data-scroll-speed="<%- scrollSpeed %>" data-project-card>
+        <a href="<%- project.data.project_link.url %>" class="block" target="_blank">
           
           <% if(i > 5) { i == 1 } else { i = i } %>
           
-          <picture class="project__img">
+          <picture class="project__img" data-project-img>
             <source media="(min-width: 550px)" srcset="<%- project.data.thumbnail[`image_${i}`].url %>">
             <source media="(max-width: 549px)" srcset="<%- project.data.thumbnail.url %>">
             <img class="block--full-width" src="<%- project.data.thumbnail.url %>" alt="<%- project.data.title %>">

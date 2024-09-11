@@ -24,18 +24,18 @@ export default class Navigation extends Components {
 
   animateText() {
     let spans = this.elements.text.querySelectorAll('span')
-    gsap.set(spans, { opacity: 0.3 })
     
-    gsap.to(spans, {
+    gsap.from(spans, {
       scrollTrigger: {
         trigger: '.type--call-out',
-        start: 'top bottom-=20%',
-        markers: true
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+        markers: false
       },
-      opacity: 1,
-      duration: 0.6,
-      stagger: { amount: 1.6 },
+      opacity: 0.2,
+      stagger: { amount: 1.2 },
       ease: 'power2.out'
-    });
+    })
   }
 }

@@ -8,6 +8,7 @@ import Project from 'pages/Project'
 import Preloader from 'components/Preloader'
 import Navigation from 'components/Navigation'
 import SplitText from 'components/SplitText'
+import ProjectCard from 'components/ProjectCard'
 
 class App {
   constructor() {
@@ -24,6 +25,7 @@ class App {
     this.locomotiveScroll.init()
     this.addEventListeners()
     this.createSplitText()
+    this.createProjectCard()
 
   }
   setUpScrollTrigger() {
@@ -80,6 +82,10 @@ class App {
 
   createSplitText() {
     this.splitText = new SplitText()
+  }
+
+  createProjectCard() {
+    this.projectCard = new ProjectCard()
   }
 
   createContent() {
