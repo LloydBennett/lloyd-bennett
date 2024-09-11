@@ -17,9 +17,11 @@ export default class Cursor extends Components {
     this.height = this.elements.cursor.offsetHeight
     this.scroll = scroll
     
-    this.scroll.on('scroll', (args) => {
-      this.updateCursor()
-    })
+    if(this.elements.footer) {
+      this.scroll.on('scroll', (args) => {
+        this.updateCursor()
+      })
+    }
   }
 
   create() {

@@ -26,7 +26,6 @@ class App {
     this.addEventListeners()
     this.createSplitText()
     this.createProjectCard()
-
   }
   setUpScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
