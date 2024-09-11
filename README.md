@@ -1,5 +1,5 @@
 # Lloyd Bennett
-My portfolio website that showcases my UX/UI & Brand design work
+My portfolio website that showcases my UX/UI & Brand design work.
 
 ![ljb-hero](https://github.com/user-attachments/assets/6c55cc78-75bc-47df-8a9e-1a6978d6248a)
 
