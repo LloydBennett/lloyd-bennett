@@ -15,10 +15,11 @@ class App {
     this.locomotiveScroll = scroll
     this.setUpScrollTrigger()
     this.createContent()
-    this.createPages()
-    //this.addLinkListeners()
-    this.createCursor()
     this.createPreloader()
+    
+    this.addLinkListeners()
+    this.createCursor()
+    
     this.createNavigation()
     this.updateScroll()
     
@@ -26,6 +27,10 @@ class App {
     this.addEventListeners()
     this.createSplitText()
     this.createProjectCard()
+    
+    this.preloader.calculatePageLoadTime().then(()=> {
+      this.createPages()
+    })
   }
   setUpScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
@@ -47,13 +52,13 @@ class App {
       },
       pinType: container.style.transform ? "transform" : "fixed"
     })
-
   }
+
   updateScroll() {
     let body = document.body
     const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
 
-    const observer = new MutationObserver(entries => {
+    const mObs = new MutationObserver(entries => {
       for (let i = 0; i < entries.length; i++) {
         if(entries[i].target.classList.contains('no-scrolling')) {
           this.locomotiveScroll.stop()
@@ -64,7 +69,11 @@ class App {
       }
     })
 
-    observer.observe(body, config)
+    new ResizeObserver(() => {
+      this.locomotiveScroll.update()
+    }).observe(document.querySelector("[data-scroll-container]"))
+
+    mObs.observe(body, config)
   }
 
   createCursor() {
@@ -88,8 +97,17 @@ class App {
   }
 
   createContent() {
+    this.head = document.querySelector('head')
     this.content = document.querySelector('.main')
     this.template = this.content.getAttribute('data-page')
+
+    this.descriptionsList = new Set([
+      ...this.head.querySelectorAll('meta[name*="description"]'),
+      ...this.head.querySelectorAll('meta[property*="description"]')
+    ])
+    this.twitterMeta = this.head.querySelector('meta[name="twitter:image"]')
+    this.ogMeta = this.head.querySelector('meta[property="og:image"]')
+    this.metaURL = this.head.querySelector('meta[property="og:url"]')
   }
 
   createPages() {
@@ -128,8 +146,12 @@ class App {
       div.innerHTML = html
 
       const divContent = div.querySelector('.main')
-      const newList = divContent.classList
+      const title = div.querySelector('title').innerText
+      const newDescription = div.querySelector('meta[name="description"]').getAttribute('content')
+      const newOgImg = div.querySelector('meta[property="og:image"]').getAttribute('content')
+      const newTwitterImg = div.querySelector('meta[name="twitter:image"]').getAttribute('content')
 
+      const newList = divContent.classList
       this.content.classList.remove(this.template)
       this.content.classList.add(...newList)
       
@@ -137,9 +159,21 @@ class App {
       this.content.setAttribute('data-page', this.template)
 
       this.content.innerHTML = divContent.innerHTML
+      this.head.querySelector('title').innerHTML = title
+
+      this.descriptionsList.forEach((element) => {
+        element.setAttribute('content', newDescription)
+      })
       
+      this.twitterMeta.setAttribute('content', newTwitterImg)
+      this.ogMeta.setAttribute('content', newOgImg)
+      this.metaURL.setAttribute('content', url)
+
       this.page = this.pages[this.template]
       this.page.create()
+      this.createSplitText()
+      this.createProjectCard()
+      this.createCursor()
       this.page.show()
     }
     else {
@@ -160,10 +194,14 @@ class App {
       l.onclick = event => {
         event.preventDefault()
         const href = l.href
-
-        this.onChange({ url: href })
+        
+        if(href !== window.location.href) {
+          this.onChange({ url: href })
+        } else {
+          return
+        }
       }
-    });
+    })
     
   }
 }

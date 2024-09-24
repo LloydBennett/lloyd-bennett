@@ -5,7 +5,8 @@ export default class About extends Page {
     super({
       id: 'about',
       elements: {
-        heroText: '[data-intro-text]'
+        heroText: '[data-intro-text]',
+        transition: '[data-menu-move]'
       }
     })
     this.text = this.elements.heroText.innerText
