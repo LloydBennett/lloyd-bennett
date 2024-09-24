@@ -65,15 +65,18 @@ app.get('/', async (req, res) => {
   const pageType = 'home'
   const document = await client.getSingle('home')
   const defaults = await handleRequest(req)
-  res.render('base', { ...defaults, document, pageType })
+  let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+  res.render('base', { ...defaults, document, pageType, fullUrl })
 })
 
 app.get('/about', async (req, res) => {
   const pageType = 'about'
   const document = await client.getSingle('about')
   const defaults = await handleRequest(req)
+  let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
-  res.render('base', { ...defaults, document, pageType })
+  res.render('base', { ...defaults, document, pageType, fullUrl })
 })
 
 app.get('/projects/:uid', async (req, res) => {
@@ -81,7 +84,9 @@ app.get('/projects/:uid', async (req, res) => {
   const pageType = 'project'
   const document = await client.getByUID('projects', uid)
   const defaults = await handleRequest(req)
-  res.render('base', { ...defaults, document, pageType })
+  let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+  res.render('base', { ...defaults, document, pageType, fullUrl })
 })
 
 app.get('*', async (req, res) => {
@@ -91,7 +96,9 @@ app.get('*', async (req, res) => {
     data: { title: "Page can’t be found" }
   }
   const defaults = await handleRequest(req)
-  res.render('base', { ...defaults, document, pageType })
+  let fullUrl = req.protocol + '://' + req.get('host')
+
+  res.render('base', { ...defaults, document, pageType, fullUrl })
 });
 
 app.listen(port, () => {
