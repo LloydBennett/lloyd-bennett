@@ -5,7 +5,6 @@
     let titleArr = title.split(" ")
     let image = document.data.hero_image_main
     let imageAlt = document.data.hero_image_alt
-    let stats = document.data.stats
     %>
 
     <div class="about__heading mix-blend__diff type--white" data-menu-move>
@@ -17,7 +16,7 @@
     </div>
     
     <div class="about__intro" data-menu-move>
-      <p class="type--body type--grit-400" data-intro-text>
+      <p class="type--body type--grit-400" data-text="line-break" data-intro-text>
         <%- document.data.intro %>
       </p>
     </div>
