@@ -5,14 +5,5 @@ export default class Components {
     this.selectors = { ...elements }
     Components.prototype.create = create
     this.create()
-    this.addEventListeners()
-  }
-  
-  addEventListeners() {
-
-  }
-
-  removeEventListeners() {
-
   }
 }
