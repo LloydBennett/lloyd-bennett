@@ -7,7 +7,8 @@ export default class Home extends Page {
       id: 'home',
       elements: {
         cta: '[data-home-cta]',
-        workSection: '[data-work]'
+        workSection: '[data-work]',
+        transition: '[data-menu-move]'
       }
     })
     this.scroll = scroll 

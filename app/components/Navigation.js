@@ -25,6 +25,7 @@ export default class Navigation extends Components {
     
     this.svgPath = {}
     this.linkSpans = []
+    this.addEventListeners()
   }
 
   create() {
