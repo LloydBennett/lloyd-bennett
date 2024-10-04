@@ -195,10 +195,24 @@ class App {
         event.preventDefault()
         const href = l.href
         
+        const linkData = l.getAttribute('data-page-trigger')
+        const linkTag = l.getAttribute('data-tag')
+
         if(href !== window.location.href) {
+          this.page.pageTrigger = linkData
+          this.page.pageTag = linkTag
+        
           this.onChange({ url: href })
         } else {
           return
+          if(this.navigation.isMenuOpen) {
+            this.navigation.animate()
+            this.navigation.isMenuOpen = false
+          }
+          else {
+            return
+          }
+          
         }
       }
     })
