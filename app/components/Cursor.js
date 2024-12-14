@@ -46,12 +46,24 @@ export default class Cursor extends Components {
 
     if(this.elements.projects) {
       this.elements.projects.forEach(element => {
+        let img = element.querySelector('[data-project-img] img')
+        
         element.addEventListener("mouseover", () => {
           this.elements.cursor.classList.add("cursor--expanded")
+          gsap.to(img, { 
+            scale: 1.2,
+            duration: 0.6,
+            ease: "power2.out"
+          })
         })
   
         element.addEventListener("mouseleave", () => {
           this.elements.cursor.classList.remove("cursor--expanded")
+          gsap.to(img, { 
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out"
+          })
         })
       });
     }    

@@ -113,6 +113,11 @@
       grid-column: 4 / 7;
     }
   }
+
+  &:hover .project__img {
+    transform: scale(1.5) !important;
+    transition: 300ms ease;
+  }
 }
 
 .project__meta {
