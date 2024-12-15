@@ -35,6 +35,21 @@ export default class Page {
     this.create()
   }
 
+  getRotationAngle(element) {
+    const computedStyle = window.getComputedStyle(element);
+    const matrix = computedStyle.getPropertyValue('transform');
+
+    if (matrix === 'none') {
+      return 0; // No transformation applied, so no rotation
+    }
+
+    const values = matrix.split('(')[1].split(')')[0].split(',');
+    const a = parseFloat(values[0]);
+    const b = parseFloat(values[1]);
+
+    const angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+    return angle;
+  }
 
   handlePageTransition(state, resolve) {
     let start = bg[state].start,
@@ -118,9 +133,9 @@ export default class Page {
             x = this.heroImg.getBoundingClientRect().left,
             width = this.heroImg.getBoundingClientRect().width,
             height = this.heroImg.getBoundingClientRect().height,
-            rotationAngle = this.getRotationAngle(this.heroImg)
+            //rotationAngle = this.getRotationAngle(this.heroImg)
             
-        console.log(rotationAngle)
+        //console.log(rotationAngle)
         console.log(`y: ${y}, x: ${x}, width: ${width}, height: ${height}`)
 
         this.tl.to(this.elements.navPreview, {
