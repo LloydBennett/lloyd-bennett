@@ -132,12 +132,10 @@ export default class Page {
         let y = this.heroImg.getBoundingClientRect().top,
             x = this.heroImg.getBoundingClientRect().left,
             width = this.heroImg.getBoundingClientRect().width,
-            height = this.heroImg.getBoundingClientRect().height,
+            height = this.heroImg.getBoundingClientRect().height
             //rotationAngle = this.getRotationAngle(this.heroImg)
             
         //console.log(rotationAngle)
-        console.log(`y: ${y}, x: ${x}, width: ${width}, height: ${height}`)
-
         this.tl.to(this.elements.navPreview, {
           y: `${y}px`,
           x: `${x}px`,
