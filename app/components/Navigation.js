@@ -16,15 +16,17 @@ export default class Navigation extends Components {
         linkTextChar: '[data-link-text] span',
         menuMove: '[data-menu-move]',
         imgPreview: '[data-nav-menu-preview]',
+        imgPrevBelt: '[data-nav-menu-prev-belt]',
         cursor: '[data-cursor]'
       }
     })
 
     this.isAnimating = false
     this.isMenuOpen = false
-    
+    this.insideProject = false
     this.svgPath = {}
     this.linkSpans = []
+    this.indexCache = 0
     this.addEventListeners()
   }
 
@@ -43,51 +45,17 @@ export default class Navigation extends Components {
   }
 
   intialiseNavLinks() {
-    let elTl = gsap.timeline()
+    this.elements.navLinks.forEach((project, i) => {
+      let tag = project.dataset.tag
+            
+      project.addEventListener('mousemove', (e) => {
+        this.handleMouseMove(e)
+        this.showNavPreview()
+        this.moveProjectImg(i);
+      })
 
-    this.elements.navLinks.forEach((element, id) => {
-      let tag = element.dataset.tag
-      let imagePrev = document.querySelector(`[data-tag-prev=${tag}]`)
-      let imageH = this.elements.imgPreview.offsetHeight
-      let imageW = this.elements.imgPreview.offsetWidth
-      
-      const hoverAnim = (e) => {
-        // add a delay if animating is true then wait until its false
-        gsap.to(imagePrev, { opacity: 1 })
-        gsap.to(this.elements.imgPreview, { 
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", 
-          duration: 0.6, 
-          ease: "power3.out"
-        })
-        gsap.to(this.elements.cursor, { opacity: 0 })
-      }
-
-      const hoverOutAnim = (e) => {
-        gsap.to(this.elements.imgPreview, 
-        { 
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", 
-          duration: 0.6, 
-          ease: "power3.out" 
-        })
-        gsap.to(imagePrev, { opacity: 0 })
-        gsap.to(this.elements.cursor, { opacity: 1 })
-      }
-      
-      element.addEventListener('mouseover', hoverAnim)
-      element.addEventListener('mouseout', hoverOutAnim)
-      
-      document.addEventListener('mousemove', (e) => {
-        let x = e.clientX - (imageW / 2)
-        let y = e.clientY - (imageH / 2)
-
-        
-        gsap.to(this.elements.imgPreview, { 
-          x: x, 
-          y: y,
-          rotate: "4deg",
-          duration: 0.8,
-          ease: "power3.out"
-        })
+      project.addEventListener('mouseleave', () => {
+        this.hideNavPreview()
       })
     })
   }
@@ -104,6 +72,7 @@ export default class Navigation extends Components {
     this.elements.body.classList.toggle('no-scrolling')
     this.elements.navMenu.classList.toggle('menu-is-open')
   }
+
   openMenu() {
     let tl = gsap.timeline({
       onComplete: () => {
@@ -152,5 +121,58 @@ export default class Navigation extends Components {
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
 
     tl.to(this.elements.navMenu, { duration: 0.6, opacity: 0, visibility: "hidden" })
+  }
+
+  showNavPreview() {
+    if (!this.insideProject) {
+      this.insideProject = true;
+      gsap.to(this.elements.imgPreview, {
+        scale: 1,
+        duration: 0.3,
+        ease: "Power2.out"
+      })
+    }
+  }
+
+  hideNavPreview() {
+    if (this.insideProject) {
+      this.insideProject = false;
+      gsap.to(this.elements.imgPreview, {
+        scale: 0,
+        duration: 0.3,
+        ease: "Power2.out"
+      })
+    }
+  }
+
+  handleMouseMove(e) {
+    const previewRect = this.elements.imgPreview.getBoundingClientRect()
+    const offsetX = previewRect.width / 2
+    const offsetY = previewRect.height / 2
+    const x = e.pageX - offsetX
+    const y = e.pageY - offsetY
+
+    gsap.to(this.elements.imgPreview, { 
+      x: x, 
+      y: y,
+      duration: 0.4,
+      ease: "power3.out"
+    })
+  }
+
+  moveProjectImg(i) {
+    let yPos = `-${this.elements.imgPreview.offsetHeight * i}`
+    
+    console.log(`last index: ${this.indexCache}`, `new index: ${i}`)
+
+    if(i !== this.indexCache) {
+      gsap.to(this.elements.imgPrevBelt, { 
+        y: yPos,
+        duration: 0.4,
+        ease: "power2.out"
+      })
+
+      this.indexCache = i
+    }
   }
 }

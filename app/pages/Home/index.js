@@ -13,13 +13,11 @@ export default class Home extends Page {
     })
     this.scroll = scroll 
     this.addLinkListeners()
-
   }
   addLinkListeners() {
-    if(this.elements.cta) {
+    if(this.elements.cta && this.elements.workSection) {
       this.elements.cta.addEventListener('click', () => {
         this.scroll.scrollTo(this.elements.workSection)
-        this.scroll.update()
       })
     }
   }

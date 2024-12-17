@@ -1,4 +1,4 @@
-<section id="work" class="section--l-bottom" data-work>
+<section id="work" class="section--l-bottom" data-work data-scroll-container>
   <%
   projects.sort((a, b) => {
     let aNum = a.data.order
@@ -18,7 +18,7 @@
       %>
 
       <div class="project__card" data-scroll data-scroll-speed="<%- scrollSpeed %>" data-project-card>
-        <a href="<%- project.data.project_link.url %>" class="block" target="_blank">
+        <a href="<%- project.data.project_link.url %>" class="block no-overflow" target="_blank">
           
           <% if(i > 5) { i == 1 } else { i = i } %>
           

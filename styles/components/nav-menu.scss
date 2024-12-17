@@ -28,7 +28,6 @@
 }
 
 .nav-menu__list-item {
-  padding: spacing(3) 0;
   position: relative;
 
   .mask-title__word {
@@ -36,31 +35,31 @@
   }
 }
 
-.nav-menu__preview {
-  width: 17rem;
-  height: 20.26rem;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-
-  @include media-query($breakpoint--medium) {
-    width: 25.6rem;
-    height: 30.4rem;
+.no-touch {
+  .nav-menu__preview {
+    width: 17rem;
+    height: 17rem;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(0);
+  
+    @include media-query($breakpoint--medium) {
+      width: 25rem;
+      height: 25rem;
+    }
   }
 }
 
+
 .nav-menu-preview__img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0;
+  padding-top: 100%;
 }
 
 .nav-menu__link {
@@ -70,6 +69,7 @@
   z-index: 2;
   position: relative;
   pointer-events: none;
+  padding: spacing(3) 0;
 
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;

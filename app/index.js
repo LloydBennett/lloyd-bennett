@@ -17,7 +17,7 @@ class App {
     this.createContent()
     this.createPreloader()
     
-    this.addLinkListeners()
+    //this.addLinkListeners()
     this.createCursor()
     
     this.createNavigation()
@@ -31,6 +31,8 @@ class App {
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
     })
+
+    this.triggerLink = null
   }
   setUpScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
@@ -134,6 +136,7 @@ class App {
   async onChange({ url, push = true }) {
     await this.page.hide()
     const req = await window.fetch(url)
+    console.log(`page trigger when hide is called: `)
     
     if(req.status === 200) {
       const html = await req.text()
@@ -150,8 +153,10 @@ class App {
       const newDescription = div.querySelector('meta[name="description"]').getAttribute('content')
       const newOgImg = div.querySelector('meta[property="og:image"]').getAttribute('content')
       const newTwitterImg = div.querySelector('meta[name="twitter:image"]').getAttribute('content')
-
+      //const heroImg = div.querySelector('[data-main-hero]')
       const newList = divContent.classList
+      
+      //this.page.heroImg = heroImg
       this.content.classList.remove(this.template)
       this.content.classList.add(...newList)
       
@@ -168,12 +173,18 @@ class App {
       this.twitterMeta.setAttribute('content', newTwitterImg)
       this.ogMeta.setAttribute('content', newOgImg)
       this.metaURL.setAttribute('content', url)
+      
+      // setTimeout(() => {
+      //   console.log(this.page.heroImg);
+      // }, 0)
 
       this.page = this.pages[this.template]
       this.page.create()
       this.createSplitText()
       this.createProjectCard()
       this.createCursor()
+      this.page.pageTrigger = this.triggerLink
+      this.page.heroImg = document.querySelector('[data-main-hero]')
       this.page.show()
     }
     else {
@@ -194,11 +205,30 @@ class App {
       l.onclick = event => {
         event.preventDefault()
         const href = l.href
-        
+        const linkData = l.getAttribute('data-page-trigger')
+        const linkTag = l.getAttribute('data-tag')
+
         if(href !== window.location.href) {
+          this.triggerLink = linkData
+          this.page.pageTrigger = linkData
+          this.page.pageTag = linkTag
+
+          if(this.navigation.isMenuOpen) {
+            this.navigation.elements.navLinks.forEach(link => {
+              link.removeEventListener('mouseout', link._hoverOutAnim)
+            })
+            this.navigation.disableMouseMove()
+          }
+
           this.onChange({ url: href })
         } else {
-          return
+          if(this.navigation.isMenuOpen) {
+            this.navigation.animate()
+            this.navigation.isMenuOpen = false
+          }
+          else {
+            return
+          }
         }
       }
     })

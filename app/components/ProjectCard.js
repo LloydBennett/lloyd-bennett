@@ -16,21 +16,22 @@ export default class ProjectCard extends Components {
   scrollAnim() {
     if(this.elements.projectCard) {
       this.elements.projectCard.forEach(element => {
-        let img = element.querySelector('[data-project-img]')
-  
+        let img = element.querySelector('[data-project-img] img')
+        
         gsap.from(img, {
-          scrollTrigger: {
+          scrollTrigger: { 
             trigger: element,
-            start: 'top 80%',
-            markers: false
+            start: 'top 80%'          
           },
-          opacity: 0,
-          duration: 0.6,
+          scale: 1.5,
+          duration: 0.8,
           ease: 'power2.out'
         })
       })
-    } else {
+    } 
+    else {
       return
     }
   }
 }
+
