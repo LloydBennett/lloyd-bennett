@@ -67,13 +67,11 @@ export default class Page {
   show() {
     return new Promise(resolve => {
       //set scrolling to top of page - need to add this
-      console.log(this.pageTrigger)
       this.handlePageTransition('show', resolve)
     })
   }
   hide() {
     return new Promise(resolve => {
-      console.log(this.pageTrigger)
       this.handlePageTransition('hide', resolve)
     })
   }
@@ -82,7 +80,6 @@ export default class Page {
     
     switch (state) {
       case 'show':
-        console.log('helloo!!!!')
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
         .to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 0)
         .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power4', 

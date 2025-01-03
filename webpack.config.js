@@ -11,6 +11,7 @@ const dirApp = path.join(__dirname, 'app');
 const dirShared = path.join(__dirname, 'shared');
 const dirStyles = path.join(__dirname, 'styles');
 const dirNode = 'node_modules';
+console.log('Webpack Resolve Config:', path.join(__dirname, 'app/utils'));
 
 module.exports = {
   entry: [
@@ -23,7 +24,10 @@ module.exports = {
       dirShared,
       dirStyles,
       dirNode
-    ]
+    ],
+    alias: {
+      utils: path.resolve(__dirname, 'app/utils')
+    }
   },
 
   plugins: [

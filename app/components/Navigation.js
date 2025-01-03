@@ -163,8 +163,6 @@ export default class Navigation extends Components {
   moveProjectImg(i) {
     let yPos = `-${this.elements.imgPreview.offsetHeight * i}`
     
-    console.log(`last index: ${this.indexCache}`, `new index: ${i}`)
-
     if(i !== this.indexCache) {
       gsap.to(this.elements.imgPrevBelt, { 
         y: yPos,

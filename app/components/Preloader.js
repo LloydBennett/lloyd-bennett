@@ -33,7 +33,6 @@ export default class Preloader extends Components {
         
         } else {
           this.isLoading = false
-          console.log("done!")
           resolve();
         }
       }
