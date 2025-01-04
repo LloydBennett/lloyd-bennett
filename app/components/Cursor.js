@@ -1,4 +1,4 @@
-import { scroll } from 'utils/locomotive-scroll'
+import { scroll } from 'utils/LocomotiveScroll'
 import gsap from 'gsap'
 import Components from 'classes/Components'
 

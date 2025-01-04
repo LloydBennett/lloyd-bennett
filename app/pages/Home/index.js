@@ -1,4 +1,4 @@
-import { scroll } from 'utils/locomotive-scroll'
+import { scroll } from 'utils/LocomotiveScroll'
 import Page from 'classes/Page'
 
 export default class Home extends Page {
