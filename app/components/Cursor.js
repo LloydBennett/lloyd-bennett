@@ -1,4 +1,3 @@
-import { scroll } from 'utils/LocomotiveScroll'
 import gsap from 'gsap'
 import Components from 'classes/Components'
 
@@ -18,11 +17,11 @@ export default class Cursor extends Components {
     this.scroll = scroll
     this.addEventListeners()
 
-    if(this.elements.footer) {
-      this.scroll.on('scroll', (args) => {
-        this.updateCursor()
-      })
-    }
+    // if(this.elements.footer) {
+    //   this.scroll.on('scroll', (args) => {
+    //     this.updateCursor()
+    //   })
+    // }
   }
 
   create() {

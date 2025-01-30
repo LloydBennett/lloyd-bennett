@@ -1,4 +1,4 @@
-import { scroll } from 'utils/LocomotiveScroll'
+import { scroll } from 'utils/LenisScroll'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Cursor from 'components/Cursor'
@@ -12,7 +12,7 @@ import ProjectCard from 'components/ProjectCard'
 
 class App {
   constructor() {
-    this.locomotiveScroll = scroll
+    this.lenisScroll = scroll
     this.setUpScrollTrigger()
     this.createContent()
     this.createPreloader()
@@ -21,10 +21,10 @@ class App {
     this.createCursor()
     
     this.createNavigation()
-    this.updateScroll()
+    //this.updateScroll()
     
-    this.locomotiveScroll.init()
-    this.addEventListeners()
+    //this.locomotiveScroll.init()
+    //this.addEventListeners()
     this.createSplitText()
     this.createProjectCard()
     
@@ -36,47 +36,38 @@ class App {
   }
   setUpScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
-
-    let container = document.querySelector('[data-scroll-container]')
-    this.locomotiveScroll.on('scroll', ScrollTrigger.update)
     
-    ScrollTrigger.scrollerProxy('[data-scroll-container]', {
-      scrollTop: (value) => {
-        return arguments.length ? this.locomotiveScroll.scrollTo(value, 0 , 0) : this.locomotiveScroll.scroll.instance.scroll.y
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight
-        }
-      },
-      pinType: container.style.transform ? "transform" : "fixed"
-    })
+    // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+    this.lenisScroll.on('scroll', ScrollTrigger.update);
+
+     gsap.ticker.add((time) => {
+       this.lenisScroll.raf(time * 1000);
+     });
+ 
+     gsap.ticker.lagSmoothing(0);
   }
 
-  updateScroll() {
-    let body = document.body
-    const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
+  // updateScroll() {
+  //   let body = document.body
+  //   const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
 
-    const mObs = new MutationObserver(entries => {
-      for (let i = 0; i < entries.length; i++) {
-        if(entries[i].target.classList.contains('no-scrolling')) {
-          this.locomotiveScroll.stop()
-        }
-        else {
-          this.locomotiveScroll.start()
-        }
-      }
-    })
+  //   const mObs = new MutationObserver(entries => {
+  //     for (let i = 0; i < entries.length; i++) {
+  //       if(entries[i].target.classList.contains('no-scrolling')) {
+  //         this.locomotiveScroll.stop()
+  //       }
+  //       else {
+  //         this.locomotiveScroll.start()
+  //       }
+  //     }
+  //   })
 
-    new ResizeObserver(() => {
-      this.locomotiveScroll.update()
-    }).observe(document.querySelector("[data-scroll-container]"))
+  //   new ResizeObserver(() => {
+  //     this.locomotiveScroll.update()
+  //   }).observe(document.querySelector("[data-scroll-container]"))
 
-    mObs.observe(body, config)
-  }
+  //   mObs.observe(body, config)
+  // }
 
   createCursor() {
     this.cursor = new Cursor()
@@ -193,8 +184,8 @@ class App {
   }
 
   addEventListeners() {
-    ScrollTrigger.addEventListener('refresh', () => this.locomotiveScroll.update())
-    ScrollTrigger.defaults({ scroller: '[data-scroll-container]' })
+    // ScrollTrigger.addEventListener('refresh', () => this.locomotiveScroll.update())
+    // ScrollTrigger.defaults({ scroller: '[data-scroll-container]' })
   }
 
   addLinkListeners() {
