@@ -4,7 +4,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   visibility: hidden;
 }
 
@@ -21,10 +21,12 @@
 }
 
 .nav-menu__list {
-  margin: spacing(15) auto 0;
-  display: table;
+  margin: spacing(15) auto spacing(8);
   z-index: 6;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nav-menu__list-item {
@@ -35,31 +37,31 @@
   }
 }
 
+.touch {
+  .nav-menu__preview {
+    display: none;
+  }
+}
+
 .no-touch {
   .nav-menu__preview {
     width: 17rem;
     height: 17rem;
-    top: 0;
+    top: 50%;
     left: 0;
     pointer-events: none;
     position: absolute;
-    transform: scale(0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transform: translateY(-50%) scale(0);
   
     @include media-query($breakpoint--medium) {
       width: 25rem;
       height: 25rem;
     }
   }
-}
-
-
-.nav-menu-preview__img {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-top: 100%;
 }
 
 .nav-menu__link {
@@ -69,25 +71,26 @@
   z-index: 2;
   position: relative;
   pointer-events: none;
-  padding: spacing(3) 0;
+ 
+  @include media-query($breakpoint--medium - 1, max-width) {
+		padding: spacing(3) 0;
+  }
 
   @include media-query($breakpoint--large) {
 		font-size: 12.8rem;
+  }
+
+  &.is-disabled {
+    color: $colour--grit-300;
+  }
+
+  &.is-active {
+    color: $colour--white;
   }
 }
 
 .menu-is-open .nav-menu__link {
   pointer-events: auto;
-}
-
-.nav-menu__list-item:hover ~ .nav-menu__list-item .mask-title__word,
-.nav-menu__list-item:has(~ .nav-menu__list-item:hover .mask-title__word) {
-  color: $colour--grit-300 !important;
-}
-
-.menu-is-open .nav-menu__list-item:hover .nav-link__line {
-  transform: translateX(0);
-  transition: transform 300ms ease;
 }
 
 .nav-link__line {
@@ -97,5 +100,4 @@
   bottom: 20%;
   background-color: $colour--white;
   transform: translateX(-101%);
-  transition: transform 300ms ease;
 }
