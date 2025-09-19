@@ -29,16 +29,24 @@ export default class Cursor extends Components {
   }
 
   addEventListeners() {
-    document.addEventListener("mousemove", (e) => {
-      let x = e.clientX
-      let y = e.clientY
+    let hasMoved = false
 
-      gsap.to(this.elements.cursor, { 
-        top: y, 
-        left: x,
-        duration: 0.6,
-        ease: "power2.out"
-      })
+    document.addEventListener("mousemove", (e) => {
+      const x = e.clientX
+      const y = e.clientY
+
+      if (!hasMoved) {
+        gsap.set(this.elements.cursor, { top: y, left: x })
+        this.elements.cursor.classList.add("is-active")
+        hasMoved = true
+      } else {
+        gsap.to(this.elements.cursor, { 
+          top: y, 
+          left: x,
+          duration: 0.6,
+          ease: "power2.out"
+        })
+      }
 
       this.updateCursor()
     })
