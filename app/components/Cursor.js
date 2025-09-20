@@ -80,21 +80,28 @@ export default class Cursor extends Components {
       cursorY + this.height / 2 > footerBounds.top &&
       cursorY - this.height / 2 < footerBounds.bottom
 
-    // Update footer cursor position instantly
-    gsap.set(this.elements.cursorFooter, {
-      top: cursorY,
-      left: cursorX
-    })
-
-    // Clip footer cursor to footer bounds for split effect
     if (intersects) {
-      const top = Math.max(0, footerBounds.top - cursorY + this.height / 2)
-      const right = Math.max(0, cursorY + this.height / 2 - footerBounds.bottom)
-      const left = Math.max(0, footerBounds.left - cursorX + this.width / 2)
-      const bottom = Math.max(0, cursorY + this.height / 2 - footerBounds.bottom)
-
-      this.elements.cursorFooter.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px)`
+      // Show footer cursor
       this.elements.cursorFooter.style.opacity = 1
+
+      // Animate footer cursor exactly like main cursor
+      gsap.to(this.elements.cursorFooter, {
+        top: cursorY,
+        left: cursorX,
+        duration: isScroll ? 0 : 0.6,
+        ease: "power2.out",
+        onUpdate: () => {
+          // Update clip-path in sync with footer cursor’s current animated position
+          const rect = this.elements.cursorFooter.getBoundingClientRect()
+
+          const topInset = Math.max(0, footerBounds.top - rect.top)
+          const leftInset = Math.max(0, footerBounds.left - rect.left)
+          const bottomInset = Math.max(0, rect.bottom - footerBounds.bottom)
+          const rightInset = Math.max(0, rect.right - footerBounds.right)
+
+          this.elements.cursorFooter.style.clipPath = `inset(${topInset}px ${rightInset}px ${bottomInset}px ${leftInset}px)`
+        }
+      })
 
       // Hide main cursor if fully inside footer
       const fullyInside =
@@ -110,6 +117,7 @@ export default class Cursor extends Components {
       }
 
     } else {
+      // Outside footer
       this.elements.cursorFooter.style.opacity = 0
       this.elements.cursor.classList.remove("is-hidden")
     }
