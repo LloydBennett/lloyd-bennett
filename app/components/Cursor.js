@@ -7,7 +7,7 @@ export default class Cursor extends Components {
       elements: {
         cursor: '[data-cursor]',
         cursorFooter: '[data-cursor-footer]',
-        projects: '[data-project-card]',
+        projects: '[data-project-card] a',
         footer: '[data-footer]',
         navMenu: '[data-nav-menu]'
       }
@@ -17,6 +17,7 @@ export default class Cursor extends Components {
     this.height = this.elements.cursor.offsetHeight
 
     this.mouse = { x: 0, y: 0 } // track latest mouse pos
+    this.hoveredProject
 
     this.addEventListeners()
   }
@@ -27,6 +28,8 @@ export default class Cursor extends Components {
 
   addEventListeners() {
     let hasMoved = false
+
+    this.elements.cursorFooter.style.opacity = 0
 
     document.addEventListener("mousemove", (e) => {
       this.mouse.x = e.clientX
@@ -46,11 +49,12 @@ export default class Cursor extends Components {
       }
 
       this.updateFooterCursor()
+      this.updateProjectHover()
     })
 
-    // listen to Lenis scroll updates
     window.addEventListener("scroll", () => {
       this.updateFooterCursor(true) // snap update
+      this.updateProjectHover()
     })
 
     if(this.elements.projects) {
@@ -65,6 +69,32 @@ export default class Cursor extends Components {
       });
     }    
   }
+ 
+  updateProjectHover() {
+    if (!this.elements.projects) return
+
+    const mouseX = this.mouse.x
+    const mouseY = this.mouse.y
+    let hovering = false
+
+    this.elements.projects.forEach(project => {
+      const rect = project.getBoundingClientRect()
+      if (
+        mouseX >= rect.left &&
+        mouseX <= rect.right &&
+        mouseY >= rect.top &&
+        mouseY <= rect.bottom
+      ) {
+        hovering = true
+      }
+    })
+
+    if (hovering) {
+      this.elements.cursor.classList.add("cursor--expanded")
+    } else {
+      this.elements.cursor.classList.remove("cursor--expanded")
+    }
+  }
 
   updateFooterCursor(isScroll = false) {
     if (!this.elements.cursorFooter || !this.elements.footer) return
@@ -73,7 +103,6 @@ export default class Cursor extends Components {
     const cursorX = this.mouse.x
     const cursorY = this.mouse.y
 
-    // Check if any part of cursor is inside footer
     const intersects =
       cursorX + this.width / 2 > footerBounds.left &&
       cursorX - this.width / 2 < footerBounds.right &&
@@ -81,17 +110,14 @@ export default class Cursor extends Components {
       cursorY - this.height / 2 < footerBounds.bottom
 
     if (intersects) {
-      // Show footer cursor
       this.elements.cursorFooter.style.opacity = 1
 
-      // Animate footer cursor exactly like main cursor
       gsap.to(this.elements.cursorFooter, {
         top: cursorY,
         left: cursorX,
         duration: isScroll ? 0 : 0.6,
         ease: "power2.out",
         onUpdate: () => {
-          // Update clip-path in sync with footer cursor’s current animated position
           const rect = this.elements.cursorFooter.getBoundingClientRect()
 
           const topInset = Math.max(0, footerBounds.top - rect.top)
@@ -103,7 +129,6 @@ export default class Cursor extends Components {
         }
       })
 
-      // Hide main cursor if fully inside footer
       const fullyInside =
         cursorX - this.width / 2 >= footerBounds.left &&
         cursorX + this.width / 2 <= footerBounds.right &&
@@ -117,7 +142,6 @@ export default class Cursor extends Components {
       }
 
     } else {
-      // Outside footer
       this.elements.cursorFooter.style.opacity = 0
       this.elements.cursor.classList.remove("is-hidden")
     }
