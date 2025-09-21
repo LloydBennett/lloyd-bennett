@@ -44,3 +44,7 @@
   transform: translateY(100%);
   transition: 100ms ease;
 }
+
+.cursor--not-clickable {
+  pointer-events: none;
+}

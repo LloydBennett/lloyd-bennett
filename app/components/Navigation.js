@@ -16,7 +16,8 @@ export default class Navigation extends Components {
         navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
         linkTextChar: '[data-link-text] span',
         menuMove: '[data-menu-move]',
-        cursor: '[data-cursor]'
+        cursor: '[data-cursor]',
+        contentOverlay: '[data-menu-content-overlay]'
       }
     })
 
@@ -147,6 +148,7 @@ export default class Navigation extends Components {
     tl.to(this.elements.bg, { duration: 0.8, attr: { d: this.svgPath.middle }, ease: "power4.in", delay: 0.1 }, "elements")
       .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out", onComplete: () => { this.elements.cursor.classList.add("cursor--inverted")} })
     tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
+    tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.4, ease: 'power2.out' }, "-=0.6")
     
     tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
 
@@ -180,6 +182,8 @@ export default class Navigation extends Components {
       .to(this.elements.bg, { duration: 0.4, attr: { d: this.svgPath.end }, ease: "power2.out" }, "-=0.3")
     
     tl.to(this.elements.menuMove, { y: 0, duration: 1, ease: 'power4.out'}, '-=0.5')
+    tl.to(this.elements.contentOverlay, { opacity: 0, duration: 0.4, ease: 'power2.out' }, "-=0.8")
+
     
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
 
