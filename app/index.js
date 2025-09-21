@@ -9,6 +9,7 @@ import Preloader from 'components/Preloader'
 import Navigation from 'components/Navigation'
 import SplitText from 'components/SplitText'
 import ProjectCard from 'components/ProjectCard'
+import Parallax from 'components/Parallax'
 
 class App {
   constructor() {
@@ -27,6 +28,7 @@ class App {
     //this.addEventListeners()
     this.createSplitText()
     this.createProjectCard()
+    this.createParallaxItems()
     
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
@@ -68,6 +70,9 @@ class App {
 
   //   mObs.observe(body, config)
   // }
+  createParallaxItems() {
+    this.Parallax = new Parallax()
+  }
 
   createCursor() {
     this.cursor = new Cursor()
