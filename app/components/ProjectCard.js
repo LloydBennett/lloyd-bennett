@@ -16,7 +16,20 @@ export default class ProjectCard extends Components {
   scrollAnim() {
     if(this.elements.projectCard) {
       this.elements.projectCard.forEach(element => {
+        let aTag = element.querySelector('a')
         let img = element.querySelector('[data-project-img] img')
+        console.log(element)
+        gsap.fromTo( aTag,
+         { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"},
+         { 
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { 
+            trigger: element,
+            start: 'top 80%'          
+          }
+        })
         
         gsap.from(img, {
           scrollTrigger: { 
