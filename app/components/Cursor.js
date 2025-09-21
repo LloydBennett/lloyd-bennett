@@ -72,6 +72,12 @@ export default class Cursor extends Components {
  
   updateProjectHover() {
     if (!this.elements.projects) return
+    let menu = document.querySelector('[data-nav-menu]')
+
+    if (menu.classList.contains("menu-is-open")) {
+      this.elements.cursor.classList.remove("cursor--expanded")
+      return
+    }
 
     const mouseX = this.mouse.x
     const mouseY = this.mouse.y
