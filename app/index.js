@@ -42,8 +42,8 @@ class App {
     // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
     this.lenisScroll.on('scroll', ScrollTrigger.update);
 
-     gsap.ticker.add((time) => {
-       this.lenisScroll.raf(time * 1000);
+     gsap.ticker.add(() => {
+       this.lenisScroll.raf(performance.now());
      });
  
      gsap.ticker.lagSmoothing(0);
