@@ -11,100 +11,103 @@ export default class Parallax extends Components {
     })
 
     gsap.registerPlugin(ScrollTrigger)
+
     this.defaults = {
       y: '-20%',
       speed: 0.9,
       trigger: '10% 60%',
       ease: 'power2.out'
-    }
+    };
 
-    this.init()
+    this.init();
   }
 
   init() {
     if (!this.elements.parallax) {
-      console.warn('⚠️ No elements found with data-parallax')
+      console.warn('⚠️ No elements found with data-parallax');
       return
     }
 
-    // Support NodeList or single element
-    const items = this.elements.parallax instanceof NodeList 
-      ? this.elements.parallax 
+    const items = this.elements.parallax instanceof NodeList
+      ? this.elements.parallax
       : [this.elements.parallax]
 
-    items.forEach(element => {
-      this.setupParallax(element)
-    })
+    items.forEach(element => this.setupParallax(element));
   }
 
   setupParallax(element) {
-    const mm = gsap.matchMedia()
+    const mm = gsap.matchMedia();
+    const configAttr = element.dataset.parallaxConfig;
+    const config = configAttr ? JSON.parse(configAttr) : {};
 
-    // Check if element has responsive config via data-parallax-config
-    // Example: data-parallax-config='{"(max-width: 768px)": {"y": "-10%"}}'
-    const configAttr = element.dataset.parallaxConfig
-    const config = configAttr ? JSON.parse(configAttr) : {}
+    const queries = Object.keys(config).length ? config : { "(min-width: 0px)": {} };
 
-    mm.add("(min-width: 0px)", () => {
-      this.animateElement(element, {})
-    })
+    Object.entries(queries).forEach(([query, overrides]) => {
+      mm.add(query, context => {
+        // Inherit element-wide scrub if not defined in media query
+        if (overrides.scrub === undefined && element.dataset.parallaxScrub) {
+          const scrubVal = element.dataset.parallaxScrub;
+          overrides.scrub = scrubVal === "true" ? true : parseFloat(scrubVal);
+        }
 
-    Object.keys(config).forEach(query => {
-      mm.add(query, () => {
-        this.animateElement(element, config[query])
-      })
-    })
+        const ctx = gsap.context(() => this.animateElement(element, overrides));
+        return () => ctx.revert();
+      });
+    });
   }
 
   animateElement(element, overrides = {}) {
-  // STEP 1: start with defaults
-  let settings = {
-    y: this.defaults.y,
-    speed: this.defaults.speed,
-    trigger: this.defaults.trigger,
-    ease: this.defaults.ease
-  }
+    let settings = {
+      y: this.defaults.y,
+      speed: this.defaults.speed,
+      trigger: this.defaults.trigger,
+      ease: this.defaults.ease,
+      scrub: false
+    };
 
-  // STEP 2: override with data attributes
-  if (element.dataset.parallax) {
-    settings.y = `-${element.dataset.parallax}%`
-  }
-  if (element.dataset.parallaxSpeed) {
-    settings.speed = parseFloat(element.dataset.parallaxSpeed)
-  }
-  if (element.dataset.parallaxTrigger) {
-    settings.trigger = element.dataset.parallaxTrigger
-  }
+    // Element-wide attributes
+    if (element.dataset.parallax) settings.y = `-${element.dataset.parallax}%`;
+    if (element.dataset.parallaxSpeed) settings.speed = parseFloat(element.dataset.parallaxSpeed);
+    if (element.dataset.parallaxTrigger) settings.trigger = element.dataset.parallaxTrigger;
+    if (element.dataset.parallaxEase) settings.ease = element.dataset.parallaxEase;
 
-  // STEP 3: responsive config overrides
-  if (overrides.y !== undefined) {
-    // normalize y → if it's a number-like string, add "%"
-    if (!isNaN(overrides.y)) {
-      settings.y = `${overrides.y}%`
+    // Media query overrides
+    Object.assign(settings, overrides);
+
+    // Normalize scrub
+    if (settings.scrub !== undefined) {
+      settings.scrub = settings.scrub === true || settings.scrub === "true"
+        ? true
+        : parseFloat(settings.scrub) || false;
+    }
+
+    if (typeof settings.y === "string" && !settings.y.includes("%")) {
+      settings.y = `-${settings.y}%`;
+    }
+
+    // Decide mode: scrub vs classic toggle
+    if (settings.scrub) {
+      gsap.to(element, {
+        y: settings.y,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element,
+          start: settings.trigger,
+          scrub: settings.scrub,
+          fastScrollEnd: true
+        }
+      });
     } else {
-      settings.y = overrides.y // already valid
+      gsap.to(element, {
+        y: settings.y,
+        ease: settings.ease,
+        duration: settings.speed,
+        scrollTrigger: {
+          trigger: element,
+          start: settings.trigger,
+          toggleActions: "play reverse play reverse"
+        }
+      });
     }
   }
-  if (overrides.speed !== undefined) settings.speed = overrides.speed
-  if (overrides.trigger !== undefined) settings.trigger = overrides.trigger
-  if (overrides.ease !== undefined) settings.ease = overrides.ease
-
-  // Kill any existing animations/ScrollTriggers for this element
-  ScrollTrigger.getAll().forEach(trigger => {
-    if (trigger.trigger === element) trigger.kill()
-  })
-
-  // Apply GSAP animation
-  gsap.to(element, {
-    y: settings.y,
-    ease: settings.ease,
-    duration: settings.speed,
-    scrollTrigger: {
-      trigger: element,
-      start: settings.trigger,
-      scrub: true
-    }
-  })
-  }
-
 }

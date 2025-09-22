@@ -21,22 +21,21 @@
       </p>
     </div>
 
-    <div class="about__hero-media" data-parallax="10">
+    <div class="about__hero-media" data-parallax="10" data-parallax-scrub=0.2>
       <div class="relative center-block rotate--l-minus" data-hero-image-container>
         <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-main-hero data-hero-image></div>
       </div>
     </div>
     
     <div class="about__hero-media-alt" data-parallax data-parallax-config='{
-      "(max-width: 959px)": { "y": "-50", "trigger": "top bottom", "speed": 0.2 },
-      "(min-width: 960px)": { "y": "-50", "trigger": "top 60%" },
-      "(min-width: 1200px)": { "y": "-50", "trigger": "top 80%" }
-    }'>
+      "(max-width: 959px)": { "y": "50", "trigger": "top bottom" },
+      "(min-width: 960px) and (max-width: 1199px)": { "y": "50", "trigger": "top bottom" },
+      "(min-width: 1200px)": { "y": "80", "trigger": "top 70%" }
+    }' data-parallax-scrub="0.3">
       <div class="relative rotate--l rotate--s-minus-l" data-hero-image-container>
         <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
       </div>
 
-     
     </div>
   
   </div>
@@ -55,7 +54,7 @@
 
 <section class="section--s">
   <div class="container about__middle">
-    <div class="about__middle-img" data-scroll data-scroll-speed="1">
+    <div class="about__middle-img" data-parallax data-parallax-scrub="0.2">
       <picture class="block">
         <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
         <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
