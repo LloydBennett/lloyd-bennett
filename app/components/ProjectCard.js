@@ -18,7 +18,7 @@ export default class ProjectCard extends Components {
       this.elements.projectCard.forEach(element => {
         let aTag = element.querySelector('a')
         let img = element.querySelector('[data-project-img] img')
-        console.log(element)
+        
         gsap.fromTo( aTag,
          { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"},
          { 
