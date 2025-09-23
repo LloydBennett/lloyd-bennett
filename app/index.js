@@ -24,7 +24,6 @@ class App {
     this.createNavigation()
     //this.updateScroll()
     
-    //this.locomotiveScroll.init()
     //this.addEventListeners()
     this.createSplitText()
     this.createProjectCard()
@@ -36,6 +35,7 @@ class App {
 
     this.triggerLink = null
   }
+  
   setUpScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
     
@@ -49,27 +49,30 @@ class App {
      gsap.ticker.lagSmoothing(0);
   }
 
-  // updateScroll() {
-  //   let body = document.body
-  //   const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
+  updateScroll() {
+    let body = document.body
+    const config = { attributes: true, attributeOldValue: true, childList: false, subtree: false }
 
-  //   const mObs = new MutationObserver(entries => {
-  //     for (let i = 0; i < entries.length; i++) {
-  //       if(entries[i].target.classList.contains('no-scrolling')) {
-  //         this.locomotiveScroll.stop()
-  //       }
-  //       else {
-  //         this.locomotiveScroll.start()
-  //       }
-  //     }
-  //   })
+    const mObs = new MutationObserver(entries => {
+      for (let i = 0; i < entries.length; i++) {
+        if(entries[i].target.classList.contains('no-scrolling')) {
+          this.lenisScroll.stop()
+          console.log("stopping lenis")
+        }
+        else {
+          this.lenisScroll.start()
+          console.log("starting lenis")
+        }
+      }
+    })
 
   //   new ResizeObserver(() => {
   //     this.locomotiveScroll.update()
   //   }).observe(document.querySelector("[data-scroll-container]"))
 
-  //   mObs.observe(body, config)
-  // }
+    mObs.observe(body, config)
+  }
+
   createParallaxItems() {
     this.Parallax = new Parallax()
   }
