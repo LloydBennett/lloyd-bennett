@@ -1,6 +1,7 @@
 import { scroll } from 'utils/LenisScroll'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Page from './classes/Page'
 import Cursor from 'components/Cursor'
 import About from 'pages/About'
 import Home from 'pages/Home'
@@ -118,11 +119,12 @@ class App {
       project: new Project()
     }
     
-    if(this.pages[this.template] !== undefined || null) {
-      this.page = this.pages[this.template]
-      this.page.create()
-      this.page.show()
-    }  
+    const PageClass = this.pages[this.template] || Page
+
+    this.page = new PageClass()
+    this.page.create()
+    this.page.show()
+      
   }
 
   onPopState () {
