@@ -15,10 +15,11 @@
         let projectTitle = project.data.title 
         let projectTitleArr = projectTitle.split(" ")
         let scrollSpeed = i * 0.5
+        let externalLink = project.data.view_as_external_link? true : false
       %>
 
       <div class="project__card" data-scroll data-scroll-speed="<%- scrollSpeed %>" data-project-card>
-        <a href="<%- project.data.project_link.url %>" class="block no-overflow" target="_blank">
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow" <% if(externalLink) { %>target="_blank" <% } %>>
           
           <% if(i > 5) { i == 1 } else { i = i } %>
           
