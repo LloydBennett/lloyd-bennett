@@ -9,7 +9,7 @@
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- T O O L S ---------------------------------------
 // ------------------------------------ // ------------------------------------------
-@import '../node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import 'lenis/dist/lenis.css';
 @import './tools/functions/spacing.scss';
 @import './tools/functions/px-to-em.scss';
 
@@ -44,6 +44,7 @@
 @import './helpers/no-overflow.scss';
 @import './helpers/position.scss';
 @import './helpers/center-block.scss';
+@import './helpers/opacity.scss';
 
 
 // ------------------------------------ // ------------------------------------------

@@ -217,19 +217,7 @@
 }
 
 .about__process-no {
-  display: none;
-
-  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--x-large - 1) {
-    display: block;
-    grid-column: 1 / 2;
-  }
-}
-.about__process-s-no {
-  margin-bottom: spacing(1);
-  display: block;
-  @media screen and (min-width: $breakpoint--small) and (max-width: $breakpoint--x-large - 1) {
-    display: none;
-  }
+  grid-column: 1 / 2;
 }
 
 .about__aside-wrap {

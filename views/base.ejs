@@ -13,10 +13,11 @@
   <% } %>
 
   <%- include('./partials/cursor') -%>
-  <main id="main" data-page="<%- page %>" class="main <%- page %>" data-scroll-container data-scroll-section-inview>
-    
-    <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>">
-      
+  <main id="main" data-page="<%- page %>" class="main <%- page %>">
+    <div class="overlay fixed bg--transparent-50 z-index--3 opacity--0 cursor--not-clickable" data-menu-content-overlay></div>
+
+    <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>" data-menu-move>
+  
       <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--container<% } %>">
         <% switch(page) {
           case 'project' : %>

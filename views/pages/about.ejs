@@ -7,7 +7,7 @@
     let imageAlt = document.data.hero_image_alt
     %>
 
-    <div class="about__heading mix-blend__diff type--white" data-menu-move>
+    <div class="about__heading mix-blend__diff type--white">
       <h1 class="about__title type--xl mask-title--l">
         <% titleArr.forEach((text, index) => { %>
           <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
@@ -15,24 +15,27 @@
       </h1>
     </div>
     
-    <div class="about__intro" data-menu-move>
+    <div class="about__intro">
       <p class="type--body type--grit-400" data-text="line-break" data-intro-text>
         <%- document.data.intro %>
       </p>
     </div>
 
-    <div class="about__hero-media" data-scroll data-scroll-speed="1" data-menu-move>
+    <div class="about__hero-media" data-parallax="10" data-parallax-scrub=0.2>
       <div class="relative center-block rotate--l-minus" data-hero-image-container>
         <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-main-hero data-hero-image></div>
       </div>
     </div>
     
-    <div class="about__hero-media-alt" data-scroll data-scroll-speed="4" data-menu-move>
+    <div class="about__hero-media-alt" data-parallax data-parallax-config='{
+      "(max-width: 959px)": { "y": "50", "trigger": "top bottom" },
+      "(min-width: 960px) and (max-width: 1199px)": { "y": "50", "trigger": "top bottom" },
+      "(min-width: 1200px)": { "y": "80", "trigger": "top 70%" }
+    }' data-parallax-scrub="0.3">
       <div class="relative rotate--l rotate--s-minus-l" data-hero-image-container>
         <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
       </div>
 
-     
     </div>
   
   </div>
@@ -51,7 +54,7 @@
 
 <section class="section--s">
   <div class="container about__middle">
-    <div class="about__middle-img" data-scroll data-scroll-speed="1">
+    <div class="about__middle-img" data-parallax data-parallax-scrub="0.2">
       <picture class="block">
         <source media="(max-width: 1270px)" srcset="<%- document.data.alt_image.url %>">
         <source media="(min-width: 1271px)" srcset="<%- document.data.alt_image.large.url %>">
@@ -85,9 +88,8 @@
       <span class="type--l"><%- countPadded %></span>
     </div>
 
-    <div class="two-col-offset <% if(count % 2 == 0){ %>two-col-offset--two<% } else { %>two-col-offset--one<% } %>">
+    <div class="two-col-offset">
       <div class="type--s-margin">
-        <span class="type--s about__process-s-no"><%- countPadded %></span>
         <h4 class="type--s"><%- obj.process_title %></h4>
       </div>
       <p class="type--body type--grit-400">

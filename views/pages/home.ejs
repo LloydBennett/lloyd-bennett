@@ -12,7 +12,7 @@
 
     %>
     
-    <div class="home-hero__title mix-blend__diff type--white" data-menu-move>
+    <div class="home-hero__title mix-blend__diff type--white">
       <h1 class="type--xxl text-center mask-title--l">
         <% titleArr.forEach((text, index) => { %>
           <% 
@@ -33,18 +33,20 @@
   
       </h1>
     </div>
-    <div class="column--centered home-hero__image" data-menu-move>
-      <div data-scroll data-scroll-speed="0.5">
+    <div class="column--centered home-hero__image">
+      <div data-parallax="10" data-parallax-scrub="0.2">
         <div class="home-hero__image-wrapper rotate--s no-overflow center-block" data-hero-image-container>
           <div class="home-hero__image-thumb" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
         </div>
       </div>
       
-      <!-- Add scroll button here -->
+      <div class="home-hero__cta" data-home-cta>
+        <%- include('../partials/scroll-button') -%>
+      </div>
       
     </div>
     
-    <div class="home-hero__label" data-menu-move>
+    <div class="home-hero__label">
       <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
 
         <span class="no-overflow block">
@@ -56,7 +58,7 @@
       </p>
     </div>
 
-    <div class="home-hero__intro" data-menu-move>
+    <div class="home-hero__intro">
       <p class="type--body text-center type--grit-400" data-text="line-break" data-intro-text>
         <%- description %>
       </p>

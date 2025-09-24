@@ -2,7 +2,7 @@ import Components from 'classes/Components'
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-export default class Navigation extends Components {
+export default class SplitText extends Components {
   constructor() {
     super({
       elements: {

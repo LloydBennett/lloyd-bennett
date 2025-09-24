@@ -11,7 +11,6 @@ const dirApp = path.join(__dirname, 'app');
 const dirShared = path.join(__dirname, 'shared');
 const dirStyles = path.join(__dirname, 'styles');
 const dirNode = 'node_modules';
-console.log('Webpack Resolve Config:', path.join(__dirname, 'app/utils'));
 
 module.exports = {
   entry: [
@@ -19,15 +18,17 @@ module.exports = {
     path.join(dirStyles, 'index.scss'),
   ],
   resolve: {
+    fallback: {
+      fs: false, // Webpack cannot polyfill fs; use an empty module
+      os: require.resolve('os-browserify/browser'),
+      path: require.resolve('path-browserify'),
+    },
     modules: [
       dirApp,
       dirShared,
       dirStyles,
       dirNode
     ],
-    alias: {
-      utils: path.resolve(__dirname, 'app/utils')
-    }
   },
 
   plugins: [
@@ -75,7 +76,10 @@ module.exports = {
             loader: 'postcss-loader',
           },
           {
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'), // Explicitly set Dart Sass
+            }
           }
         ]
       },

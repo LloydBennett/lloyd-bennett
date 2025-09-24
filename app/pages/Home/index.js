@@ -1,4 +1,4 @@
-import { scroll } from 'utils/locomotive-scroll'
+import { scroll } from 'utils/LenisScroll'
 import Page from 'classes/Page'
 
 export default class Home extends Page {
@@ -17,7 +17,9 @@ export default class Home extends Page {
   addLinkListeners() {
     if(this.elements.cta && this.elements.workSection) {
       this.elements.cta.addEventListener('click', () => {
-        this.scroll.scrollTo(this.elements.workSection)
+        this.scroll.scrollTo(this.elements.workSection, {
+          duration: 1.5
+        })
       })
     }
   }

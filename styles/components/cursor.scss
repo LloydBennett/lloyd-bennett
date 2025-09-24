@@ -10,7 +10,6 @@
   border-style: solid; 
   border-radius: 100%;
   z-index: 4;
-  position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
   transition: border-color 100ms ease, width 300ms ease, height 300ms ease, background-color 300ms ease;
@@ -19,11 +18,14 @@
     width: 5.6rem;
     height: 5.6rem;
   }
+
+  &.is-hidden {
+    opacity: 0;
+  }
 }
 
 .cursor--inverted {
   border-color: $colour--white;
-  transition: border-color 100ms ease;
 }
 
 .cursor--expanded {
@@ -41,4 +43,8 @@
 .cursor__text {
   transform: translateY(100%);
   transition: 100ms ease;
+}
+
+.cursor--not-clickable {
+  pointer-events: none;
 }
