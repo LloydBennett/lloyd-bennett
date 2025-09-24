@@ -73,7 +73,7 @@
   pointer-events: none;
  
   @include media-query($breakpoint--medium - 1, max-width) {
-		padding: spacing(2) 0;
+		padding: $spacing-rule-half 0;
   }
 
   @include media-query($breakpoint--large) {
