@@ -9,9 +9,7 @@ const port = 3000
 const Prismic = require('@prismicio/client');
 const PrismicH = require('@prismicio/helpers');
 
-if (process.env.NODE_ENV !== 'production') {
-  app.use(express.static(path.join(__dirname, 'public')));
-}
+app.use(express.static(path.join(__dirname, 'public')));
 
 const routes = [
   {
