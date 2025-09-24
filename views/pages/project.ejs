@@ -32,7 +32,6 @@
 
 } ) %>
 
-<section class="section section--l">
 <section class="section section--s">
   <div class="section--s">
     <div class="hero__project container">
@@ -148,22 +147,5 @@
       <% }) %>
     </div>
 
-  </div>
-</section>
-
-<%- include('../partials/belt', { label: 'Next Project', small_spacing: true }) -%>
-
-<section class="project__next">
-  <div class="container grid">
-    <div class="project__next-wrapper">
-      <h1 class="type--xl text-center project__next-title">
-        <% nextTitle.forEach((t) => { %>
-          <span class="no-wrap--and-break"><%- t %></span>
-        <% }) %>
-      </h1>
-      <a href="<%- nextUrl %>" class="project__next-thumb">
-        <div class="project__next-img" style="background-image: url('<%- nextImg %>') "></div>
-      </a>
-    </div>
   </div>
 </section>
