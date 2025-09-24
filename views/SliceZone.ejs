@@ -5,7 +5,8 @@
         return prevSlices + include('./slices/TwoColumnImage.ejs', { slice: slice })
         break;
       case 'full_width_image':
-        return prevSlices + include('./slices/FullWidthImage.ejs', { slice: slice })
+      case 'full_width_video':
+        return prevSlices + include('./slices/FullWidthMedia.ejs', { slice: slice })
         break;
       case 'single_paragraph':
         return prevSlices + include('./slices/SingleParagraph.ejs', { slice: slice })
