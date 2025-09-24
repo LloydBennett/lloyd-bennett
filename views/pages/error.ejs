@@ -32,7 +32,7 @@
         <% }) %>
       </h1>
       <div data-hero-content-group>
-        <p class="type--body type--grit-400 type--m-margin" data-intro-text>
+        <p class="type--body type--grit-400 type--m-margin error-grid__message" data-text="line-break" data-intro-text>
           <%- errorMessage %>
         </p>
 
@@ -44,7 +44,9 @@
 
   </div>
 
-  <div class="error-grid__image" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover"></div>
+  <div class="error-grid__image relative" data-hero-image-container>
+    <div class="overlay absolute" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
+  </div>
 
   <div class="error-grid__socials" data-fade-element>
     <% socialMedia.forEach((link) =>  { %>  

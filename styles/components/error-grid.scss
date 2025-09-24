@@ -112,15 +112,8 @@
 }
 
 .error-grid__message {
-  max-width: 42rem;
-
-  @include media-query($breakpoint--medium) {
-    max-width: 47rem;
-  }
-
-  @include media-query($breakpoint--xx-large) {
-    max-width: 52rem;
-  }
+  max-width: 60rem;
+  text-wrap: balance;
 }
 
 .error-grid__logo {
