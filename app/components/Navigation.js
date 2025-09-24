@@ -35,6 +35,8 @@ export default class Navigation extends Components {
   }
 
   addEventListeners() {
+    if(!this.elements.trigger) return
+    
     this.elements.trigger.addEventListener('click', (e) => {
       if (this.isAnimating) return
       this.animate()
