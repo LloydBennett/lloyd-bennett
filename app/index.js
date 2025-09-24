@@ -114,9 +114,9 @@ class App {
 
   createPages() {
     this.pages = {
-      home: new Home(),
-      about: new About(),
-      project: new Project()
+      home: Home,
+      about: About,
+      project: Project
     }
     
     const PageClass = this.pages[this.template] || Page
