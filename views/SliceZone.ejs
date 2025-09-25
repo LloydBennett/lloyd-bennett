@@ -1,8 +1,8 @@
 <% getSlices = ((SliceZone) => {
   return SliceZone.reduce((prevSlices, slice) => {
     switch(slice.slice_type) {
-      case 'two_column_image':
-        return prevSlices + include('./slices/TwoColumnImage.ejs', { slice: slice })
+      case 'two_column_media':
+        return prevSlices + include('./slices/TwoColumnMedia.ejs', { slice: slice })
         break;
       case 'full_width_image':
       case 'full_width_video':

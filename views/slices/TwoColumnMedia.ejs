@@ -1,0 +1,44 @@
+<% let columns = slice.items %>
+
+<section class="section--s">
+  <div class="container two-column-grid two-column-grid--gap-s">
+    <% columns.forEach((col, index) => { %>
+    
+      <% 
+        let i = index + 1 
+        let mediaType = col.media_type.toLowerCase()
+      %>
+
+      <% if (mediaType === "image" && col.column_image.url) { %>
+        <div class="column <% if(i % 2 == 0) { %>column--half-end <% } else { %>column--half-start<% } %>">
+          <% let thumbnail = col.column_image %>
+
+          <picture>
+            <source media="(max-width: 767px)" srcset="<%- thumbnail.small.url %>">
+            <source media="(max-width: 1199px)" srcset="<%- thumbnail.url %>">
+            <source media="(min-width: 1200px)" srcset="<%- thumbnail.large.url %>">
+            <img class="block--full-width" src="<%- thumbnail.url %>" alt="<%- thumbnail.alt %>">
+          </picture>
+        </div>
+      <% } else if (mediaType === "video" && col.video.url) {%>
+
+        <% 
+          let videoPoster = col.video_poster
+          let video = col.video.url
+        %>
+        
+        <div class="video__frame column <% if(i % 2 == 0) { %>column--half-end <% } else { %>column--half-start<% } %>">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<%- videoPoster.small.url %>">
+            <source media="(max-width: 1199px)" srcset="<%- videoPoster.url %>">
+            <source media="(min-width: 1200px)" srcset="<%- videoPoster.large.url %>">
+            <img class="block--full-width" src="<%- videoPoster.url %>" alt="<%- videoPoster.alt %>">
+          </picture>
+          <video class="video" src="<%- video %>" muted loop playsinline controls></video>
+        </div>
+
+      <% } %>
+    <% }) %>
+
+  </div>
+</section>
