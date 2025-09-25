@@ -11,3 +11,8 @@
     object-fit: cover;
   }
 }
+
+.video__poster {
+  position: relative;
+  z-index: 2;
+}

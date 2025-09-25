@@ -11,6 +11,7 @@ import Navigation from 'components/Navigation'
 import SplitText from 'components/SplitText'
 import ProjectCard from 'components/ProjectCard'
 import Parallax from 'components/Parallax'
+import VideoPlayer from 'components/VideoPlayer'
 
 class App {
   constructor() {
@@ -29,6 +30,7 @@ class App {
     this.createSplitText()
     this.createProjectCard()
     this.createParallaxItems()
+    this.createVideoPlayer()
     
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
@@ -67,15 +69,15 @@ class App {
       }
     })
 
-  //   new ResizeObserver(() => {
-  //     this.locomotiveScroll.update()
-  //   }).observe(document.querySelector("[data-scroll-container]"))
-
     mObs.observe(body, config)
   }
 
   createParallaxItems() {
     this.Parallax = new Parallax()
+  }
+
+  createVideoPlayer() {
+    this.VideoPlayer = new VideoPlayer()
   }
 
   createCursor() {
