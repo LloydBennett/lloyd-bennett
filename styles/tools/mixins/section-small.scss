@@ -1,15 +1,11 @@
-@mixin section--s($margin-pos: bottom, $property: margin) {
-  #{$property}-#{$margin-pos}: spacing(6);
+@mixin section--s($margin-pos: bottom) {
+  margin-#{$margin-pos}: spacing(3);
 
   @include media-query($breakpoint--small) {
-    #{$property}-#{$margin-pos}: spacing(8);
-  }
-  
-  @include media-query($breakpoint--medium) {
-    #{$property}-#{$margin-pos}: spacing(10);
+    margin-#{$margin-pos}: spacing(5);
   }
 
-  @include media-query($breakpoint--x-large) {
-    #{$property}-#{$margin-pos}: spacing(13);
+  @include media-query($breakpoint--large) {
+    margin-#{$margin-pos}: spacing(9);
   }
 }

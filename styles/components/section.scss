@@ -10,16 +10,16 @@
   @include section--l(bottom, padding);
 }
 
+.section--m {
+  @include section--m;
+}
+
+.section--m-top {
+  @include section--m(top, padding);
+}
+
 .section--s {
   @include section--s;
-}
-
-.section--s-top {
-  @include section--s(top, padding);
-}
-
-.section-xs {
-  @include section--xs;
 }
 
 .section--container {
