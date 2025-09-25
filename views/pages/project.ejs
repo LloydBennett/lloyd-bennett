@@ -31,8 +31,8 @@
 
 } ) %>
 
-<section class="section section--m">
-  <div class="section--m">
+<section class="section section--m-m-bottom">
+  <div class="section--m-m-bottom">
     <div class="hero__project container">
       <div class="hero__project-no">
         <span class="type--xl">
@@ -56,15 +56,17 @@
 </section>
 
 
-<section class="section--l">
+<section class="section--l-m-bottom">
   <div class="container grid">
     <% 
     let services = document.data.services
     let industries = document.data.industries
     let intro = document.data.introduction
+
+    
     
     %>
-    <div class="aside section--l">
+    <div class="aside section--l-m-bottom">
       <div class="aside__content">
         <h4 class="type--body type--s-margin">
           Services
@@ -119,7 +121,7 @@
 
 <%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
 
-<section class="section--l">
+<section class="section--end">
   <% 
     let outcome = document.data.outcome
     

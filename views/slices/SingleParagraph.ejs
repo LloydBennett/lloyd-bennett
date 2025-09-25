@@ -1,7 +1,25 @@
 <% 
   var para = slice.items
+  let marginPos = slice.primary.margin.toLowerCase()
+  let cssClass
+  console.log(marginPos)
+
+  switch(marginPos) {
+    case 'bottom':
+      cssClass = 'section--l-m-bottom'
+      break
+    case 'top':
+      cssClass = 'section--l-m-top'
+      break
+    case 'both':
+      cssClass = 'section--l-m-both'
+      break
+    default:
+      cssClass = 'section--l-m-bottom'
+      break
+  }
 %>
-<section class="section--l">
+<section class="<%- cssClass %>">
   <div class="container grid">
     <div class="offset-content">
       

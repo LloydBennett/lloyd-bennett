@@ -1,25 +1,87 @@
-.section--l {
+.section--l-m-bottom {
   @include section--l;
 }
 
-.section--l-top {
+.section--l-m-top {
+  @include section--l(top);
+}
+
+.section--l-m-both {
+  @include section--l((top, bottom));
+}
+
+.section--l-p-top {
   @include section--l(top, padding);
 }
 
-.section--l-bottom {
+.section--l-p-bottom {
   @include section--l(bottom, padding);
 }
 
-.section--m {
+.section--l-p-both {
+  @include section--l((top, bottom), padding);
+}
+
+.section--m-m-bottom {
   @include section--m;
 }
 
-.section--m-top {
+.section--m-m-top {
+  @include section--m(top);
+}
+
+.section--m-m-both {
+  @include section--m((top, bottom));
+}
+
+.section--m-p-top {
   @include section--m(top, padding);
 }
 
-.section--s {
+.section--m-p-bottom {
+  @include section--m(bottom, padding);
+}
+
+.section--m-p-both {
+  @include section--m((top, bottom), padding);
+}
+
+.section--s-m-bottom {
   @include section--s;
+}
+
+.section--s-m-top {
+  @include section--s(top);
+}
+
+.section--s-m-both {
+  @include section--s((top, bottom));
+}
+
+.section--s-p-bottom {
+  @include section--s(bottom, padding);
+}
+
+.section--s-p-top {
+  @include section--s(top, padding);
+}
+
+.section--s-p-both {
+  @include section--s((top, bottom), padding);
+}
+
+.section--end {
+  @include section--l;
+}
+
+.section--media {
+  & + & {
+    @include section--xs(top)
+  }
+
+  & + .section--end {
+    @include section--l((top, bottom))
+  }
 }
 
 .section--container {

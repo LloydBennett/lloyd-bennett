@@ -7,15 +7,15 @@
   }
 }
 
-.two-column-grid--gap-s {
-	row-gap: spacing(3);
+.two-column-grid--gap-xs {
+	row-gap: spacing(2);
 
-	@include media-query($breakpoint--small) {
-    row-gap: spacing(5);
+	@include media-query($breakpoint--medium) {
+    row-gap: spacing(4);
   }
 
   @include media-query($breakpoint--large) {
-    row-gap: spacing(9);
+    row-gap: spacing(5);
   }
 }
 
