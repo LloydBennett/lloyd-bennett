@@ -73,9 +73,18 @@
         </h4>
         <ul class="list">
         <% services.forEach((service, i) => { %>
+          <% 
+              let slug = service.skill.slug 
+              let updatedString = slug.replace(/-/g, " ")
+              // Title case each word
+              let skill = updatedString
+                .split(" ")
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(" ")
+          %>
           <li class="list__item">
             <p class="type--body type--grit-400">
-              <%- service.skill %>
+              <%- skill %>
             </p>
           </li>
         <% }) %>
@@ -87,9 +96,18 @@
         </h4>
         <ul class="list">
           <% industries.forEach((elem) => { %>
+
+            <% 
+              let slug = elem.category.slug 
+              let updatedString = slug.replace(/-/g, " ")
+              let industry = updatedString
+                .split(" ")
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(" ")
+            %>
             <li class="list__item">
               <p class="type--body type--grit-400">
-                <%- elem.industry %>
+                <%- industry %>
               </p>
             </li>
           <% }) %>
