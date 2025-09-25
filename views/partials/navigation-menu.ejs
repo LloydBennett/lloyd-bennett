@@ -34,10 +34,11 @@
         let letters = title.split("")
         let projectTag = title.replace(/\s+/g, '-').toLowerCase();
         let projectImg = project.data.hero_image.url
+        let externalLink = project.data.view_as_external_link? true : false
       %>
     <li class="nav-menu__list-item type--white text-center" data-nav-menu-item>
       <div class="no-overflow inline-block relative">
-        <a href="<%- project.data.project_link.url %>" class="nav-menu__link" target="_blank" data-tag="<%- projectTag %>" data-page-trigger>
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="nav-menu__link" <% if(externalLink) { %>target="_blank" <% } %> data-tag="<%- projectTag %>" data-page-trigger>
           <span class="flex mask-title__word no-overflow-y" data-link-text>
             <% letters.forEach((l) => { %>
               <% if(l === " ") { %>
