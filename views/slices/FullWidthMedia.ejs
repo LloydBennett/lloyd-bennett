@@ -17,8 +17,8 @@
       let videoPoster = media.primary.video_poster_image.url
       let video = media.primary.video.url
       %>
-      <div class="block">
-        <video class="block--full-width" poster="<%- videoPoster %>" src="<%- video %>" muted loop playsinline controls></video>
+      <div class="block" data-video-frame="play-on-scroll">
+        <video class="block--full-width" poster="<%- videoPoster %>" src="<%- video %>" muted loop playsinline controls data-video></video>
       </div>
 
     <% }%>

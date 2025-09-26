@@ -6,7 +6,7 @@ export default class VideoPlayer extends Components {
   constructor() {
     super({
       elements: {
-        scrollVideo: '[data-video-frame]'
+        scrollVideo: '[data-video-frame="play-on-scroll"]'
       }
     })
 
@@ -15,20 +15,26 @@ export default class VideoPlayer extends Components {
   }
 
   init() {
-    console.log('go away!')
     this.playOnScroll()
   }
 
   playOnScroll() {
     if(!this.elements.scrollVideo) return
 
-    let scrollVideo = [this.elements.scrollVideo]
-    
+    let scrollVideo = this.elements.scrollVideo
+
+    // checks to see if we have a single element or multiple
+    if (scrollVideo instanceof Element) {
+      scrollVideo = [scrollVideo];
+    } else {
+      scrollVideo = Array.from(scrollVideo)
+    }
+
     scrollVideo.forEach(frame => {
       const video = frame.querySelector("[data-video]")
       const poster = frame.querySelector("[data-video-poster]")
-      
-      console.log(poster)
+
+      if(!video) return
 
       ScrollTrigger.create({
         trigger: frame,
@@ -36,19 +42,28 @@ export default class VideoPlayer extends Components {
         end: "bottom 30%",
         onEnter: () => {
           video.play()
-          gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
+
+          if(poster) {
+            gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
+          }
         },
         onEnterBack: () => {
           video.play()
-          gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
+          if(poster) {
+            gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
+          }
         },
         onLeave: () => {
           video.pause()
-          gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          if(poster) {
+            gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          }
         },
         onLeaveBack: () => {
           video.pause();
-          gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          if(poster) {
+            gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          }
         }
       })
     })

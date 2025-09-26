@@ -27,7 +27,7 @@
           let video = col.video.url
         %>
         
-        <div class="video__frame column <% if(i % 2 == 0) { %>column--half-end <% } else { %>column--half-start<% } %>" data-video-frame>
+        <div class="video__frame column <% if(i % 2 == 0) { %>column--half-end <% } else { %>column--half-start<% } %>" data-video-frame="play-on-scroll">
           <picture class="video__poster" data-video-poster>
             <source media="(max-width: 767px)" srcset="<%- videoPoster.small.url %>">
             <source media="(max-width: 1199px)" srcset="<%- videoPoster.url %>">
