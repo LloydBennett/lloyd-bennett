@@ -32,8 +32,6 @@ export default class VideoPlayer extends Components {
 
     scrollVideo.forEach(frame => {
       const video = frame.querySelector("[data-video]")
-      const poster = frame.querySelector("[data-video-poster]")
-
       if(!video) return
 
       ScrollTrigger.create({
@@ -42,28 +40,15 @@ export default class VideoPlayer extends Components {
         end: "bottom 30%",
         onEnter: () => {
           video.play()
-
-          if(poster) {
-            gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
-          }
         },
         onEnterBack: () => {
           video.play()
-          if(poster) {
-            gsap.to(poster, { opacity: 0, duration: 0.3, ease: "power2.out" });
-          }
         },
         onLeave: () => {
           video.pause()
-          if(poster) {
-            gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
-          }
         },
         onLeaveBack: () => {
-          video.pause();
-          if(poster) {
-            gsap.to(poster, { opacity: 1, duration: 0.3, ease: "power2.out" });
-          }
+          video.pause()
         }
       })
     })
