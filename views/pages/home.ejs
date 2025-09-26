@@ -21,11 +21,11 @@
           %>
 
           <% if (i === titleArr.length) { %>
-            <span class="type--italic home-hero__title-last mask-title__word inline-block no-overflow">
+            <span class="type--italic home-hero__title-last inline-block">
           <% } else if (i === (titleArr.length - 1)) { %>
-            <span class="home-hero__title-pen mask-title__word inline-block no-overflow">
+            <span class="home-hero__title-pen inline-block">
           <% } else { %>
-            <span class="mask-title__word inline-block no-overflow">
+            <span class="inline-block">
           <% } %>
             <% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%>
           </span>

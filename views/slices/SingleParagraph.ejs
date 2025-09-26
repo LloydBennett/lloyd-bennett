@@ -1,8 +1,9 @@
 <% 
-  var para = slice.items
-  let marginPos = slice.primary.margin.toLowerCase()
+  let para = slice.items
+  let marginPos = slice.primary.margin 
+    ? slice.primary.margin.toLowerCase() 
+    : "default"  
   let cssClass
-  console.log(marginPos)
 
   switch(marginPos) {
     case 'bottom':

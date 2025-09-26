@@ -78,7 +78,11 @@
 
 .about__hero-media {
   grid-column: 1 / 7;
-  margin-top: -20%;
+  margin-top: -7%;
+
+  @include media-query($breakpoint--small) {
+    margin-top: -15%;
+  }
 
   @include media-query($breakpoint--large) {
     grid-column: 1 / 5;

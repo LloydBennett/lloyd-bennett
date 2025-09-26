@@ -28,7 +28,6 @@
     nextTitle = ntitle.split(" ")
     return
   }
-
 } ) %>
 
 <section class="section section--m-m-bottom">
@@ -36,13 +35,17 @@
     <div class="hero__project container">
       <div class="hero__project-no">
         <span class="type--xl">
-          <%- projectIndex %>
+          <% let numbers = projectIndex.split("") %>
+          <% numbers.forEach((digit, i)=> { %><span class="inline-block" data-title-reveal><%- digit %></span><% })%>
         </span>
       </div>
       
       <h1 class="type--xl hero__project-title">
         <% projectTitleArr.forEach((title) => { %>
-          <span class="no-wrap--and-break"><%- title %></span>
+          <% let letters = title.split("") %>
+          <span class="no-wrap--and-break">
+            <% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%>
+          </span>
         <% }) %>
       </h1>
     </div>
@@ -76,7 +79,6 @@
           <% 
               let slug = service.skill.slug 
               let updatedString = slug.replace(/-/g, " ")
-              // Title case each word
               let skill = updatedString
                 .split(" ")
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -95,21 +97,32 @@
           Industry
         </h4>
         <ul class="list">
-          <% industries.forEach((elem) => { %>
+          <% industries.forEach((elem) => {
+            let industry
+            if (elem.category && elem.category.slug) {
+              let slug = elem.category.slug
+              let hasSpace 
+              let updatedString
+                
+              if(/--/.test(slug)) { 
+                updatedString = slug.replace(/--/g, " & ")
+                hasSpace = false
+              } else {
+                updatedString = slug.replace(/-/g, " ")
+                hasSpace = true
+              }
 
-            <% 
-              let slug = elem.category.slug 
-              let updatedString = slug.replace(/-/g, " ")
-              let industry = updatedString
-                .split(" ")
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join(" ")
+              industry = updatedString.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
+            }                       
             %>
+            <% if (industry) { %>
             <li class="list__item">
               <p class="type--body type--grit-400">
                 <%- industry %>
               </p>
             </li>
+            <% }%>
+            
           <% }) %>
         </ul>
       </div>

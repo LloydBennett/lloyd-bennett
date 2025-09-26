@@ -8,9 +8,9 @@
     %>
 
     <div class="about__heading mix-blend__diff type--white">
-      <h1 class="about__title type--xl mask-title--l">
+      <h1 class="about__title type--xl">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+          <span class="inline-block"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
     </div>
@@ -28,7 +28,7 @@
     </div>
     
     <div class="about__hero-media-alt" data-parallax data-parallax-config='{
-      "(max-width: 959px)": { "y": "50", "trigger": "top bottom" },
+      "(max-width: 959px)": { "y": "80", "trigger": "top bottom" },
       "(min-width: 960px) and (max-width: 1199px)": { "y": "50", "trigger": "top bottom" },
       "(min-width: 1200px)": { "y": "80", "trigger": "top 70%" }
     }' data-parallax-scrub="0.3">

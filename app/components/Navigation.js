@@ -152,7 +152,9 @@ export default class Navigation extends Components {
     tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
     tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' }, "-=0.8")
     
-    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
+    tl.fromTo(this.elements.linkTextChar, { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
+
+    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 0.65 } }, "<-0.1")
 
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
   }
@@ -174,7 +176,7 @@ export default class Navigation extends Components {
 
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     
-    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
+    tl.to(this.elements.linkTextChar, { opacity: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 0.4 } })
 
     setTimeout(() => {
       this.elements.cursor.classList.remove("cursor--inverted")  

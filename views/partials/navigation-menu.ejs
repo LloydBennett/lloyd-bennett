@@ -11,9 +11,9 @@
   
   <ul class="nav-menu__list" data-lenis-prevent>
     <li class="nav-menu__list-item type--white text-center" data-nav-menu-item>
-      <div class="no-overflow inline-block relative">
+      <div class="inline-block relative">
         <a href="<%- navigation.data.about.url %>" class="nav-menu__link" data-tag="about" data-page-trigger="menu-link">
-          <span class="flex mask-title__word no-overflow-y" data-link-text>
+          <span class="flex" data-link-text>
             <% aTitle.forEach((a) => { %>
               <% if(a === " ") { %>
                 <span class="no-wrap">&nbsp;</span>
@@ -23,7 +23,9 @@
             <% }) %>
           </span>
         </a>
-        <span class="nav-link__line" data-nav-link-line></span>
+        <div class="no-overflow nav-link-line__wrapper">
+          <span class="nav-link__line" data-nav-link-line></span>
+        </div>
       </div>
       <div class="nav-menu__preview z-index--minus-1" style="background-image: url('<%- about.data.hero_image_main.url %>')" data-tag-prev="about" data-nav-menu-preview></div>
     </li>
@@ -37,9 +39,9 @@
         let externalLink = project.data.view_as_external_link? true : false
       %>
     <li class="nav-menu__list-item type--white text-center" data-nav-menu-item>
-      <div class="no-overflow inline-block relative">
+      <div class="inline-block relative">
         <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="nav-menu__link" <% if(externalLink) { %>target="_blank" <% } %> data-tag="<%- projectTag %>" data-page-trigger>
-          <span class="flex mask-title__word no-overflow-y" data-link-text>
+          <span class="flex" data-link-text>
             <% letters.forEach((l) => { %>
               <% if(l === " ") { %>
                 <span>&nbsp;</span>
@@ -49,7 +51,9 @@
             <% }) %>
           </span>
         </a>
-        <span class="nav-link__line" data-nav-link-line></span>
+        <div class="no-overflow nav-link-line__wrapper">
+          <span class="nav-link__line" data-nav-link-line></span>
+        </div>
       </div>
       <div class="nav-menu__preview z-index--minus-1" style="background-image: url('<%- projectImg %>')" data-tag-prev="<%- projectTag %>" data-nav-menu-preview></div>
     </li>

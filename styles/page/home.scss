@@ -54,24 +54,24 @@
 }
 
 .home-hero__image {
-  margin-top: -#{spacing(4)};
+  margin-top: -#{spacing(1)};
   grid-row-start: 2;
   position: relative;
 
   @include media-query($breakpoint--small) {
-    margin-top: -#{spacing(7)};
+    margin-top: -#{spacing(4)};
   }
 
-  @include media-query($breakpoint--large) {
-    margin-top: -#{spacing(10)};
-  }
-  
   @include media-query($breakpoint--x-large - 1, max-width) {
     grid-column: 2 / 8;
   }
 
   @include media-query($breakpoint--x-large) {
-    margin-top: -#{spacing(14)};
+    margin-top: -#{spacing(7)};
+  }
+
+  @include media-query($breakpoint--xx-large) {
+    margin-top: -#{spacing(9)};
   }
 }
 
