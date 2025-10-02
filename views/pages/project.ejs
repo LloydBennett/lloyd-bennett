@@ -6,10 +6,11 @@
   let nextTitle
   let nextImg
   let nextUrl
+  let projectColour = document.data.project_colour
   
 %>
 <% projects.forEach((obj, i) => { 
-  
+ 
   if(obj.data.title === projectTitle) {
     let count = i + 1 
     let ntitle
@@ -50,12 +51,16 @@
       </h1>
     </div>
   </div>
-  <picture class="block">
-    <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
-    <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
-    <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
-    <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
-  </picture>
+  <div class="relative no-overflow" data-hero-image-container>
+    <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- projectColour %>"></div>
+    <picture class="block" data-hero-image>
+      <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
+      <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
+      <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
+      <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
+    </picture>
+  </div>
+  
 </section>
 
 

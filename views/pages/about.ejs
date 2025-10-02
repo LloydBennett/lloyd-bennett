@@ -5,6 +5,9 @@
     let titleArr = title.split(" ")
     let image = document.data.hero_image_main
     let imageAlt = document.data.hero_image_alt
+    let mainColour = document.data.hero_image_main_cover_colour
+    let altColour = document.data.hero_image_alt_cover_colour
+
     %>
 
     <div class="about__heading mix-blend__diff type--white">
@@ -23,6 +26,7 @@
 
     <div class="about__hero-media" data-parallax="10" data-parallax-scrub=0.2>
       <div class="relative center-block rotate--l-minus" data-hero-image-container>
+        <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- mainColour %>"></div>
         <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-main-hero data-hero-image></div>
       </div>
     </div>
@@ -33,6 +37,8 @@
       "(min-width: 1200px)": { "y": "80", "trigger": "top 70%" }
     }' data-parallax-scrub="0.3">
       <div class="relative rotate--l rotate--s-minus-l" data-hero-image-container>
+        <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- altColour %>"></div>
+
         <div class="about__hero-alt-img" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
       </div>
 

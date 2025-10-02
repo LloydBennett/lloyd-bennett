@@ -22,7 +22,8 @@ export default class Page {
       menuBg: '[data-nav-menu-bg]',
       navPreview: '[data-nav-menu-preview]',
       navItems: '.nav-menu__list-item',
-      navLinks: '.nav-menu__list-item [data-page-trigger]'
+      navLinks: '.nav-menu__list-item [data-page-trigger]',
+      imageCover: '[data-image-cover]'
     }
 
     Page.prototype.create = create
@@ -93,9 +94,10 @@ export default class Page {
 
         this.tl.fromTo(this.elements.titleSpans, { y: "100%" }, { y: 0, duration: 0.65, ease: "power2.out", stagger: { amount: 0.5 }}, "<-0.1")
 
-        this.tl.fromTo(this.elements.heroImgContainer, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.5")
+        this.tl.fromTo(this.elements.heroImgContainer, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", duration: 0.6, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.5")
+        this.tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out" }, '-=0.1')
 
-        this.tl.fromTo(this.elements.heroImage, { scale: 1.5 }, { scale: 1, duration: 0.6, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.5 n")
+        this.tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.4")
         this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.5, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
 
         if (this.elements.scrollBtnCircle) {

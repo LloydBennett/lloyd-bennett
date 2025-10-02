@@ -15,13 +15,14 @@
         let projectTitle = project.data.title 
         let projectTitleArr = projectTitle.split(" ")
         let externalLink = project.data.view_as_external_link? true : false
+        let projectColour = project.data.project_colour
       %>
 
       <div class="project__card" data-project-card>
-        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow" <% if(externalLink) { %>target="_blank" <% } %>>
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow relative" <% if(externalLink) { %>target="_blank" <% } %>>
           
           <% if(i > 5) { i == 1 } else { i = i } %>
-          
+          <div class="overlay absolute z-index--2" data-project-cover style="background-color: <%- projectColour %>"></div>
           <picture class="project__img" data-project-img>
             <source media="(min-width: 550px)" srcset="<%- project.data.thumbnail[`image_${i}`].url %>">
             <source media="(max-width: 549px)" srcset="<%- project.data.thumbnail.url %>">
