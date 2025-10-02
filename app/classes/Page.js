@@ -23,7 +23,9 @@ export default class Page {
       navPreview: '[data-nav-menu-preview]',
       navItems: '.nav-menu__list-item',
       navLinks: '.nav-menu__list-item [data-page-trigger]',
-      imageCover: '[data-image-cover]'
+      imageCover: '[data-image-cover]',
+      menuMove: '[data-menu-move]',
+      contentOverlay: '[data-menu-content-overlay]'
     }
 
     Page.prototype.create = create
@@ -81,6 +83,8 @@ export default class Page {
     
     switch (state) {
       case 'show':
+        const texts = gsap.utils.toArray(this.elements.text)
+
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
         .to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 0)
         .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power4', 
@@ -98,7 +102,7 @@ export default class Page {
         this.tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out" }, '-=0.1')
 
         this.tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.4")
-        this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.5, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
+        this.tl.fromTo(texts, { y: "100%" }, { y: 0, duration: 0.5, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
 
         if (this.elements.scrollBtnCircle) {
           this.tl.fromTo(this.elements.scrollBtnCircle, { strokeDashoffset: 2057, strokeDasharray: 2057 }, { strokeDashoffset:0, duration: 1.2, ease: "power2.out" }, "-=1");
@@ -113,11 +117,15 @@ export default class Page {
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
 
         this.tl.to(this.elements.loader, { display: "block" })
+        this.tl.to(this.elements.navBar, { opacity: 0, duration: 0.4, ease: 'power2.out' })
 
-        this.tl.to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: 'power4.in', delay: 0.1 }, 'transition')
+        this.tl.to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: 'power4.in', delay: 0.1 }, 'transition -=0.2')
         .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power2.out' })
 
-        this.tl.to(this.elements.transition, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition')
+        this.tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition -=0.2')
+        this.tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' }, "-=0.6")
+
+        //this.tl.to(this.elements.transition, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition')
           .add(resolve)
       break
       default:

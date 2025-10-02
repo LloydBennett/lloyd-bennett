@@ -21,22 +21,24 @@ class App {
     this.createPreloader()
     
     //this.addLinkListeners()
-    this.createCursor()
-    
+        
     this.createNavigation()
-    //this.updateScroll()
-    
+    this.init()    
     //this.addEventListeners()
-    this.createSplitText()
-    this.createProjectCard()
-    this.createParallaxItems()
-    this.createVideoPlayer()
     
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
     })
 
     this.triggerLink = null
+  }
+
+  init() {
+    this.createCursor()
+    this.createSplitText()
+    this.createProjectCard()
+    this.createParallaxItems()
+    this.createVideoPlayer()
   }
   
   setUpScrollTrigger() {
@@ -126,7 +128,6 @@ class App {
     this.page = new PageClass()
     this.page.create()
     this.page.show()
-      
   }
 
   onPopState () {
@@ -177,18 +178,14 @@ class App {
       this.ogMeta.setAttribute('content', newOgImg)
       this.metaURL.setAttribute('content', url)
       
-      // setTimeout(() => {
-      //   console.log(this.page.heroImg);
-      // }, 0)
-
-      this.page = this.pages[this.template]
+      const PageClass = this.pages[this.template] || Page
+      this.page = new PageClass()
       this.page.create()
-      this.createSplitText()
-      this.createProjectCard()
-      this.createCursor()
+      this.init()
       this.page.pageTrigger = this.triggerLink
       this.page.heroImg = document.querySelector('[data-main-hero]')
       this.page.show()
+      ScrollTrigger.refresh(true)
     }
     else {
       console.log('Error loading page!')
