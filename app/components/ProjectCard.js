@@ -39,11 +39,7 @@ export default class ProjectCard extends Components {
           { 
             clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", 
             duration: 0.4,
-            ease: "power2.out",
-            scrollTrigger: { 
-              trigger: element,
-              start: 'top 80%'          
-            } 
+            ease: "power2.out"
           }, '-=0.2'
 
         ).from(img, {
