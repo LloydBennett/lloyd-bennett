@@ -32,6 +32,7 @@ export default class Page {
     // this.loader = document.querySelector('[data-loader]')
     // this.loaderPath = document.querySelector('[data-preloader-bg]')
     this.pageTrigger = null
+    this.transitionType = null
     this.pageTag = null
     this.heroImg = null
     this.tl = gsap.timeline()
@@ -58,11 +59,14 @@ export default class Page {
     let start = bg[state].start,
         middle = bg[state].middle,
         end = bg[state].end
-
-    switch(this.pageTrigger) {
+    
+    switch(this.transitionType) {
       case 'menu-link':
-       this.menuTransition(state, resolve, { start, middle, end })
-      break
+        this.menuTransition(state, resolve, { start, middle, end })
+        break
+      case 'morph':
+        this.morphTransition(state, resolve)
+        break
       default:
         this.defaultTransition(state, resolve, { start, middle, end })
     }
@@ -70,6 +74,7 @@ export default class Page {
   show() {
     return new Promise(resolve => {
       //set scrolling to top of page - need to add this
+      this.resetTimeline()
       this.handlePageTransition('show', resolve)
     })
   }
@@ -78,6 +83,7 @@ export default class Page {
       this.handlePageTransition('hide', resolve)
     })
   }
+  
   defaultTransition(state, resolve, { start, middle, end }) {
     if(!state) return
     
@@ -111,7 +117,7 @@ export default class Page {
       
         this.tl.fromTo(this.elements.navBar, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.2")
           .add(resolve)
-      break
+        break
       case 'hide':
         this.elements.body.classList.add("no-scrolling")
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
@@ -127,11 +133,101 @@ export default class Page {
 
         //this.tl.to(this.elements.transition, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition')
           .add(resolve)
-      break
+        break
       default:
         console.warn('A transition state (show / hide) has not been specified!')
         return
     }
+  }
+  
+  morphTransition(state, resolve) {
+    let tl = gsap.timeline({ onComplete: resolve })
+    let wrapper = document.querySelector('[data-menu-move]')
+    let triggerImage = this.pageTrigger
+
+    switch (state) {
+      case 'show':
+        let hero = document.querySelector('[data-hero-image-container]')
+        let overlay = document.querySelector('[data-transition-overlay]')
+        const texts = gsap.utils.toArray(this.elements.text)
+
+        let newOverlayPos = this.calculatePosition(hero)
+        
+        tl.to(overlay, 
+          { 
+            left: `${newOverlayPos.x}%`, 
+            top: `${newOverlayPos.y}%`, 
+            duration: 0.6, 
+            ease: 'power2.out'
+          }
+        ).to(overlay,
+          { 
+            width: newOverlayPos.w,
+            duration: 0.4,
+            ease: 'power2.out'
+           }
+        ).to(overlay,
+          { 
+             height: newOverlayPos.h, 
+             duration: 0.4,
+             ease: 'power2.out'
+          }
+        )
+
+        tl.to(wrapper, { opacity: 1, duration: 0.4, ease: 'power2.out', onComplete: () => {
+          overlay.style.opacity = 0;
+          overlay.remove()
+        } })
+
+        tl.fromTo(this.elements.titleSpans, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out", stagger: { amount: 0.4 }})
+
+        tl.fromTo(this.elements.titleSpans, { y: "100%" }, { y: 0, duration: 0.65, ease: "power2.out", stagger: { amount: 0.5 }}, "<-0.1")
+
+        tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out" }, '-=0.1')
+
+        tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.4")
+        tl.fromTo(texts, { y: "100%" }, { y: 0, duration: 0.5, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}, 
+          onComplete: () => {
+            this.elements.body.classList.remove("no-scrolling")
+          }
+        }, "-=0.2")
+
+        tl.fromTo(this.elements.navBar, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.2")
+        
+        break
+      case 'hide':
+        let cover = this.pageTrigger.querySelector('[data-project-cover]')
+        let bgColour = window.getComputedStyle(cover).backgroundColor
+        let projectCover = this.createOverlay(cover)
+        projectCover.style.backgroundColor = bgColour
+        
+        this.setCurrentOverlayDimensions(projectCover, triggerImage)
+        
+        gsap.to(projectCover, {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 0.6, 
+          ease: "power2.out"
+        })
+
+        tl.to(wrapper, 
+        { 
+          opacity: 0, 
+          duration: 0.6, 
+          ease: "power2.out",
+          onComplete: () => {
+            this.elements.body.classList.add("no-scrolling")
+          } 
+        })
+
+        tl.to(this.elements.navBar, { opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
+
+        break
+      default:
+        console.warn('A transition state (show / hide) has not been specified!')
+        return
+
+    }
+
   }
 
   menuTransition(state, resolve, { start, middle, end }) {
@@ -192,5 +288,64 @@ export default class Page {
         console.warn('A transition state (show / hide) has not been specified!')
         return
     } 
+  }
+
+  createOverlay(cover) {
+    //let cover = this.pageTrigger.querySelector('[data-project-cover]')
+    let newCover = document.createElement('div')
+    //let bgColour = window.getComputedStyle(cover).backgroundColor
+    
+    newCover.style.backgroundColor = bgColour
+    newCover.setAttribute('data-transition-overlay', '')
+    newCover.style.zIndex = 3
+    
+    gsap.set(newCover, { 
+      clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"
+    })
+
+    return newCover
+  }
+
+  setCurrentOverlayDimensions(cover, triggerImage) {
+    let wrapper = document.querySelector('.main')
+    //let triggerImage = this.pageTrigger
+    let newPos = this.calculatePosition(triggerImage)
+
+    cover.style.position = "fixed"
+    cover.style.top = `${newPos.y}%`
+    cover.style.left = `${newPos.x}%`
+    cover.style.width = newPos.w
+    cover.style.height = newPos.h
+
+    this.elements.body.insertBefore(cover, wrapper)
+  }
+  
+  calculatePosition(elem) {
+    let elemDimensions = {
+      w: elem.offsetWidth,
+      h: elem.offsetHeight,
+      y: elem.getBoundingClientRect().top,
+      x: elem.getBoundingClientRect().left
+    };
+
+    let viewportHeight = window.innerHeight;
+    let viewportWidth = window.innerWidth;
+
+    let yPos = (elemDimensions.y / viewportHeight) * 100;
+    let xPos = (elemDimensions.x / viewportWidth) * 100;
+
+    return { 
+      y: yPos, 
+      x: xPos, 
+      w: `${(elemDimensions.w / window.innerWidth) * 100}%`, 
+      h: `${(elemDimensions.h / window.innerHeight) * 100}%` 
+    }
+  }
+
+  resetTimeline() {
+    if (this.tl) {
+      this.tl.kill()
+    }
+    this.tl = gsap.timeline()
   }
 }
