@@ -12,14 +12,16 @@
       <% 
         let i = index + 1 
         let indexOutput = i.toString().padStart(2, '0')
-        let projectTitle = project.data.title 
+        let projectTitle = project.data.title
+        let projectTag = projectTitle.replace(/\s+/g, '-').toLowerCase();
         let projectTitleArr = projectTitle.split(" ")
         let externalLink = project.data.view_as_external_link? true : false
         let projectColour = project.data.project_colour
       %>
 
-      <div class="project__card" data-project-card>
-        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow relative" <% if(externalLink) { %>target="_blank" <% } %>>
+      <div class="project__card" data-project-card="<%- projectTag %>">
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow relative" <% if(externalLink) { %>target="_blank" <% } %>
+          <% if(!externalLink) { %>data-page-trigger="morph"<%}%>>
           
           <% if(i > 5) { i == 1 } else { i = i } %>
           <div class="overlay absolute z-index--2" data-project-cover style="background-color: <%- projectColour %>"></div>
@@ -30,11 +32,11 @@
           </picture>
         </a>
 
-        <div class="project__meta">
-          <span class="type--s"><%- indexOutput %></span>
+        <div class="project__meta" data-project-card-meta>
+          <span class="type--s" data-project-card-meta-text><%- indexOutput %></span>
           <h4 class="type--s">
             <% projectTitleArr.forEach((title) => { %>
-              <span class="no-wrap--and-break"><%- title %></span>
+              <span class="no-wrap--and-break" data-project-card-meta-text><%- title %></span>
             <% }) %>
             
           </h4>

@@ -12,7 +12,7 @@ export default class Navigation extends Components {
         bg: '[data-nav-menu-bg]',
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
-        navLinks: '.nav-menu__list-item [data-page-trigger]',
+        navLinks: '.nav-menu__list-item [data-menu-link]',
         navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
         linkTextChar: '[data-link-text] span',
         menuMove: '[data-menu-move]',
@@ -25,6 +25,7 @@ export default class Navigation extends Components {
     this.isMenuOpen = false
     this.svgPath = {}
     this.linkSpans = []
+    this.isMouseDisabled = false
     this.scrollPosition = 0
     this.lScroll = scroll
     this.addEventListeners()
@@ -110,10 +111,13 @@ export default class Navigation extends Components {
           })
         }
 
-        this.hideNavPreview(imgPrev)
+        if(!this.isMouseDisabled) {
+          this.hideNavPreview(imgPrev)
+        }
       })
 
       link.addEventListener('mousemove', (e) => {
+        if (this.isMouseDisabled) return
         handleMouseMove(e)
       })
     })
@@ -194,6 +198,34 @@ export default class Navigation extends Components {
     tl.to(this.elements.navMenu, { duration: 0.6, opacity: 0, visibility: "hidden" })
   }
 
+  closeMenuImmediate() {
+    // Reset menu-related elements instantly
+    gsap.killTweensOf("*") // stop any running tweens (optional, but helps avoid overlap)
+
+    // Set all properties instantly
+    gsap.set(this.elements.bg, { attr: { d: 'M 0 100 V 100 Q 50 100 100 100 V 100 z' }}) // fully closed path
+    gsap.set(this.elements.linkTextChar, { opacity: 0, y: "110%" })
+    gsap.set(this.elements.menuMove, { y: 0 })
+    gsap.set(this.elements.contentOverlay, { opacity: 0 })
+    gsap.set(this.elements.navMenu, { opacity: 0, visibility: "hidden" })
+    gsap.set(this.elements.navBar, { opacity: 1 })
+    gsap.set(document.querySelectorAll('[data-nav-menu-preview]'), {
+      scale: 0
+    })
+
+    // Restore cursor
+    this.elements.cursor.classList.remove("cursor--inverted")
+    this.elements.navMenu.classList.toggle('menu-is-open')
+    this.elements.navBar.classList.toggle('inverted')
+
+    
+    // Reset scroll and state
+    this.lScroll.start()
+    this.isAnimating = false
+    this.isMenuOpen = false
+  }
+
+
   showNavPreview(img) {
     gsap.to(img, {
       scale: 1,
@@ -208,5 +240,13 @@ export default class Navigation extends Components {
       duration: 0.3,
       ease: "Power2.out"
     })
+  }
+
+  disableMouseMove() {
+    this.isMouseDisabled = true
+  }
+
+  enableMouseMove() {
+    this.isMouseDisabled = false
   }
 }

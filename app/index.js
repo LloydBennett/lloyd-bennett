@@ -29,11 +29,13 @@ class App {
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
     })
-
-    this.triggerLink = null
+    
+    this.triggerElem = null
+    this.triggerTransition = null
   }
 
   init() {
+    this.addLinkListeners()
     this.createCursor()
     this.createSplitText()
     this.createProjectCard()
@@ -153,19 +155,20 @@ class App {
       div.innerHTML = html
 
       const divContent = div.querySelector('.main')
+      const pageContent = div.querySelector('[data-menu-move]')
       const title = div.querySelector('title').innerText
       const newDescription = div.querySelector('meta[name="description"]').getAttribute('content')
       const newOgImg = div.querySelector('meta[property="og:image"]').getAttribute('content')
       const newTwitterImg = div.querySelector('meta[name="twitter:image"]').getAttribute('content')
-      //const heroImg = div.querySelector('[data-main-hero]')
       const newList = divContent.classList
       
-      //this.page.heroImg = heroImg
       this.content.classList.remove(this.template)
       this.content.classList.add(...newList)
       
       this.template = divContent.getAttribute('data-page')
       this.content.setAttribute('data-page', this.template)
+
+      gsap.set(pageContent, { opacity: 0 })
 
       this.content.innerHTML = divContent.innerHTML
       this.head.querySelector('title').innerHTML = title
@@ -182,8 +185,16 @@ class App {
       this.page = new PageClass()
       this.page.create()
       this.init()
-      this.page.pageTrigger = this.triggerLink
-      this.page.heroImg = document.querySelector('[data-main-hero]')
+      
+      this.page.transitionType = this.triggerTransition
+      this.page.pageTrigger = this.triggerElem
+      this.page.heroImg = document.querySelector('[data-hero-image-container]')
+
+      if(this.navigation.isMenuOpen) {
+        this.navigation.closeMenuImmediate()
+        this.navigation.enableMouseMove()
+      }
+
       this.page.show()
       ScrollTrigger.refresh(true)
     }
@@ -205,13 +216,17 @@ class App {
       l.onclick = event => {
         event.preventDefault()
         const href = l.href
-        const linkData = l.getAttribute('data-page-trigger')
+        const linkTransition = l.getAttribute('data-page-trigger')
         const linkTag = l.getAttribute('data-tag')
 
         if(href !== window.location.href) {
-          this.triggerLink = linkData
-          this.page.pageTrigger = linkData
+          this.triggerTransition = linkTransition
+          this.triggerElem = event.target
+          this.page.transitionType = linkTransition
+          this.page.pageTrigger = l
           this.page.pageTag = linkTag
+          
+          console.log(this.page.pageTrigger)
 
           if(this.navigation.isMenuOpen) {
             this.navigation.elements.navLinks.forEach(link => {

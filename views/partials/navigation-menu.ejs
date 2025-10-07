@@ -2,6 +2,7 @@
   let svg = "M 0 100 V 100 Q 50 100 100 100 V 100 z" 
   let aboutTitle = about.data.nav_menu_alias
   let aTitle = aboutTitle.split("")
+  let aboutCoverColour = about.data.hero_image_main_cover_colour
 %>
 
 <div class="nav-menu z-index--3" data-lenis-prevent data-nav-menu>
@@ -12,7 +13,7 @@
   <ul class="nav-menu__list" data-lenis-prevent>
     <li class="nav-menu__list-item type--white text-center" data-nav-menu-item>
       <div class="inline-block relative">
-        <a href="<%- navigation.data.about.url %>" class="nav-menu__link" data-tag="about" data-page-trigger="menu-link">
+        <a href="<%- navigation.data.about.url %>" class="nav-menu__link" data-menu-link data-tag="about" data-cover-colour="<%- aboutCoverColour %>" data-page-trigger="menu-link">
           <span class="flex" data-link-text>
             <% aTitle.forEach((a) => { %>
               <% if(a === " ") { %>
@@ -37,10 +38,11 @@
         let projectTag = title.replace(/\s+/g, '-').toLowerCase();
         let projectImg = project.data.hero_image.url
         let externalLink = project.data.view_as_external_link? true : false
+        let projectColour = project.data.project_colour
       %>
     <li class="nav-menu__list-item type--white text-center" data-nav-menu-item>
       <div class="inline-block relative">
-        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="nav-menu__link" <% if(externalLink) { %>target="_blank" <% } %> data-tag="<%- projectTag %>" data-page-trigger>
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="nav-menu__link" data-menu-link <% if(externalLink) { %>target="_blank" <% } %> data-tag="<%- projectTag %>" data-cover-colour="<%- projectColour %>" <% if(!externalLink) { %>data-page-trigger="menu-link"<%}%>>
           <span class="flex" data-link-text>
             <% letters.forEach((l) => { %>
               <% if(l === " ") { %>

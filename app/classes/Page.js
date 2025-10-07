@@ -155,8 +155,8 @@ export default class Page {
         
         tl.to(overlay, 
           { 
-            left: `${newOverlayPos.x}%`, 
-            top: `${newOverlayPos.y}%`, 
+            x: newOverlayPos.x, 
+            y: newOverlayPos.y, 
             duration: 0.6, 
             ease: 'power2.out'
           }
@@ -225,7 +225,6 @@ export default class Page {
       default:
         console.warn('A transition state (show / hide) has not been specified!')
         return
-
     }
 
   }
@@ -236,52 +235,94 @@ export default class Page {
         console.log('I am showing the next page')
         let y = this.heroImg.getBoundingClientRect().top,
             x = this.heroImg.getBoundingClientRect().left,
-            width = this.heroImg.getBoundingClientRect().width,
-            height = this.heroImg.getBoundingClientRect().height
-            //rotationAngle = this.getRotationAngle(this.heroImg)
-            
-        //console.log(rotationAngle)
-        this.tl.to(this.elements.navPreview, {
+            width = this.heroImg.offsetWidth,
+            height = this.heroImg.offsetHeight
+
+        let coverImg = document.querySelector('[data-transition-overlay]')
+        let menuBg = document.querySelector('[data-transition-bg]')
+        let menuBgPath = menuBg.querySelector('[data-transition-bg] [data-nav-menu-bg]')
+        let hiddenDiv = document.querySelector('[data-menu-move]')
+        const texts = gsap.utils.toArray(this.elements.text)
+
+        let rotationAngle = this.getRotationAngle(this.heroImg)
+
+        gsap.set(menuBgPath, { attr: { d: start }})
+
+        this.tl.to(menuBgPath, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 'transition')
+        .to(menuBgPath, { duration: 0.4, attr: { d: end }, ease: 'power4'})
+        
+        this.tl.to(coverImg, {
           y: `${y}px`,
           x: `${x}px`,
+          rotate: rotationAngle,
           ease: 'power2.out',
-          duration: 0.8
-        }).to(this.elements.navPreview, {
+          duration: 0.6
+        }, 'transition')
+        .to(coverImg, {
           width: `${width}px`,
           height: `${height}px`,
           ease: 'power2.out',
-          duration: 0.8
-        }, '-=0.3')
+          duration: 0.6,
+          onComplete: () => {
+            menuBg.remove()
+            hiddenDiv.style.opacity = 1
+            gsap.set(this.elements.navItems, { pointerEvents: ""})
+            gsap.set(this.elements.navLinks, { pointerEvents: ""})
 
-
+          }
+        }, '-=0.6')
 
         
-        // this.tl.set(this.elements.menuBg, { attr: { d: start }})
-        // .to(this.elements.menuBg, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 0)
-        // .to(this.elements.menuBg, { duration: 0.4, attr: { d: end }, ease: 'power4', 
-        //   onComplete: () => {
-        //     console.log('menu closed')
-        //     // this.elements.body.classList.remove("no-scrolling")
-        // }})
+        this.tl.fromTo(this.elements.heroImgContainer, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", duration: 0.6, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.5")
 
-        // this.tl.fromTo(this.elements.titleSpans, { y: "200%" }, { y: 0, duration: 0.65, ease: "power2.out", stagger: { amount: 0.6 }}, "-=0.2")
-        // this.tl.fromTo(this.elements.text, { y: "100%" }, { y: 0, duration: 0.4, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
+        this.tl.set(coverImg, { opacity: 0, onComplete:() => {
+          coverImg.remove()
+        } })
+
+        this.tl.fromTo(this.elements.titleSpans, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out", stagger: { amount: 0.4 }})
+        this.tl.fromTo(this.elements.titleSpans, { y: "100%" }, { y: 0, duration: 0.65, ease: "power2.out", stagger: { amount: 0.5 }}, "<-0.1")
+
+        
+        this.tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out", onComplete: ()=> {
+          resolve()
+        } }, '-=0.1')
+
+        this.tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.4")
+        this.tl.fromTo(texts, { y: "100%" }, { y: 0, duration: 0.5, ease: "power2.out", stagger: (index, target, list) => { return target.dataset.textReveal * 0.1}}, "-=0.2")
+        this.tl.fromTo(this.elements.navBar, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.2")
+
+
       break
       case 'hide':
-        const navPreviewChild = this.elements.navPreview.querySelector(`[data-tag-prev="${this.pageTag}"]`);
-
-        this.tl.to(this.elements.navItems, { pointerEvents: "none"})
-        this.tl.to(this.elements.navLinks, { pointerEvents: "none"})
-
-        this.tl.fromTo(this.elements.linkTextChar, { y: 0 }, { y: "110%", ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
-        this.tl.to(this.elements.navPreview, { 
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-          opacity: 1,
-          duration: 0.6, 
-          ease: "power3.out"
-        })
+        let navImage = document.querySelector(`[data-tag-prev="${this.pageTag}"]`)
+        let bgColour = document.querySelector(`.nav-menu__link[data-tag="${this.pageTag}"]`).getAttribute('data-cover-colour')
+        let wrapper = document.querySelector('.main')
+        let menuBgElem = document.querySelector('.nav-menu__bg')
+        const menuBgClone = menuBgElem.cloneNode(true)
         
-        this.tl.to(navPreviewChild, { opacity: 1 }).add(resolve)
+        menuBgClone.setAttribute('data-transition-bg', '')
+        menuBgClone.style.zIndex = 4
+        
+        gsap.set(this.elements.navItems, { pointerEvents: "none"})
+        gsap.set(this.elements.navLinks, { pointerEvents: "none"})
+
+        let menuProjectCover = this.createOverlay(navImage)
+        menuProjectCover.style.backgroundColor = bgColour
+        this.setCurrentOverlayDimensions(menuProjectCover, navImage)
+
+        this.tl.to(this.elements.linkTextChar, { opacity: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 0.4 } }, 'elements')
+        this.tl.to(this.elements.navBar, { opacity: 0, duration: 0.6, ease: "power2.out" }, 'elements')
+
+        this.tl.to(menuProjectCover, {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 0.6, 
+          ease: "power2.out",
+          onComplete: () => {
+            this.elements.body.insertBefore(menuBgClone, wrapper)
+            resolve()
+          }
+        }, 'elements')
+
  
       break
       default:
@@ -290,14 +331,14 @@ export default class Page {
     } 
   }
 
-  createOverlay(cover) {
+  createOverlay(cover, dataAttr = 'data-transition-overlay') {
     //let cover = this.pageTrigger.querySelector('[data-project-cover]')
     let newCover = document.createElement('div')
     //let bgColour = window.getComputedStyle(cover).backgroundColor
     
-    newCover.style.backgroundColor = bgColour
-    newCover.setAttribute('data-transition-overlay', '')
-    newCover.style.zIndex = 3
+    //newCover.style.backgroundColor = bgColour
+    newCover.setAttribute(dataAttr, '')
+    newCover.style.zIndex = 5
     
     gsap.set(newCover, { 
       clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"
@@ -312,10 +353,15 @@ export default class Page {
     let newPos = this.calculatePosition(triggerImage)
 
     cover.style.position = "fixed"
-    cover.style.top = `${newPos.y}%`
-    cover.style.left = `${newPos.x}%`
-    cover.style.width = newPos.w
-    cover.style.height = newPos.h
+
+    gsap.set(cover,
+      {
+        y: `${newPos.y}px`,
+        x: `${newPos.x}px`,
+        width: newPos.w,
+        height: newPos.h
+      }
+    )
 
     this.elements.body.insertBefore(cover, wrapper)
   }
@@ -326,19 +372,19 @@ export default class Page {
       h: elem.offsetHeight,
       y: elem.getBoundingClientRect().top,
       x: elem.getBoundingClientRect().left
-    };
+    }
 
     let viewportHeight = window.innerHeight;
     let viewportWidth = window.innerWidth;
 
-    let yPos = (elemDimensions.y / viewportHeight) * 100;
-    let xPos = (elemDimensions.x / viewportWidth) * 100;
+    // let yPos = (elemDimensions.y / viewportHeight) * 100;
+    // let xPos = (elemDimensions.x / viewportWidth) * 100;
 
     return { 
-      y: yPos, 
-      x: xPos, 
-      w: `${(elemDimensions.w / window.innerWidth) * 100}%`, 
-      h: `${(elemDimensions.h / window.innerHeight) * 100}%` 
+      y: elemDimensions.y, 
+      x: elemDimensions.x, 
+      w: `${(elemDimensions.w / viewportWidth) * 100}%`, 
+      h: `${(elemDimensions.h / viewportHeight) * 100}%` 
     }
   }
 
