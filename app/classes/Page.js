@@ -90,6 +90,8 @@ export default class Page {
     switch (state) {
       case 'show':
         const texts = gsap.utils.toArray(this.elements.text)
+        
+        gsap.set(this.elements.menuMove, { opacity: 1 })
 
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
         .to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 0)
@@ -119,14 +121,15 @@ export default class Page {
           .add(resolve)
         break
       case 'hide':
-        this.elements.body.classList.add("no-scrolling")
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
 
         this.tl.to(this.elements.loader, { display: "block" })
         this.tl.to(this.elements.navBar, { opacity: 0, duration: 0.4, ease: 'power2.out' })
 
         this.tl.to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: 'power4.in', delay: 0.1 }, 'transition -=0.2')
-        .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power2.out' })
+        .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power2.out', onComplete: () => {
+            this.elements.body.classList.add("no-scrolling")
+        } })
 
         this.tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition -=0.2')
         this.tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' }, "-=0.6")
@@ -284,6 +287,7 @@ export default class Page {
 
         
         this.tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out", onComplete: ()=> {
+          this.elements.body.classList.remove("no-scrolling")
           resolve()
         } }, '-=0.1')
 
@@ -305,6 +309,7 @@ export default class Page {
         
         gsap.set(this.elements.navItems, { pointerEvents: "none"})
         gsap.set(this.elements.navLinks, { pointerEvents: "none"})
+        this.elements.body.classList.add("no-scrolling")
 
         let menuProjectCover = this.createOverlay(navImage)
         menuProjectCover.style.backgroundColor = bgColour
