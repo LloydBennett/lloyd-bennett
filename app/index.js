@@ -17,6 +17,7 @@ class App {
   constructor() {
     this.lenisScroll = scroll
     this.setUpScrollTrigger()
+    this.createCursor()
     this.createContent()
     this.createPreloader()
     
@@ -24,7 +25,6 @@ class App {
         
     this.createNavigation()
     this.init()    
-    //this.addEventListeners()
     
     this.preloader.calculatePageLoadTime().then(()=> {
       this.createPages()
@@ -36,7 +36,6 @@ class App {
 
   init() {
     this.addLinkListeners()
-    this.createCursor()
     this.createSplitText()
     this.createProjectCard()
     this.createParallaxItems()
@@ -196,16 +195,13 @@ class App {
       }
 
       this.page.show()
+      this.init()
+      this.cursor.refreshElements()
       ScrollTrigger.refresh(true)
     }
     else {
       console.log('Error loading page!')
     }
-  }
-
-  addEventListeners() {
-    // ScrollTrigger.addEventListener('refresh', () => this.locomotiveScroll.update())
-    // ScrollTrigger.defaults({ scroller: '[data-scroll-container]' })
   }
 
   addLinkListeners() {
