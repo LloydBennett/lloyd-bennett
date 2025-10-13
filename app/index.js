@@ -20,9 +20,6 @@ class App {
     this.createCursor()
     this.createContent()
     this.createPreloader()
-    
-    //this.addLinkListeners()
-        
     this.createNavigation()
     this.init()    
     
@@ -155,6 +152,7 @@ class App {
 
       const divContent = div.querySelector('.main')
       const pageContent = div.querySelector('[data-menu-move]')
+      const contentWrapper = this.content.querySelector('[data-menu-move]')
       const title = div.querySelector('title').innerText
       const newDescription = div.querySelector('meta[name="description"]').getAttribute('content')
       const newOgImg = div.querySelector('meta[property="og:image"]').getAttribute('content')
@@ -169,7 +167,8 @@ class App {
 
       gsap.set(pageContent, { opacity: 0 })
 
-      this.content.innerHTML = divContent.innerHTML
+      contentWrapper.innerHTML = pageContent.innerHTML
+
       this.head.querySelector('title').innerHTML = title
 
       this.descriptionsList.forEach((element) => {
@@ -183,7 +182,6 @@ class App {
       const PageClass = this.pages[this.template] || Page
       this.page = new PageClass()
       this.page.create()
-      this.init()
       
       this.page.transitionType = this.triggerTransition
       this.page.pageTrigger = this.triggerElem
