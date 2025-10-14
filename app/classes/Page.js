@@ -89,10 +89,11 @@ export default class Page {
     
     switch (state) {
       case 'show':
-        const texts = gsap.utils.toArray(this.elements.text)
+        const texts = gsap.utils.toArray(document.querySelectorAll('[data-text-reveal]'))
         
-        gsap.set(this.elements.menuMove, { opacity: 1 })
-
+        gsap.set(this.elements.menuMove, { opacity: 1, y: 0 })
+        gsap.set(this.elements.contentOverlay, { opacity: 0 })
+    
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
         .to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: "power2.in" }, 0)
         .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power4', 
@@ -123,18 +124,18 @@ export default class Page {
       case 'hide':
         this.tl.set(this.elements.loaderBg, { attr: { d: start }})
 
+        console.log(`text: ${this.elements.text}`)
+
         this.tl.to(this.elements.loader, { display: "block" })
         this.tl.to(this.elements.navBar, { opacity: 0, duration: 0.4, ease: 'power2.out' })
 
-        this.tl.to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: 'power4.in', delay: 0.1 }, 'transition -=0.2')
+        this.tl.to(this.elements.loaderBg, { duration: 0.8, attr: { d: middle }, ease: 'power4.in', delay: 0.1 }, 'transition -=0.6')
         .to(this.elements.loaderBg, { duration: 0.4, attr: { d: end }, ease: 'power2.out', onComplete: () => {
             this.elements.body.classList.add("no-scrolling")
         } })
 
-        this.tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition -=0.2')
+        this.tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition -=0.6')
         this.tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' }, "-=0.6")
-
-        //this.tl.to(this.elements.transition, { y: "-100", duration: 1, ease: 'power4.in'}, 'transition')
           .add(resolve)
         break
       default:
@@ -233,6 +234,8 @@ export default class Page {
   }
 
   menuTransition(state, resolve, { start, middle, end }) {
+    let wrapperContent = document.querySelector('[data-menu-move]')
+
     switch (state) {
       case 'show':
         console.log('I am showing the next page')
@@ -244,8 +247,12 @@ export default class Page {
         let coverImg = document.querySelector('[data-transition-overlay]')
         let menuBg = document.querySelector('[data-transition-bg]')
         let menuBgPath = menuBg.querySelector('[data-transition-bg] [data-nav-menu-bg]')
-        let hiddenDiv = document.querySelector('[data-menu-move]')
-        const texts = gsap.utils.toArray(this.elements.text)
+        const texts = document.querySelectorAll('[data-text-reveal]')
+                //console.log(document.querySelectorAll('[data-intro-text] [data-text-reveal]'))
+
+
+        console.log(this.elements.text)
+        console.log(texts)
 
         let rotationAngle = this.getRotationAngle(this.heroImg)
 
@@ -268,7 +275,7 @@ export default class Page {
           duration: 0.6,
           onComplete: () => {
             menuBg.remove()
-            hiddenDiv.style.opacity = 1
+            gsap.set(wrapperContent, { opacity: 1 })
             gsap.set(this.elements.navItems, { pointerEvents: ""})
             gsap.set(this.elements.navLinks, { pointerEvents: ""})
 
@@ -288,7 +295,7 @@ export default class Page {
         
         this.tl.fromTo(this.elements.imageCover, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 0.4, stagger: { amount: 0.2 }, ease: "power2.out", onComplete: ()=> {
           this.elements.body.classList.remove("no-scrolling")
-          resolve()
+          //resolve()
         } }, '-=0.1')
 
         this.tl.fromTo(this.elements.heroImage, { scale: 2 }, { scale: 1, duration: 0.8, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.4")
@@ -309,6 +316,7 @@ export default class Page {
         
         gsap.set(this.elements.navItems, { pointerEvents: "none"})
         gsap.set(this.elements.navLinks, { pointerEvents: "none"})
+        gsap.set(wrapperContent, { opacity: 0 })
         this.elements.body.classList.add("no-scrolling")
 
         let menuProjectCover = this.createOverlay(navImage)

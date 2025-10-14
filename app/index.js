@@ -17,6 +17,7 @@ class App {
   constructor() {
     this.lenisScroll = scroll
     this.setUpScrollTrigger()
+    this.createSplitText()
     this.createCursor()
     this.createContent()
     this.createPreloader()
@@ -33,7 +34,6 @@ class App {
 
   init() {
     this.addLinkListeners()
-    this.createSplitText()
     this.createProjectCard()
     this.createParallaxItems()
     this.createVideoPlayer()
@@ -138,7 +138,6 @@ class App {
   async onChange({ url, push = true }) {
     await this.page.hide()
     const req = await window.fetch(url)
-    console.log(`page trigger when hide is called: `)
     
     if(req.status === 200) {
       const html = await req.text()
@@ -192,6 +191,8 @@ class App {
         this.navigation.enableMouseMove()
       }
 
+      this.createSplitText()
+
       this.page.show()
       this.init()
       this.cursor.refreshElements()
@@ -206,7 +207,6 @@ class App {
     const links = document.querySelectorAll('[data-page-trigger]')
 
     links.forEach((l) => {
-      
       l.onclick = event => {
         event.preventDefault()
         const href = l.href
@@ -226,10 +226,12 @@ class App {
             this.navigation.elements.navLinks.forEach(link => {
               link.removeEventListener('mouseout', link._hoverOutAnim)
             })
+
             this.navigation.disableMouseMove()
           }
 
           this.onChange({ url: href })
+
         } else {
           if(this.navigation.isMenuOpen) {
             this.navigation.animate()
