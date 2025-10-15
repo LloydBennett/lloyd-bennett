@@ -238,9 +238,11 @@ export default class Page {
 
     switch (state) {
       case 'show':
-        console.log('I am showing the next page')
-        let y = this.heroImg.getBoundingClientRect().top,
-            x = this.heroImg.getBoundingClientRect().left,
+        let isRotated = this.heroImg.hasAttribute('data-hero-image-rotated') 
+        let positionRef = isRotated? document.querySelector('[data-hero-image-block]') : this.heroImg
+        
+        let y = positionRef.getBoundingClientRect().top,
+            x = positionRef.getBoundingClientRect().left,
             width = this.heroImg.offsetWidth,
             height = this.heroImg.offsetHeight
 
@@ -248,12 +250,7 @@ export default class Page {
         let menuBg = document.querySelector('[data-transition-bg]')
         let menuBgPath = menuBg.querySelector('[data-transition-bg] [data-nav-menu-bg]')
         const texts = document.querySelectorAll('[data-text-reveal]')
-                //console.log(document.querySelectorAll('[data-intro-text] [data-text-reveal]'))
-
-
-        console.log(this.elements.text)
-        console.log(texts)
-
+        
         let rotationAngle = this.getRotationAngle(this.heroImg)
 
         gsap.set(menuBgPath, { attr: { d: start }})
@@ -281,7 +278,6 @@ export default class Page {
 
           }
         }, '-=0.6')
-
         
         this.tl.fromTo(this.elements.heroImgContainer, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)", duration: 0.6, stagger: { amount: 0.2 }, ease: "power2.out" }, "-=0.5")
 

@@ -220,8 +220,6 @@ class App {
           this.page.pageTrigger = l
           this.page.pageTag = linkTag
           
-          console.log(this.page.pageTrigger)
-
           if(this.navigation.isMenuOpen) {
             this.navigation.elements.navLinks.forEach(link => {
               link.removeEventListener('mouseout', link._hoverOutAnim)

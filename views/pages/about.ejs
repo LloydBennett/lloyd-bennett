@@ -25,10 +25,13 @@
     </div>
 
     <div class="about__hero-media" data-parallax="10" data-parallax-scrub=0.2>
-      <div class="relative center-block rotate--l-minus" data-hero-image-container>
-        <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- mainColour %>"></div>
-        <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-main-hero data-hero-image></div>
+      <div data-hero-image-block>
+        <div class="relative center-block rotate--l-minus" data-hero-image-container data-hero-image-rotated>
+          <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- mainColour %>"></div>
+          <div class="about__hero-media-img" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-main-hero data-hero-image></div>
+        </div>
       </div>
+      
     </div>
     
     <div class="about__hero-media-alt" data-parallax data-parallax-config='{
