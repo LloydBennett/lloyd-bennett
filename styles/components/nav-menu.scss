@@ -37,30 +37,28 @@
   }
 }
 
-.touch {
-  .nav-menu__preview {
-    display: none;
+.nav-menu__preview {
+  display: none;
+  top: 50%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transform: translateY(-50%) scale(0);
+
+  @include media-query($breakpoint--medium) {
+    width: 25rem;
+    height: 25rem;
+    display: block;
   }
 }
 
-.no-touch {
+.touch {
   .nav-menu__preview {
-    width: 17rem;
-    height: 17rem;
-    top: 50%;
-    left: 0;
-    pointer-events: none;
-    position: absolute;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    transform: translateY(-50%) scale(0);
-  
-    @include media-query($breakpoint--medium) {
-      width: 25rem;
-      height: 25rem;
-    }
+    display: none !important;
   }
 }
 

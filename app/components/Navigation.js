@@ -1,5 +1,6 @@
 import Components from 'classes/Components'
 import gsap from 'gsap'
+import isTouchDevice from 'utils/isTouchDevice'
 import { scroll } from 'utils/LenisScroll'
 
 export default class Navigation extends Components {
@@ -77,6 +78,7 @@ export default class Navigation extends Components {
       }
       
       link.addEventListener('mouseenter', (e) => {
+        if (isTouchDevice()) return
         this.elements.navLinks.forEach(otherLink => {
           if (otherLink !== link) {
             otherLink.classList.add('is-disabled')
@@ -99,6 +101,7 @@ export default class Navigation extends Components {
       })
 
       link.addEventListener('mouseleave', (e) => {
+        if (isTouchDevice()) return 
         this.elements.navLinks.forEach(otherLink => {
           otherLink.classList.remove('is-disabled', 'is-active')
         })
@@ -119,6 +122,29 @@ export default class Navigation extends Components {
       link.addEventListener('mousemove', (e) => {
         if (this.isMouseDisabled) return
         handleMouseMove(e)
+      })
+
+      link.addEventListener('click', (e) => {
+        if (isTouchDevice()) {
+
+          if (underline) {
+            gsap.to(underline, {
+              x: 0,
+              duration: 0.3,
+              ease: "power2.out"
+            })
+            gsap.to(underline, {
+              x: "100%",
+              duration: 0.3,
+              delay: 0.3,
+              ease: "power2.in",
+              onComplete: () => {
+                gsap.set(underline, { x: "-100%"})
+              }
+            })
+          }
+        }
+        
       })
     })
   }
