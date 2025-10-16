@@ -7,7 +7,9 @@ export default function isTouchDevice() {
   const hasTouchPoints = navigator.maxTouchPoints && navigator.maxTouchPoints > 0;
   const hasTouchClass = document.documentElement.classList.contains('touch');
 
-  const isSmallViewport = window.innerWidth <= 768;
+  return hasTouchEvents || hasTouchPoints || hasTouchClass;
+}
 
-  return hasTouchEvents || hasTouchPoints || hasTouchClass || isSmallViewport;
+export function isSmallViewport() {
+  return window.innerWidth <= 768;
 }

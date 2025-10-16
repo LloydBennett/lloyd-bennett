@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import create from '../utils/Create'
-import isTouchDevice from 'utils/isTouchDevice'
+import isTouchDevice, { isSmallViewport } from '../utils/IsTouchDevice'
 import { bg } from '../utils/BackgroundPath'
 
 export default class Page {
@@ -232,7 +232,7 @@ export default class Page {
 
   menuTransition(state, resolve, { start, middle, end }) {
     let wrapperContent = document.querySelector('[data-menu-move]')
-    const isPreviewEnabled = !isTouchDevice()
+    const isPreviewEnabled = !isSmallViewport()
     
     switch (state) {
       case 'show':
