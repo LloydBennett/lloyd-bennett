@@ -30,8 +30,6 @@ export default class Page {
     }
 
     Page.prototype.create = create
-    // this.loader = document.querySelector('[data-loader]')
-    // this.loaderPath = document.querySelector('[data-preloader-bg]')
     this.pageTrigger = null
     this.transitionType = null
     this.pageTag = null
