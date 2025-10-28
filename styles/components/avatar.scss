@@ -1,0 +1,31 @@
+.avatar {
+  border-radius: 100%;
+  width: 4.8rem;
+  height: 4.8rem;
+  overflow: hidden;
+
+  @include media-query($breakpoint--large) {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+
+  @include media-query($breakpoint--xx-large) {
+    width: 7.2rem;
+    height: 7.2rem;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.avatar__wrapper {
+  display: flex;
+  gap: spacing(2);
+  align-items: center;
+}
+
+.avatar--center {
+  justify-content: center;
+}

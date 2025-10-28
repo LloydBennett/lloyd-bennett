@@ -1,0 +1,26 @@
+<% 
+  let content = slice.primary
+  let quote = content.quote
+  let role = content.role
+  let author = content.author
+  let img = content.avatar
+  console.log(slice)
+
+%>
+<div class="container grid section--l-m-bottom">
+  <blockquote class="testimonial">
+    <div class="section--s-m-bottom testimonial__mark">
+      <%- include('../partials/svg/quote-mark') -%>
+    </div>
+    <q class="testimonial__quote text-center type--s type--quote type--italic type--m-margin block"><%- quote %></q>
+    <div class="avatar__wrapper avatar--center">
+      <div class="avatar">
+        <img src="<%- img.url %>" alt="<%- img.alt %>">
+      </div>
+      <div>
+        <span class="type--alt-s type--letter-sp type--semi-bold block "><%- role %></span>
+        <span class="type--body block"><%- author %></span>
+      </div>
+    </div>
+  </blockquote>
+</div>

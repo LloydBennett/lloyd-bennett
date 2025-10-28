@@ -11,6 +11,9 @@
       case 'single_paragraph':
         return prevSlices + include('./slices/SingleParagraph.ejs', { slice: slice })
         break;
+      case 'testimonial':
+        return prevSlices + include('./slices/testimonial.ejs', { slice: slice })
+        break;
       default :
         return '<h1>No Slices found</h1>'
     }

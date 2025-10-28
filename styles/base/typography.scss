@@ -191,6 +191,10 @@ body {
 	@include capitalised-text;
 }
 
+.type--regular {
+	font-weight: $type--font-weight-reg !important;
+}
+
 .type--semi-bold {
 	font-weight: $type--font-weight-semi;
 }
@@ -229,4 +233,10 @@ body {
 
 .white-space {
 	white-space: pre;
+}
+
+.type--quote {
+	font-family: $type--family-body;
+	font-weight: $type--font-weight-reg;
+	line-height: 1.4;
 }
