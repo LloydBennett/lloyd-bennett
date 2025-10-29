@@ -54,10 +54,23 @@
   <div class="relative no-overflow" data-hero-image-container>
     <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- projectColour %>"></div>
     <picture class="block" data-hero-image>
-      <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
-      <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
-      <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
-      <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
+
+      <source media="(max-width: 700px)"
+        srcset="
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=700 1x,
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=1400 2x,
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=2100 3x
+        "
+      sizes="100vw">
+
+      <source media="(min-width: 701px)"
+        srcset="
+        <%- document.data.hero_image.url %>?auto=compress,format&w=1440 1x,
+        <%- document.data.hero_image.url %>?auto=compress,format&w=2880 2x,
+        <%- document.data.hero_image.url %>?auto=compress,format&w=4320 3x
+        "
+      sizes="100vw">
+      <img class="block--full-width" src="<%- document.data.hero_image.url %>?auto=compress,format&w=1440" alt="<%- document.data.hero_image.alt %>">
     </picture>
   </div>
   
