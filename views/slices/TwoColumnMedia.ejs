@@ -14,7 +14,7 @@
           <% let thumbnail = col.column_image %>
 
           <picture>
-            <source media="(max-width: 767px)" srcset="<%- thumbnail.small.url %>?auto=compress,format&w=900 1x,<%- thumbnail.small.url %>?auto=compress,format&w=1800 2x">
+            <source media="(max-width: 767px)" srcset="<%- thumbnail.url %>?auto=compress,format&w=900 1x,<%- thumbnail.url %>?auto=compress,format&w=1800 2x">
             <source media="(min-width: 768px)" srcset="<%- thumbnail.url %>?auto=compress,format&w=694 1x,<%- thumbnail.url %>?auto=compress,format&w=1388 2x">
             <img class="block--full-width" src="<%- thumbnail.url %>?auto=compress,format&w=694" alt="<%- thumbnail.alt %>">
           </picture>
