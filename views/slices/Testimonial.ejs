@@ -5,8 +5,27 @@
   let author = content.author
   let img = content.avatar
 
+  let marginPos = content.margin 
+    ? content.margin.toLowerCase() 
+    : "default"  
+  let cssClass
+
+  switch(marginPos) {
+    case 'bottom':
+      cssClass = 'section--l-m-bottom'
+      break
+    case 'top':
+      cssClass = 'section--l-m-top'
+      break
+    case 'both':
+      cssClass = 'section--l-m-both'
+      break
+    default:
+      cssClass = 'section--l-m-bottom'
+      break
+  }
 %>
-<div class="container grid section--l-m-bottom">
+<div class="container grid <%- cssClass %>">
   <blockquote class="testimonial">
     <div class="section--s-m-bottom testimonial__mark">
       <%- include('../partials/svg/quote-mark') -%>
