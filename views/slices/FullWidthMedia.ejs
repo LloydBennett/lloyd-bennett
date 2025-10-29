@@ -4,12 +4,13 @@
     
     <% if(media.slice_type === 'full_width_image') { %>
       <% let thumbnail = media.primary.thumbnail_image %>
-
+      <% console.log(media.primary.thumbnail_image.small) %>
       <picture class="block">
-        <source media="(max-width: 800px)" srcset="<%- thumbnail.small.url %>">
-        <source media="(max-width: 1199px)" srcset="<%- thumbnail.url %>">
-        <source media="(min-width: 1200px)" srcset="<%- thumbnail.large.url %>">
-        <img class="block--full-width" src="<%- thumbnail.url %>" alt="<%- thumbnail.alt %>">
+
+        <source media="(max-width: 800px)"srcset="<%- thumbnail.url %>?auto=compress,format&w=900 1x,<%- thumbnail.url %>?auto=compress,format&w=1800 2x">
+        
+        <source media="(min-width: 801px)" srcset="<%- thumbnail.url %>?auto=compress,format&w=2824">
+        <img class="block--full-width" src="<%- thumbnail.url %>?auto=compress&w=2824,format" alt="<%- thumbnail.alt %>">
       </picture>
     
     <% } else if (media.slice_type === 'full_width_video') {%>
