@@ -173,8 +173,12 @@
 <section class="section--end">
   <% 
     let outcome = document.data.outcome
+    let stats = document.data.stats
+    const hasValidStats = stats.some(
+      item => item.stats_value !== null && item.stats_unit !== null
+    )
     
-    %>
+  %>
   <div class="container grid">
     <div class="offset-content">
       <div class="meta meta--margin-bottom">
@@ -195,6 +199,18 @@
           </p>
         <% } %>
       <% }) %>
+        
+       <% if(hasValidStats) { %>
+        <div class="project__stats flex section--s-m-top">
+          <% stats.forEach((stat) => { %>
+          <div>
+            <% if(stat.stats_value) {%><span class="type--l type--s-margin block"><%- stat.stats_value %></span><%}%>
+            <% if(stat.stats_unit) {%><span class="type--alt-s block"><%- stat.stats_unit %></span><%}%>
+          </div>
+          <% }) %>
+        </div>
+        
+      <% } %>
     </div>
 
   </div>
