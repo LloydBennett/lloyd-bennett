@@ -27,8 +27,20 @@
     }
   }
 
+  .project__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project__img {
+    aspect-ratio: 1 / 1;
+  }
+
   &:first-child,
   &:nth-child(7n) {
+
     @include media-query($breakpoint--small) {
       grid-column: 1 / 8;
     }
@@ -39,6 +51,12 @@
 
     @include media-query($breakpoint--x-large) {
       grid-column: 1 / 6;
+    }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        aspect-ratio: 1388 / 1088;
+      }
     }
   }
 
@@ -56,17 +74,28 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 8 / 11;
     }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        aspect-ratio: 814 / 1072;
+      }
+    }
   }
 
   &:nth-child(3),
   &:nth-child(9n) {
-
     @include media-query($breakpoint--small) {
       grid-column: 1 / 6;
     }
 
     @include media-query($breakpoint--medium) {
       grid-column: 3 / 7;
+    }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        aspect-ratio: 694 / 479;
+      }
     }
   }
 
@@ -84,6 +113,12 @@
     @include media-query($breakpoint--x-large) {
       grid-column: 2 / 5;
     }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        aspect-ratio: 814 / 816;
+      }
+    }
   }
 
   &:nth-child(5),
@@ -100,6 +135,12 @@
 
     @include media-query($breakpoint--x-large) {
       grid-column: 7 / 11;
+    }
+
+    .project__img {
+      @include media-query($breakpoint--small) {
+        aspect-ratio: 1100 / 816;
+      }
     }
   }
 

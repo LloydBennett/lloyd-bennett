@@ -25,11 +25,9 @@
           
           <% if(i > 5) { i == 1 } else { i = i } %>
           <div class="overlay absolute z-index--2" data-project-cover style="background-color: <%- projectColour %>"></div>
-          <picture class="project__img" data-project-img>
-            <source media="(min-width: 550px)" srcset="<%- project.data.thumbnail[`image_${i}`].url %>">
-            <source media="(max-width: 549px)" srcset="<%- project.data.thumbnail.url %>">
-            <img class="block--full-width" src="<%- project.data.thumbnail.url %>" alt="<%- project.data.title %>">
-          </picture>
+          <div class="project__img" data-project-img>
+            <img src="<%- project.data.thumbnail.url %>?auto=compress,format&w=2000" alt="<%- project.data.title %>">
+          </div>
         </a>
 
         <div class="project__meta" data-project-card-meta>

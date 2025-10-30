@@ -3,6 +3,14 @@
   let aboutTitle = about.data.nav_menu_alias
   let aTitle = aboutTitle.split("")
   let aboutCoverColour = about.data.hero_image_main_cover_colour
+
+  
+  projects.sort((a, b) => {
+    let aNum = a.data.order
+    let bNum = b.data.order
+  
+    return aNum - bNum
+  })
 %>
 
 <div class="nav-menu z-index--3" data-lenis-prevent data-nav-menu>
