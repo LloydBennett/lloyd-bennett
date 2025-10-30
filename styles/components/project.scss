@@ -171,11 +171,11 @@
   overflow: hidden;
 
   @include media-query($breakpoint--small) {
-    height: 40rem;
+    height: 50rem;
   }
 
   @include media-query($breakpoint--x-large) {
-    height: 50rem;
+    height: 80rem;
   }
 }
 
@@ -187,7 +187,7 @@
   }
 
   @include media-query($breakpoint--small) {
-    grid-column: 1 / 9;
+    grid-column: 2 / 8;
   }
 
   @include media-query($breakpoint--x-large) {

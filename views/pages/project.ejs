@@ -7,6 +7,8 @@
   let nextImg
   let nextUrl
   let projectColour = document.data.project_colour
+  let nextExLink
+
 
   function formatSlug(slug) {
     if (!slug) return "";
@@ -46,12 +48,16 @@
     
     if(i === projects.length - 1) {
       ntitle = projects[0].data.title 
-      nextImg = projects[0].data.hero_image.url
-      nextUrl = projects[0].url
+      nextImg = `${projects[0].data.hero_image.url}?auto=compress,format&w=2880`
+      nextExLink = projects[0].data.view_as_external_link? true : false
+      nextUrl = nextExLink? projects[0].data.project_link.url : projects[0].url
+
     } else {
       ntitle = projects[count].data.title 
-      nextImg = projects[count].data.hero_image.url
-      nextUrl = projects[count].url
+      nextImg = `${projects[count].data.hero_image.url}?auto=compress,format&w=2880`
+      nextExLink = projects[count].data.view_as_external_link? true : false
+
+      nextUrl = nextExLink? projects[count].data.project_link.url : projects[count].url
     }
     nextTitle = ntitle.split(" ")
     return
@@ -218,5 +224,24 @@
       <% } %>
     </div>
 
+  </div>
+</section>
+<%- include('../partials/marquee', { label: 'Next Project', small_spacing: true, hide_extra_labels: true }) -%>
+
+<section class="project__next">
+  <div class="container grid">
+    <div class="project__next-wrapper">
+      <div class="relative z-index--2 mix-blend__diff type--white">
+        <h1 class="type--xl text-center project__next-title">
+          <% nextTitle.forEach((t) => { %>
+            <span class="no-wrap--and-break"><%- t %></span>
+          <% }) %>
+        </h1>
+      </div>
+      
+      <a href="<%- nextUrl %>" class="project__next-thumb" <%if(nextExLink) {%>target="_blank" <% }%>>
+        <div class="project__next-img" style="background-image: url('<%- nextImg %>') "></div>
+      </a>
+    </div>
   </div>
 </section>
