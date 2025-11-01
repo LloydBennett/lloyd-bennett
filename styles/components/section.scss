@@ -70,6 +70,10 @@
   @include section--s((top, bottom), padding);
 }
 
+.section--tiny-m-top {
+  margin-top: spacing(1);
+}
+
 .section--end {
   @include section--l;
 }

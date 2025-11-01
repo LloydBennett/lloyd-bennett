@@ -131,6 +131,10 @@ body {
 	}
 }
 
+.type--xs {
+	@include text-size(1.2, 1.4);
+}
+
 .type--alt-xl {
 	@include capitalised-text(true);
 	@include text-size(1.6, 2.4, 3.2);

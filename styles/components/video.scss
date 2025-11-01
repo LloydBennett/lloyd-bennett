@@ -4,15 +4,15 @@
 }
 
 .video-frame--tall {
-  aspect-ratio: 900 / 800;
-
-  @include media-query($breakpoint--medium) {
-    aspect-ratio: 694 / 850;
-  }
+  aspect-ratio: 694 / 850;
 }
 
 .video-frame--landscape {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 12;
+
+  @include media-query($breakpoint--medium) {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .video--cover {
