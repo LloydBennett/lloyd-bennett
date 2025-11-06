@@ -19,6 +19,7 @@
 @import './tools/mixins/offset-content.scss';
 @import './tools/mixins/text-size.scss';
 @import './tools/mixins/section-large.scss';
+@import './tools/mixins/section-medium.scss';
 @import './tools/mixins/section-small.scss';
 @import './tools/mixins/section-xsmall.scss';
 @import './tools/mixins/captialised-text.scss';
@@ -86,6 +87,9 @@
 @import './components/error-grid.scss';
 @import './components/cursor.scss';
 @import './components/mix-blend-mode.scss';
+@import './components/video.scss';
+@import './components/avatar.scss';
+@import './components/testimonial.scss';
 
 // ------------------------------------ // ------------------------------------------
 // -------------------------------- P A G E S ---------------------------------------

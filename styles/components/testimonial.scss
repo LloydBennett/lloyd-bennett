@@ -1,0 +1,38 @@
+.testimonial {
+
+  @include media-query($breakpoint--small) {
+		grid-column: 1 / 9;
+	}
+
+  @include media-query($breakpoint--large) {
+		grid-column: 2 / 8;
+	}
+
+  @include media-query($breakpoint--x-large) {
+		grid-column: 2 / 10;
+	}
+}
+
+.testimonial__quote {
+  border-top: 1px solid $colour--grit-200;
+  padding-top: spacing(4);
+
+  @include media-query($breakpoint--medium) {
+    padding-top: spacing(6);
+  }
+}
+
+.testimonial__mark {
+  margin-left: auto;
+  margin-right: auto;
+  width: 5rem;
+
+  @include media-query($breakpoint--x-large) {
+    width: 7.2rem;
+  }
+
+  svg {
+    width: 100%;
+    display: block;
+  }
+}

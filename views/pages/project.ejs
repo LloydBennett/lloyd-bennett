@@ -6,10 +6,40 @@
   let nextTitle
   let nextImg
   let nextUrl
-  
+  let projectColour = document.data.project_colour
+  let nextExLink
+
+
+  function formatSlug(slug) {
+    if (!slug) return "";
+
+    const acronyms = ["ai", "ux", "ui", "crm", "seo", "api", "iot"];
+
+    // ✅ Special case for UX/UI pairings
+    if (/^ux(--|-)?ui/.test(slug)) {
+      // Replace "ux--ui" or "ux-ui" with "uxui" so we can handle it cleanly
+      slug = slug.replace(/^ux(--|-)?ui/, "uxui");
+    }
+
+    // Replace -- with " & " and - with space
+    let updated = slug
+      .replace(/--/g, " & ")
+      .replace(/-/g, " ");
+
+    // Split into words and normalize capitalization
+    let words = updated.split(" ").map(word => {
+      if (word.toLowerCase() === "uxui") return "UX/UI"; // merged UXUI
+      if (acronyms.includes(word.toLowerCase())) return word.toUpperCase();
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+
+    return words.join(" ");
+  }
+
 %>
+
 <% projects.forEach((obj, i) => { 
-  
+ 
   if(obj.data.title === projectTitle) {
     let count = i + 1 
     let ntitle
@@ -18,63 +48,89 @@
     
     if(i === projects.length - 1) {
       ntitle = projects[0].data.title 
-      console.log(projects[0].data.title)
-      nextImg = projects[0].data.hero_image.large.url
-      nextUrl = projects[0].url
+      nextImg = `${projects[0].data.hero_image.url}?auto=compress,format&w=2880`
+      nextExLink = projects[0].data.view_as_external_link? true : false
+      nextUrl = nextExLink? projects[0].data.project_link.url : projects[0].url
+
     } else {
       ntitle = projects[count].data.title 
-      nextImg = projects[count].data.hero_image.large.url
-      nextUrl = projects[count].url
+      nextImg = `${projects[count].data.hero_image.url}?auto=compress,format&w=2880`
+      nextExLink = projects[count].data.view_as_external_link? true : false
+
+      nextUrl = nextExLink? projects[count].data.project_link.url : projects[count].url
     }
     nextTitle = ntitle.split(" ")
     return
   }
-
 } ) %>
 
-<section class="section section--l">
-  <div class="section--s">
+<section class="section section--m-m-bottom">
+  <div class="section--m-m-bottom">
     <div class="hero__project container">
       <div class="hero__project-no">
         <span class="type--xl">
-          <%- projectIndex %>
+          <% let numbers = projectIndex.split("") %>
+          <% numbers.forEach((digit, i)=> { %><span class="inline-block" data-title-reveal><%- digit %></span><% })%>
         </span>
       </div>
       
       <h1 class="type--xl hero__project-title">
         <% projectTitleArr.forEach((title) => { %>
-          <span class="no-wrap--and-break"><%- title %></span>
+          <% let letters = title.split("") %>
+          <span class="no-wrap--and-break">
+            <% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%>
+          </span>
         <% }) %>
       </h1>
     </div>
   </div>
-  <picture class="block">
-    <source media="(max-width: 700px)" srcset="<%- document.data.hero_image.small.url %>">
-    <source media="(max-width: 1270px)" srcset="<%- document.data.hero_image.url %>">
-    <source media="(min-width: 1271px)" srcset="<%- document.data.hero_image.large.url %>">
-    <img class="block--full-width" src="<%- document.data.hero_image.url %>" alt="<%- document.data.hero_image.alt %>">
-  </picture>
+  <div class="relative no-overflow" data-hero-image-container>
+    <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- projectColour %>"></div>
+    <picture class="block" data-hero-image>
+
+      <source media="(max-width: 700px)"
+        srcset="
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=700 1x,
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=1400 2x,
+        <%- document.data.hero_image.small.url %>?auto=compress,format&w=2100 3x
+        "
+      sizes="100vw">
+
+      <source media="(min-width: 701px)"
+        srcset="
+        <%- document.data.hero_image.url %>?auto=compress,format&w=1440 1x,
+        <%- document.data.hero_image.url %>?auto=compress,format&w=2880 2x,
+        <%- document.data.hero_image.url %>?auto=compress,format&w=4320 3x
+        "
+      sizes="100vw">
+      <img class="block--full-width" src="<%- document.data.hero_image.url %>?auto=compress,format&w=1440" alt="<%- document.data.hero_image.alt %>">
+    </picture>
+  </div>
+  
 </section>
 
 
-<section class="section--l">
+<section class="section--l-m-bottom">
   <div class="container grid">
     <% 
     let services = document.data.services
     let industries = document.data.industries
     let intro = document.data.introduction
+
+    
     
     %>
-    <div class="aside section--l">
+    <div class="aside section--l-m-bottom">
       <div class="aside__content">
         <h4 class="type--body type--s-margin">
           Services
         </h4>
         <ul class="list">
         <% services.forEach((service, i) => { %>
+          
           <li class="list__item">
             <p class="type--body type--grit-400">
-              <%- service.skill %>
+              <%- formatSlug(service.skill.slug) %>
             </p>
           </li>
         <% }) %>
@@ -85,12 +141,17 @@
           Industry
         </h4>
         <ul class="list">
-          <% industries.forEach((elem) => { %>
-            <li class="list__item">
-              <p class="type--body type--grit-400">
-                <%- elem.industry %>
-              </p>
-            </li>
+          <% industries.forEach((elem) => {
+            
+            if (elem.category && elem.category.slug) { %>
+              
+              <li class="list__item">
+                <p class="type--body type--grit-400">
+                  <%- formatSlug(elem.category.slug) %>
+                </p>
+              </li>
+            <% }%>
+            
           <% }) %>
         </ul>
       </div>
@@ -120,11 +181,15 @@
 
 <%- include('../SliceZone.ejs', {SliceZone: document.data.body}) %>
 
-<section class="section--l">
+<section class="section--end">
   <% 
     let outcome = document.data.outcome
+    let stats = document.data.stats
+    const hasValidStats = stats.some(
+      item => item.stats_value !== null && item.stats_unit !== null
+    )
     
-    %>
+  %>
   <div class="container grid">
     <div class="offset-content">
       <div class="meta meta--margin-bottom">
@@ -145,22 +210,36 @@
           </p>
         <% } %>
       <% }) %>
+        
+       <% if(hasValidStats) { %>
+        <div class="project__stats flex section--s-m-top">
+          <% stats.forEach((stat) => { %>
+          <div>
+            <% if(stat.stats_value) {%><span class="type--l type--s-margin block"><%- stat.stats_value %></span><%}%>
+            <% if(stat.stats_unit) {%><span class="type--alt-s block"><%- stat.stats_unit %></span><%}%>
+          </div>
+          <% }) %>
+        </div>
+        
+      <% } %>
     </div>
 
   </div>
 </section>
-
-<%- include('../partials/belt', { label: 'Next Project', small_spacing: true }) -%>
+<%- include('../partials/marquee', { label: 'Next Project', small_spacing: true, hide_extra_labels: true }) -%>
 
 <section class="project__next">
   <div class="container grid">
     <div class="project__next-wrapper">
-      <h1 class="type--xl text-center project__next-title">
-        <% nextTitle.forEach((t) => { %>
-          <span class="no-wrap--and-break"><%- t %></span>
-        <% }) %>
-      </h1>
-      <a href="<%- nextUrl %>" class="project__next-thumb">
+      <div class="relative z-index--2 mix-blend__diff type--white">
+        <h1 class="type--xl text-center project__next-title">
+          <% nextTitle.forEach((t) => { %>
+            <span class="no-wrap--and-break"><%- t %></span>
+          <% }) %>
+        </h1>
+      </div>
+      
+      <a href="<%- nextUrl %>" class="project__next-thumb" <%if(nextExLink) {%>target="_blank" <% }%>>
         <div class="project__next-img" style="background-image: url('<%- nextImg %>') "></div>
       </a>
     </div>

@@ -7,7 +7,7 @@
 }
 
 .hero__project-title {
-  grid-column: 1 / 5;
+  grid-column: 1 / 7;
 
   @include media-query($breakpoint--medium - 1, max-width) {
     text-align: center;
@@ -32,7 +32,7 @@
 }
 
 .hero__project-no {
-  grid-column: 1 / 5;
+  grid-column: 1 / 7;
 
   @include media-query($breakpoint--medium - 1, max-width) {
     text-align: center;

@@ -9,6 +9,7 @@
     let firstLabel = labelArr[0]
     let newLabel = labelArr.splice(1, 2).toString().replace(/,/g, " ")
     let description = document.data.hero_description
+    let colour = document.data.hero_image_cover_colour
 
     %>
     
@@ -21,11 +22,11 @@
           %>
 
           <% if (i === titleArr.length) { %>
-            <span class="type--italic home-hero__title-last mask-title__word inline-block no-overflow">
+            <span class="type--italic home-hero__title-last inline-block">
           <% } else if (i === (titleArr.length - 1)) { %>
-            <span class="home-hero__title-pen mask-title__word inline-block no-overflow">
+            <span class="home-hero__title-pen inline-block">
           <% } else { %>
-            <span class="mask-title__word inline-block no-overflow">
+            <span class="inline-block">
           <% } %>
             <% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%>
           </span>
@@ -35,7 +36,8 @@
     </div>
     <div class="column--centered home-hero__image">
       <div data-parallax="10" data-parallax-scrub="0.2">
-        <div class="home-hero__image-wrapper rotate--s no-overflow center-block" data-hero-image-container>
+        <div class="home-hero__image-wrapper rotate--s no-overflow center-block relative" data-hero-image-container>
+          <div class="overlay absolute z-index--2" data-image-cover style="background-color: <%- colour %>"></div>
           <div class="home-hero__image-thumb" style="background: url('<%- image.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
         </div>
       </div>
@@ -50,10 +52,10 @@
       <p class="type--alt-l text-right no-wrap type--grit-400 no-overflow">
 
         <span class="no-overflow block">
-          <span class="inline-block" data-text-reveal><%- firstLabel %></span>
+          <span class="inline-block" data-text-reveal="1"><%- firstLabel %></span>
         </span>
         <span class="no-overflow block">
-          <span class="inline-block" data-text-reveal><%- newLabel %></span>
+          <span class="inline-block" data-text-reveal="2"><%- newLabel %></span>
         </span>
       </p>
     </div>
@@ -66,9 +68,9 @@
   </div>
 </section>
 
-<section class="section--l section--l-top">
+<section class="section--l-m-both">
   <div class="container grid">
-    <div class="services__call-out section--s">
+    <div class="services__call-out section--m-m-bottom">
       <h4 class="type--call-out" data-text>
         <%- document.data.call_out_text %>
       </h4>

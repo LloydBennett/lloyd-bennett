@@ -1,4 +1,4 @@
-<section id="work" class="section--l-bottom" data-work data-scroll-container>
+<section id="work" class="section--l-p-bottom" data-work data-scroll-container>
   <%
   projects.sort((a, b) => {
     let aNum = a.data.order
@@ -12,28 +12,29 @@
       <% 
         let i = index + 1 
         let indexOutput = i.toString().padStart(2, '0')
-        let projectTitle = project.data.title 
+        let projectTitle = project.data.title
+        let projectTag = projectTitle.replace(/\s+/g, '-').toLowerCase();
         let projectTitleArr = projectTitle.split(" ")
-        let scrollSpeed = i * 0.5
+        let externalLink = project.data.view_as_external_link? true : false
+        let projectColour = project.data.project_colour
       %>
 
-      <div class="project__card" data-scroll data-scroll-speed="<%- scrollSpeed %>" data-project-card>
-        <a href="<%- project.data.project_link.url %>" class="block no-overflow" target="_blank">
+      <div class="project__card" data-project-card="<%- projectTag %>">
+        <a href="<% if(externalLink) { %> <%- project.data.project_link.url %> <%} else { %><%- project.url %><%} %>" class="block no-overflow relative" <% if(externalLink) { %>target="_blank" <% } %>
+          <% if(!externalLink) { %>data-page-trigger="morph"<%}%>>
           
           <% if(i > 5) { i == 1 } else { i = i } %>
-          
-          <picture class="project__img" data-project-img>
-            <source media="(min-width: 550px)" srcset="<%- project.data.thumbnail[`image_${i}`].url %>">
-            <source media="(max-width: 549px)" srcset="<%- project.data.thumbnail.url %>">
-            <img class="block--full-width" src="<%- project.data.thumbnail.url %>" alt="<%- project.data.title %>">
-          </picture>
+          <div class="overlay absolute z-index--2" data-project-cover style="background-color: <%- projectColour %>"></div>
+          <div class="project__img" data-project-img>
+            <img src="<%- project.data.thumbnail.url %>?auto=compress,format&w=2000" alt="<%- project.data.title %>">
+          </div>
         </a>
 
-        <div class="project__meta">
-          <span class="type--s"><%- indexOutput %></span>
-          <h4 class="type--s">
+        <div class="project__meta" data-project-card-meta>
+          <span class="type--s" data-project-card-meta-text><%- indexOutput %></span>
+          <h4 class="type--s text-right">
             <% projectTitleArr.forEach((title) => { %>
-              <span class="no-wrap--and-break"><%- title %></span>
+              <span class="no-wrap--and-break" data-project-card-meta-text><%- title %></span>
             <% }) %>
             
           </h4>

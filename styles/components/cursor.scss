@@ -14,6 +14,10 @@
   pointer-events: none;
   transition: border-color 100ms ease, width 300ms ease, height 300ms ease, background-color 300ms ease;
 
+  @include media-query($breakpoint--medium - 1, max-width) {
+    display: none;
+  }
+
   @include media-query($breakpoint--large) {
     width: 5.6rem;
     height: 5.6rem;

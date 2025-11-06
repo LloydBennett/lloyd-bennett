@@ -26,9 +26,9 @@
           Error
         </span>
       </div>
-      <h1 class="type--xl mask-title--l type--s-margin">
+      <h1 class="type--xl type--s-margin">
         <% titleArr.forEach((text, index) => { %>
-          <span class="mask-title__l-word inline-block no-overflow"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
+          <span class="inline-block"><% let letters = text.split("") %><% letters.forEach((char, i)=> { %><span class="inline-block" data-title-reveal><%- char %></span><% })%></span>
         <% }) %>
       </h1>
       <div data-hero-content-group>
@@ -45,6 +45,7 @@
   </div>
 
   <div class="error-grid__image relative" data-hero-image-container>
+    <div class="overlay absolute z-index--2" data-image-cover style="background-color: #B79C81"></div>
     <div class="overlay absolute" style="background: url('<%- imageAlt.large.url %>') center no-repeat; background-size: cover" data-hero-image></div>
   </div>
 

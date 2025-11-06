@@ -1,5 +1,6 @@
 import Components from 'classes/Components'
 import gsap from 'gsap'
+import isTouchDevice, { isSmallViewport } from 'utils/IsTouchDevice'
 import { scroll } from 'utils/LenisScroll'
 
 export default class Navigation extends Components {
@@ -12,7 +13,7 @@ export default class Navigation extends Components {
         bg: '[data-nav-menu-bg]',
         navBar: '[data-nav-bar]',
         linkText: '[data-link-text]',
-        navLinks: '.nav-menu__list-item [data-page-trigger]',
+        navLinks: '.nav-menu__list-item [data-menu-link]',
         navLinkSpans: '.nav-menu__list-item [data-page-trigger] span',
         linkTextChar: '[data-link-text] span',
         menuMove: '[data-menu-move]',
@@ -25,6 +26,7 @@ export default class Navigation extends Components {
     this.isMenuOpen = false
     this.svgPath = {}
     this.linkSpans = []
+    this.isMouseDisabled = false
     this.scrollPosition = 0
     this.lScroll = scroll
     this.addEventListeners()
@@ -76,6 +78,7 @@ export default class Navigation extends Components {
       }
       
       link.addEventListener('mouseenter', (e) => {
+        if (isTouchDevice() || isSmallViewport()) return
         this.elements.navLinks.forEach(otherLink => {
           if (otherLink !== link) {
             otherLink.classList.add('is-disabled')
@@ -98,6 +101,7 @@ export default class Navigation extends Components {
       })
 
       link.addEventListener('mouseleave', (e) => {
+        if (isTouchDevice() || isSmallViewport()) return 
         this.elements.navLinks.forEach(otherLink => {
           otherLink.classList.remove('is-disabled', 'is-active')
         })
@@ -110,11 +114,37 @@ export default class Navigation extends Components {
           })
         }
 
-        this.hideNavPreview(imgPrev)
+        if(!this.isMouseDisabled) {
+          this.hideNavPreview(imgPrev)
+        }
       })
 
       link.addEventListener('mousemove', (e) => {
+        if (isTouchDevice() || isSmallViewport()) return
         handleMouseMove(e)
+      })
+
+      link.addEventListener('click', (e) => {
+        if (isTouchDevice() || isSmallViewport()) {
+
+          if (underline) {
+            gsap.to(underline, {
+              x: 0,
+              duration: 0.3,
+              ease: "power2.out"
+            })
+            gsap.to(underline, {
+              x: "100%",
+              duration: 0.3,
+              delay: 0.3,
+              ease: "power2.in",
+              onComplete: () => {
+                gsap.set(underline, { x: "-100%"})
+              }
+            })
+          }
+        }
+        
       })
     })
   }
@@ -152,7 +182,9 @@ export default class Navigation extends Components {
     tl.to(this.elements.menuMove, { y: "-100", duration: 1, ease: 'power4.in'}, "elements")
     tl.to(this.elements.contentOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' }, "-=0.8")
     
-    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 1 } })
+    tl.fromTo(this.elements.linkTextChar, { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
+
+    tl.fromTo(this.elements.linkTextChar, { y: "110%" }, { y: 0, ease: 'power2.out', duration: 0.6, stagger: { amount: 0.65 } }, "<-0.1")
 
     tl.to(this.elements.navBar, { duration: 0.6, opacity: 1, ease: "power2.out" }, '-=0.3 nav')
   }
@@ -174,7 +206,7 @@ export default class Navigation extends Components {
 
     tl.set(this.elements.bg, { attr: { d: this.svgPath.start }})
     
-    tl.to(this.elements.linkTextChar, { y: "110%", ease: 'power2.out', duration: 0.4, stagger: { amount: 0.5 } })
+    tl.to(this.elements.linkTextChar, { opacity: 0, ease: 'power2.out', duration: 0.4, stagger: { amount: 0.4 } })
 
     setTimeout(() => {
       this.elements.cursor.classList.remove("cursor--inverted")  
@@ -192,6 +224,34 @@ export default class Navigation extends Components {
     tl.to(this.elements.navMenu, { duration: 0.6, opacity: 0, visibility: "hidden" })
   }
 
+  closeMenuImmediate() {
+    // Reset menu-related elements instantly
+    gsap.killTweensOf("*") // stop any running tweens (optional, but helps avoid overlap)
+
+    // Set all properties instantly
+    gsap.set(this.elements.bg, { attr: { d: 'M 0 100 V 100 Q 50 100 100 100 V 100 z' }}) // fully closed path
+    gsap.set(this.elements.linkTextChar, { opacity: 0, y: "110%" })
+    gsap.set(this.elements.menuMove, { y: 0 })
+    gsap.set(this.elements.contentOverlay, { opacity: 0 })
+    gsap.set(this.elements.navMenu, { opacity: 0, visibility: "hidden" })
+    gsap.set(this.elements.navBar, { opacity: 1 })
+    gsap.set(document.querySelectorAll('[data-nav-menu-preview]'), {
+      scale: 0
+    })
+
+    // Restore cursor
+    this.elements.cursor.classList.remove("cursor--inverted")
+    this.elements.navMenu.classList.toggle('menu-is-open')
+    this.elements.navBar.classList.toggle('inverted')
+
+    
+    // Reset scroll and state
+    this.lScroll.start()
+    this.isAnimating = false
+    this.isMenuOpen = false
+  }
+
+
   showNavPreview(img) {
     gsap.to(img, {
       scale: 1,
@@ -206,5 +266,13 @@ export default class Navigation extends Components {
       duration: 0.3,
       ease: "Power2.out"
     })
+  }
+
+  disableMouseMove() {
+    this.isMouseDisabled = true
+  }
+
+  enableMouseMove() {
+    this.isMouseDisabled = false
   }
 }

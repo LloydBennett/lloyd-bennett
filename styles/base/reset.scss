@@ -431,7 +431,14 @@
     font: inherit; /* 2 */
   }
   
+  q {
+    quotes: none;
+  }
   
+  blockquote {
+    margin: 0;
+  }
+
   *{
       box-sizing: border-box;
   }

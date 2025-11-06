@@ -16,7 +16,7 @@
   <main id="main" data-page="<%- page %>" class="main <%- page %>">
     <div class="overlay fixed bg--transparent-50 z-index--3 opacity--0 cursor--not-clickable" data-menu-content-overlay></div>
 
-    <div class="<% if( page !== 'project' ) { %>bg--grit-50 main--margin<%} %>" data-menu-move>
+    <div class="flex flex--column bg--grit-50<% if( page !== 'project' ) { %> main--margin<%} %>" data-menu-move>
   
       <div class="<% if( page === 'error' ) { %>error-grid flex<% } else { %>section--container<% } %>">
         <% switch(page) {

@@ -1,3 +1,24 @@
+.two-column-grid {
+	@include grid;
+	
+  @include media-query($breakpoint--medium - 1, max-width) {
+    display: flex;
+		flex-direction: column;
+  }
+}
+
+.two-column-grid--gap-xs {
+	row-gap: spacing(2);
+
+	@include media-query($breakpoint--medium) {
+    row-gap: spacing(4);
+  }
+
+  @include media-query($breakpoint--large) {
+    row-gap: spacing(5);
+  }
+}
+
 .column {
 	grid-column: 1 / 9;
 
@@ -20,7 +41,7 @@
 
 .column--half-start {
 	@include media-query($breakpoint--medium) {
-		grid-column: 1 / 4;
+		grid-column: 1 / 5;
 	}
 
 	@include media-query($breakpoint--x-large) {
@@ -30,7 +51,7 @@
 
 .column--half-end {
 	@include media-query($breakpoint--medium) {
-		grid-column: 4 / 7;
+		grid-column: 5 / 9;
 	}
 
 	@include media-query($breakpoint--x-large) {

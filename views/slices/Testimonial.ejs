@@ -1,0 +1,44 @@
+<% 
+  let content = slice.primary
+  let quote = content.quote
+  let role = content.role
+  let author = content.author
+  let img = content.avatar
+
+  let marginPos = content.margin 
+    ? content.margin.toLowerCase() 
+    : "default"  
+  let cssClass
+
+  switch(marginPos) {
+    case 'bottom':
+      cssClass = 'section--l-m-bottom'
+      break
+    case 'top':
+      cssClass = 'section--l-m-top'
+      break
+    case 'both':
+      cssClass = 'section--l-m-both'
+      break
+    default:
+      cssClass = 'section--l-m-bottom'
+      break
+  }
+%>
+<div class="container grid <%- cssClass %>">
+  <blockquote class="testimonial">
+    <div class="section--s-m-bottom testimonial__mark">
+      <%- include('../partials/svg/quote-mark') -%>
+    </div>
+    <q class="testimonial__quote text-center type--s type--quote type--italic type--m-margin block"><%- quote %></q>
+    <div class="avatar__wrapper avatar--center">
+      <div class="avatar">
+        <img src="<%- img.url %>" alt="<%- img.alt %>">
+      </div>
+      <div>
+        <span class="type--body block"><%- author %></span>
+        <span class="type--alt-xs type--letter-sp type--semi-bold block "><%- role %></span>
+      </div>
+    </div>
+  </blockquote>
+</div>

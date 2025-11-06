@@ -1,0 +1,28 @@
+<% let media = slice %>
+<section class="section--media">
+  <div class="container">
+    
+    <% if(media.slice_type === 'full_width_image') { %>
+      <% let thumbnail = media.primary.thumbnail_image %>
+      <% console.log(media.primary.thumbnail_image.small) %>
+      <picture class="block">
+
+        <source media="(max-width: 800px)"srcset="<%- thumbnail.url %>?auto=compress,format&w=900 1x,<%- thumbnail.url %>?auto=compress,format&w=1800 2x">
+        
+        <source media="(min-width: 801px)" srcset="<%- thumbnail.url %>?auto=compress,format&w=2824">
+        <img class="block--full-width" src="<%- thumbnail.url %>?auto=compress&w=2824,format" alt="<%- thumbnail.alt %>">
+      </picture>
+    
+    <% } else if (media.slice_type === 'full_width_video') {%>
+      <% 
+      let video = media.primary.video.url
+      %>
+      <div class="video__frame video-frame--landscape" data-video-frame="play-on-scroll">
+        <video class="video--cover" src="<%- video %>" muted loop playsinline controls data-video></video>
+      </div>
+
+    <% }%>
+  </div>
+</section>
+
+

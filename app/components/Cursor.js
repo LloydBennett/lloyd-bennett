@@ -26,6 +26,12 @@ export default class Cursor extends Components {
     super.create()
   }
 
+  refreshElements() {
+    this.elements.projects = document.querySelectorAll('[data-project-card] a')
+    this.elements.footer = document.querySelector('[data-footer]')
+    this.elements.navMenu = document.querySelector('[data-nav-menu]')
+  }
+
   addEventListeners() {
     let hasMoved = false
 
