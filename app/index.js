@@ -30,10 +30,12 @@ class App {
     
     this.triggerElem = null
     this.triggerTransition = null
+
+    //window.addEventListener('popstate', this.onPopState.bind(this))
   }
 
   init() {
-    this.addLinkListeners()
+    //this.addLinkListeners()
     this.createProjectCard()
     this.createParallaxItems()
     this.createVideoPlayer()
@@ -129,6 +131,10 @@ class App {
   }
 
   onPopState () {
+    //this.triggerTransition = 'default'
+
+    //this.page.transitionType = 'default';
+
     this.onChange({
       url: window.location.pathname,
       push: false
