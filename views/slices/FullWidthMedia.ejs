@@ -4,7 +4,6 @@
     
     <% if(media.slice_type === 'full_width_image') { %>
       <% let thumbnail = media.primary.thumbnail_image %>
-      <% console.log(media.primary.thumbnail_image.small) %>
       <picture class="block">
 
         <source media="(max-width: 800px)"srcset="<%- thumbnail.url %>?auto=compress,format&w=900 1x,<%- thumbnail.url %>?auto=compress,format&w=1800 2x">
