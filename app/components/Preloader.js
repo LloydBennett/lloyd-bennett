@@ -13,8 +13,8 @@ export default class Preloader extends Components {
     
     this.LSPINNER_WIDTH = this.elements.loaderIconSpinner.getBoundingClientRect().width;
     this.LSPINNER_WIDTH_RULE = this.LSPINNER_WIDTH / 10;
-    this.LSPINNER_RADIUS = (this.LSPINNER_WIDTH / 2) - (this.LSPINNER_WIDTH_RULE / 2) ;
-    this.LSPINNER_CIRCUMFERENCE = 2 * Math.PI * this.LSPINNER_RADIUS;
+    this.LSPINNER_RADIUS = this.elements.loaderIconCircle.r.baseVal.value;
+    this.LSPINNER_CIRCUMFERENCE = 2 * Math.PI * this.LSPINNER_RADIUS + 1.5;
 
     this.elements.loaderIconCircle.style.strokeDasharray = this.LSPINNER_CIRCUMFERENCE;
     this.isLoading = true
@@ -42,7 +42,13 @@ export default class Preloader extends Components {
 
   updateLoader(amount) {
     let progress = amount / 100;
-    let dashoffset = this.LSPINNER_CIRCUMFERENCE * (1 - progress);
+    let dashoffset = +(this.LSPINNER_CIRCUMFERENCE * (1 - progress)).toFixed(3);
+
+    // force full completion
+    if (progress >= 1) {
+      dashoffset = 0;
+    }
+
     this.elements.loaderIconCircle.style.strokeDashoffset = dashoffset;
   }
 }

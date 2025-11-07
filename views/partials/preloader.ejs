@@ -4,7 +4,10 @@
   <div class="fixed overlay" data-loader-bg>
     <%- include('./svg/background', { path: svgPath, dataAttr: "data-preloader-bg" }) -%>
   </div>
-  <div class="loader__content absolute overlay flex center-flex" data-loader-icon>
-    <%- include('./svg/loader-icon') -%>
+  <div class="absolute overlay flex center-flex" data-loader-icon>
+    <div class="loader__icon">
+      <%- include('./svg/loader-icon') -%>
+    </div>
+    
   </div>
 </div>
