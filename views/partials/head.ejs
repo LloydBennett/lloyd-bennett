@@ -18,6 +18,8 @@
   <% } %>
   
   <meta name="description" content="<%- meta.data.description %>">
+  <meta name="keywords" content="<% meta.data.meta_keywords.forEach((item, i) => {%><%if(i === meta.data.meta_keywords.length - 1) { %><%- item.keyword %><% } else {%><%- item.keyword %>, <%}})%>">
+
   <meta property="og:url" content="<%- fullUrl %>" />
   <meta property="og:title" content="<%- meta.data.title %>" />
   <meta property="og:description" content="<%- meta.data.description %>" />
