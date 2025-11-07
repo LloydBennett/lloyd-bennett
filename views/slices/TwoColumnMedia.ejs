@@ -29,7 +29,7 @@
         %>
         <div class="column <% if(i % 2 == 0) { %>column--half-end <% } else { %>column--half-start<% } %>">
           <div class="video__frame <%if (col.orientation ==="Landscape") {%> video-frame--landscape <% } else { %> video-frame--tall<% } %>" data-video-frame="play-on-scroll">
-            <video class="video video--cover" src="<%- video %>" muted loop playsinline controls data-video></video>
+            <video class="video video--cover" src="<%- video %>" muted loop playsinline data-video></video>
           </div>
           <% if(col.caption) { %>
             <div class="section--tiny-m-top"><span class="type--xs"><%- col.caption %></span></div>

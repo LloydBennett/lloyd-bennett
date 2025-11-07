@@ -39,10 +39,14 @@ export default class VideoPlayer extends Components {
         start: "top 70%",
         end: "bottom 30%",
         onEnter: () => {
-          video.play()
+          video.play().catch(err => {
+            console.warn("Video play failed:", err)
+          })
         },
         onEnterBack: () => {
-          video.play()
+          video.play().catch(err => {
+            console.warn("Video play failed:", err)
+          })
         },
         onLeave: () => {
           video.pause()
