@@ -76,7 +76,11 @@
 }
 
 .home-hero__image-wrapper {
-  max-width: 70rem;
+  max-width: 55rem;
+
+  @include media-query($breakpoint--x-large) {
+    max-width: 70rem;
+  }
 }
 
 .home-hero__image-thumb {
