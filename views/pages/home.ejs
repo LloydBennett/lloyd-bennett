@@ -93,6 +93,10 @@
   </div>
 </section>
 
+<% if (document.data.body && Array.isArray(document.data.body)) { %>
+  <%- include('../SliceZone.ejs', { SliceZone: document.data.body }) %>
+<% } %>
+
 <%- include('../partials/marquee', { label: document.data.belt_label, small_spacing: false, hide_extra_labels: false }) -%>
 
 <%- include('../partials/project-list', { project: projects }) -%>
