@@ -1,7 +1,7 @@
 <% let media = slice %>
 <section class="section--media">
   <div class="container">
-    
+    <% console.log(media) %>
     <% if(media.slice_type === 'full_width_image') { %>
       <% let thumbnail = media.primary.thumbnail_image %>
       <picture class="block">
@@ -21,6 +21,9 @@
       </div>
 
     <% }%>
+    <% if(media.primary.caption) { %>
+      <div class="section--tiny-m-top"><%if(media.primary.caption_title) { %><span class="type--uppercase type--family-alt type--xs type--semi-bold"><%- media.primary.caption_title %> </span><% }%><span class="type--xs">- <%- media.primary.caption%></span></div>
+    <%} %>
   </div>
 </section>
 

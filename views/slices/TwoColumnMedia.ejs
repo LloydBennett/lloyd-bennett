@@ -19,7 +19,7 @@
             <img class="block--full-width" src="<%- thumbnail.url %>?auto=compress,format&w=694" alt="<%- thumbnail.alt %>">
           </picture>
           <% if(col.caption) { %>
-            <div class="section--tiny-m-top"><span class="type--xs type--italic"><%- col.caption%></span></div>
+            <div class="section--tiny-m-top"><%if(col.caption_title) { %><span class="type--uppercase type--family-alt type--xs type--semi-bold"><%- col.caption_title %> </span><% }%><span class="type--xs">- <%- col.caption%></span></div>
           <%} %>
         </div>
       <% } else if (mediaType === "video" && col.video.url) {%>
@@ -32,7 +32,7 @@
             <video class="video video--cover" src="<%- video %>" muted loop playsinline data-video></video>
           </div>
           <% if(col.caption) { %>
-            <div class="section--tiny-m-top"><span class="type--xs"><%- col.caption %></span></div>
+            <div class="section--tiny-m-top"><%if(col.caption_title) { %><span class="type--uppercase type--family-alt type--xs type--semi-bold"><%- col.caption_title %> </span><% }%><span class="type--xs">- <%- col.caption %></span></div>
           <%} %>
         </div>
         
