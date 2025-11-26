@@ -19,10 +19,6 @@
 .services__call-out {
   grid-column: 1 / 9;
 
-  @include media-query($breakpoint--large) {
-    text-align: center;
-  }
-
   @include media-query($breakpoint--x-large) {
     grid-column: 1 / 11;
   }
