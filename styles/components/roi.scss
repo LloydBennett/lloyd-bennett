@@ -10,7 +10,6 @@
   &:nth-child(2),
   &:nth-child(4),
   &:nth-child(6) {
-
     @include media-query($breakpoint--x-large) {
       grid-column: 4 / 7;
     }
@@ -90,6 +89,16 @@
     &:nth-child(4) {
       animation-delay: 0.9s;
     }
+  }
+}
+
+.roi--smart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    max-width: 4rem;
   }
 }
 
