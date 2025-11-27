@@ -1,5 +1,6 @@
 <% 
   let block = slice.items
+  let primary = slice.primary
 %>
 
 <section class="section--l-m-bottom">
@@ -8,27 +9,27 @@
       <div class="meta meta--margin-bottom">
         <div class="hr"></div>
         <span class="block type--alt-s type--semi-bold type--letter-sp">
-          Impact of my work
+          <%- primary.heading %>
         </span>
       </div>
+      <% if(primary.heading_description) { %>
+      <p class="type--body"><%- primary.heading_description %> </p>
+      <% } %>
     </div>
     
     <% block.forEach((item, index) => { %>
-      <% let icon = item.icon.toLowerCase() %>
+      <% 
+      let icon = item.icon.toLowerCase()
+      
+      %>
       <div class="roi__col">
-
         <div class="roi__icon roi--<%-icon%>">
-          <%- include('../partials/svg/scale') -%>
-          <%- include('../partials/svg/speed') -%>
-          <%- include('../partials/svg/consistency') -%>
-          <%- include('../partials/svg/smart') -%>
-
-          <%- item.icon %>
+          <%- include(`../partials/svg/${icon}`) -%>
         </div>
         <h3 class="type--s-special type--xs-margin">
           <%- item.impact_title %>
         </h3>
-        <p class="type--xs">
+        <p class="type--body">
           <%- item.impact_description %>
         </p>
       </div>
