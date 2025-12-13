@@ -26,8 +26,8 @@
 
 .loader-circle--loaded {
   stroke: $colour--passion;
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
   transform: rotate(-90deg);
   transform-origin: 50%;
 }
