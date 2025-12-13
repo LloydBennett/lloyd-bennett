@@ -13,7 +13,7 @@ export default class Home extends Page {
         workSection: '[data-work]',
         transition: '[data-menu-move]',
         floatingPoster:'[data-floating-poster]',
-        roiSection: '[data-roi-section]',
+        introSection: '[data-skills-section]',
         posterImgs: '[data-floating-poster-images]'
       }
     })
@@ -64,27 +64,36 @@ export default class Home extends Page {
     gsap.set(this.elements.floatingPoster, { opacity: 0 }); // ensure hidden initially
     let anim = this.animateFloatingPoster()
 
-    ScrollTrigger.create({
-      trigger: this.elements.roiSection,
-      start: '45% bottom',   
-      end: '130% bottom',      
-      markers: false,
-      onEnter: () => {
-        gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
-        anim.play()
-      },
-      onLeave: () => { 
-        gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
-        anim.pause()
-      },
-      onEnterBack: () =>  { 
-        gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
-        anim.play()
-      },
-      onLeaveBack: () => {
-        gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
-        anim.pause()
-      }
+    const breakpoints = [
+      { query: "(max-width: 1199px)", start: "10% bottom", end: "150% bottom" },
+      { query: "(min-width: 1200px)", start: "top bottom", end: "250% bottom" },
+    ]
+
+    breakpoints.forEach(bp => {
+      gsap.matchMedia().add(bp.query, () => {
+        ScrollTrigger.create({
+          trigger: this.elements.introSection,
+          start: bp.start,   
+          end: bp.end,      
+          markers: false,
+          onEnter: () => {
+            gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
+            anim.play()
+          },
+          onLeave: () => { 
+            gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
+            anim.pause()
+          },
+          onEnterBack: () =>  { 
+            gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
+            anim.play()
+          },
+          onLeaveBack: () => {
+            gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
+            anim.pause()
+          }
+        })
+      })
     })
   }
 }

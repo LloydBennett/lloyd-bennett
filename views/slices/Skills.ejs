@@ -1,0 +1,22 @@
+<% 
+  let block = slice.items
+  let primary = slice.primary
+  let icon = primary.icon.toLowerCase()
+%>
+ 
+<div class="skills__col">
+  <div class="skills__icon skills--<%-icon%>">
+    <%- include(`../partials/svg/${icon}`) -%>
+  </div>
+  <span class="block type--alt-s type--semi-bold type--letter-sp type--xs-margin">
+    <%- primary.column_title %>
+  </span>
+
+  <ul>
+    <% slice.items.forEach((item, index) => { %>
+    <li class="list__item">
+      <span class="services__list-item"> <%- item.skill %></span>
+    </li>
+    <% }) %>
+  </ul>
+</div>

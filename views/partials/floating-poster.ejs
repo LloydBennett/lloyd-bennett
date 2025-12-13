@@ -2,14 +2,11 @@
 data = floatingPoster.data
 isPosterShowing = data.show_floating_poster
 gallery = data.gallery
-
-console.log(floatingPoster)
 %>
 
 <% if(isPosterShowing) { %>
     <div class="floating-poster z-index--3" data-floating-poster>
       <% gallery.forEach((item, i) => {  %>
-        <% console.log(item) %>
         <img src="<%- item.image.url %>?auto=compress,format&w=814" alt="<%- item.image.alt %>" data-floating-poster-images>
       <% })%>
     </div>
