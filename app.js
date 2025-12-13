@@ -93,6 +93,12 @@ app.get('/projects/:uid', async (req, res) => {
 })
 
 app.get('*', async (req, res) => {
+  // 🚨 NEW: block asset requests
+  if (req.path.includes('.')) {
+    console.log('🛑 Asset request blocked by wildcard:', req.path)
+    return res.status(404).end()
+  }
+  
   let pageType = "error"
   
   let document = {
@@ -101,7 +107,7 @@ app.get('*', async (req, res) => {
   const defaults = await handleRequest(req)
   let fullUrl = req.protocol + '://' + req.get('host')
 
-  res.render('base', { ...defaults, document, pageType, fullUrl })
+  res.status(404).render('base', { ...defaults, document, pageType, fullUrl })
 });
 
 app.listen(port, () => {
