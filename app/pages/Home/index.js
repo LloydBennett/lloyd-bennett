@@ -59,7 +59,7 @@ export default class Home extends Page {
   }
 
   init() {
-    if(!this.elements.floatingPoster) return
+    if(!this.elements.floatingPoster || !this.elements.introSection) return
 
     gsap.set(this.elements.floatingPoster, { opacity: 0 }); // ensure hidden initially
     let anim = this.animateFloatingPoster()
