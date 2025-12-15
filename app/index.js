@@ -12,6 +12,7 @@ import SplitText from 'components/SplitText'
 import ProjectCard from 'components/ProjectCard'
 import Parallax from 'components/Parallax'
 import VideoPlayer from 'components/VideoPlayer'
+import Icons from 'components/Icons'
 
 class App {
   constructor() {
@@ -39,6 +40,7 @@ class App {
     this.createProjectCard()
     this.createParallaxItems()
     this.createVideoPlayer()
+    this.createIcons()
   }
   
   setUpScrollTrigger() {
@@ -92,6 +94,10 @@ class App {
   
   createPreloader() {
     this.preloader = new Preloader()
+  }
+
+  createIcons() {
+    this.icons = new Icons()
   }
 
   createSplitText() {

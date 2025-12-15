@@ -68,30 +68,23 @@
   </div>
 </section>
 
-<section class="section--l-m-both">
+<section class="section--l-m-top section--m-m-bottom" data-intro-skills>
   <div class="container grid">
-    <div class="services__call-out section--m-m-bottom">
+    <div class="services__call-out">
       <h4 class="type--call-out type--justify" data-text>
         <%- document.data.call_out_text %>
       </h4>
     </div>
-    <div class="services">
-      <% 
-        let list = document.data.services_list
-        
-      %>
-      <ul class="services__list">
-        <% for(skill in list) { %>
-          <li>
-            <p class="services__list-item">
-             <%- list[skill].service %>
-            </p>
-          </li>
-        <% } %>
-      </ul>
-    </div>
   </div>
 </section>
+
+<% if (document.data.body && Array.isArray(document.data.body)) { %>
+  <section class="section--l-m-bottom" data-skills-section>
+    <div class="container grid--all skills--grid-gap">
+      <%- include('../SliceZone.ejs', { SliceZone: document.data.body }) %>
+    </div>
+  </section>
+<% } %>
 
 <%- include('../partials/marquee', { label: document.data.belt_label, small_spacing: false, hide_extra_labels: false }) -%>
 

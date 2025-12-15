@@ -7,12 +7,18 @@
   
   <%- include('./partials/preloader') -%>
   
+  <% if(page === "home") { %>
+    <%- include('./partials/floating-poster', { page: page }) -%>
+  <% } %>
+  
   <% if( page !== 'error' ) { %>
     <%- include('./partials/navigation-bar') -%>
     <%- include('./partials/navigation-menu') -%>
   <% } %>
 
   <%- include('./partials/cursor') -%>
+  
+
   <main id="main" data-page="<%- page %>" class="main <%- page %>">
     <div class="overlay fixed bg--transparent-50 z-index--3 opacity--0 cursor--not-clickable" data-menu-content-overlay></div>
 

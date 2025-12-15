@@ -1,0 +1,77 @@
+.skills__col {
+  &:nth-child(1) {  
+    grid-column: 1 / 4;
+
+    @include media-query($breakpoint--small) {
+       grid-column: 3 / 5;
+    }
+
+    @include media-query($breakpoint--x-large) {
+      grid-column: 4 / 6;
+    }
+  }
+
+  &:nth-child(2) {
+    grid-column: 4 / 7;
+
+    @include media-query($breakpoint--small) {
+      grid-column: 5 / 9;
+    }
+
+    @include media-query($breakpoint--x-large) {
+      grid-column: 6 / 8;
+    }
+    
+  }
+
+  &:nth-child(3) {
+    grid-column: 1 / 4;
+
+    @include media-query($breakpoint--small) {
+      grid-column: 3 / 6;
+    }
+
+    @include media-query($breakpoint--x-large) {
+      //grid-column: 8 / 11;
+      grid-column: 8 / 10;
+    }
+  }
+
+  & + & {
+    @include media-query($breakpoint--small - 1, max-width) {
+      margin-bottom: spacing(3);
+    }
+  }
+}
+
+.skills--grid-gap {
+  row-gap: spacing(3);
+
+  @include media-query($breakpoint--medium) {
+    row-gap: spacing(7);
+  }
+}
+
+.skills__icon {
+  width: 6rem;
+  height: 6rem;
+  padding: 1rem;
+  margin-bottom: spacing(3);
+
+  @include media-query($breakpoint--medium) {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+  }
+}
+
+.skills--strategy {
+  path { 
+    stroke-dasharray: 100; 
+    stroke-dashoffset: 100;
+  }
+}

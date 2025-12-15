@@ -4,14 +4,10 @@
   }
 
   @include media-query($breakpoint--large) {
-    grid-column: 3 / 8;
+    grid-column: 4 / 8;
   }
 
   @include media-query($breakpoint--x-large) {
-    grid-column: 3 / 9;
-  }
-
-  @include media-query($breakpoint--xx-large) {
     grid-column: 4 / 9;
   }
 }
