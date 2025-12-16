@@ -61,7 +61,7 @@ export default class Home extends Page {
   init() {
     if(!this.elements.floatingPoster || !this.elements.introSection) return
 
-    gsap.set(this.elements.floatingPoster, { opacity: 0 }); // ensure hidden initially
+    gsap.set(this.elements.floatingPoster, { clipPath: "inset(50% 50% 50% 50%)" }); // ensure hidden initially
     let anim = this.animateFloatingPoster()
 
     const breakpoints = [
@@ -77,19 +77,44 @@ export default class Home extends Page {
           end: bp.end,      
           markers: false,
           onEnter: () => {
-            gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
+            gsap.fromTo(
+              this.elements.floatingPoster,
+              {
+                clipPath: "inset(50% 50% 50% 50%)",
+                webkitClipPath: "inset(50% 50% 50% 50%)"
+              },
+              {
+                clipPath: "inset(0% 0% 0% 0%)",
+                webkitClipPath: "inset(0% 0% 0% 0%)",
+                duration: 0.4,
+                ease: "power2.out"
+              }
+            )
+
             anim.play()
           },
           onLeave: () => { 
-            gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
+            gsap.to(this.elements.floatingPoster, { clipPath: "inset(50% 50% 50% 50%)", duration: 0.4, ease: "power2.out" })
             anim.pause()
           },
           onEnterBack: () =>  { 
-            gsap.to(this.elements.floatingPoster, { opacity: 1, duration: 0.4, ease: "power2.out" })
+            gsap.fromTo(
+              this.elements.floatingPoster,
+              {
+                clipPath: "inset(50% 50% 50% 50%)",
+                webkitClipPath: "inset(50% 50% 50% 50%)"
+              },
+              {
+                clipPath: "inset(0% 0% 0% 0%)",
+                webkitClipPath: "inset(0% 0% 0% 0%)",
+                duration: 0.4,
+                ease: "power2.out"
+              }
+            )
             anim.play()
           },
           onLeaveBack: () => {
-            gsap.to(this.elements.floatingPoster, { opacity: 0, duration: 0.4, ease: "power2.out" })
+            gsap.to(this.elements.floatingPoster, { clipPath: "inset(50% 50% 50% 50%)", duration: 0.4, ease: "power2.out" })
             anim.pause()
           }
         })
